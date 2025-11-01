@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christopher Wilt - Game Developer / Software Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="sidebar">
+            <div>
+                <img src="Images/profilepic.jpg" alt="Christopher Wilt" class="profile-photo">
+                <h1>Christopher Wilt</h1>
+                <p>Game Developer / Software Engineer</p>
+            </div>
+
+            <div class="connect-group">
+                <h4 class="connect-heading">CONNECT WITH ME</h4>
+                <div class="social-links">
+                    <a href="mailto:ctwilt23@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+                    <!--<a href="https://instagram.com/yourusername" target="_blank"><i class="fab fa-instagram"></i></a>-->
+                    <a href="https://facebook.com/christopher.wilt.507" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://x.com/ImJustThunder" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/in/christopher-wilt-b89561287" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </header>
+
+        <main class="content">
+            <section class="about-me">
+                <h2>ABOUT ME</h2>
+                <h3>Passion To Develop Games</h3>
+                <p>
+                    As a passionate student game developer at Full Sail University, I specialize in
+                    programming, multithreading, and debugging, bringing efficiency and innovation
+                    to every project. With expertise in C++ and Unreal Engine, I design immersive
+                    gameplay mechanics, crafting fluid movement systems and advanced player
+                    controllers. My strong analytical mindset allows me to apply probability and
+                    statistics to enhance AI decision-making and game logic. Whether refining physics,
+                    optimizing algorithms, or designing interactive experiences, I merge technical
+                    excellence with creative vision to push the boundaries of game development and
+                    build unforgettable gaming experiences.
+
+                </p>
+            </section>
+
+            <section class="education">
+                <h2>EDUCATION</h2>
+                <div class="entry">
+                    <h4>2026</h4>
+                    <div>
+                        <p><strong>Bachelor's of Computer Science</strong></p>
+                        <p>Game Development Degree</p>
+                        <p>Full Sail University</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="experience">
+                <h2>EXPERIENCE</h2>
+                <div class="entry">
+                    <h4>2025</h4>
+                    <div>
+                        <p><strong>Solo Game Developer - SND Game</strong></p>
+                        <p>Personal Project</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="button-container">
+                <a href="Resume/WiltChristopher_Resume.pdf" target="_blank" class="btn">RESUME</a>
+                <a href="Projects/projects.html" class="btn">PROJECTS</a>
+            </div>
+        </main>
+    </div>
+    <script>document.addEventListener('DOMContentLoaded', () => {
+            // Find all links on the page
+            const allLinks = document.querySelectorAll('a');
+
+            allLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    const href = this.getAttribute('href');
+
+                    // Check if it's a link we want to animate.
+                    // We IGNORE:
+                    // - Links opening in a new tab (like your resume)
+                    // - Mail links (mailto:)
+                    // - Simple anchor links (#)
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) {
+                        return; // Let the browser handle it normally
+                    }
+
+                    // If it's a page-navigation link (like "PROJECTS"):
+                    event.preventDefault(); // 1. Stop the browser from navigating
+
+                    // 2. Add the fade-out class
+                    document.body.classList.add('fade-out');
+
+                    // 3. Wait for the animation (400ms) to finish, then navigate
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 400); // This time MUST match the 'transition' time in your CSS
+                });
+            });
+        });</script>
+</body>
+</html>

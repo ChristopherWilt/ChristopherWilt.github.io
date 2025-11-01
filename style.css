@@ -1,0 +1,205 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #1e1c1c; /* This matches your sidebar color */
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh; /* Ensures it takes at least the full viewport height */
+    /* Removed max-width, box-shadow, border-radius, and overflow */
+}
+
+.sidebar {
+    flex: 3;
+    background-color: #1e1c1c;
+    color: #fff;
+    padding: 60px 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* CHANGED from flex-start */
+    box-sizing: border-box; /* Add this for better spacing */
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+.profile-photo {
+    width: 250px; /* Changed from 180px */
+    height: 250px; /* Changed from 180px */
+    border-radius: 20px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.sidebar h1 {
+    margin: 10px 0 5px 0;
+    font-size: 2.2em;
+}
+
+.sidebar p {
+    margin: 0 0 30px 0;
+    font-size: 1.1em;
+    color: #bbb;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.8em;
+    margin: 0 12px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    .social-links a:hover {
+        color: #ff2e54; /* Updated hover color to match red */
+    }
+
+.content {
+    flex: 2;
+    background-color: #ff2e54;
+    color: #fff;
+    padding: 60px 10%; /* Changed from 60px 50px */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+    animation: fadeUp 0.6s ease-out 0.2s forwards;
+}
+
+    .content h2 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+        border-bottom: 2px solid rgba(255,255,255,0.3);
+        padding-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .content h3 {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+        color: #fff; /* Brighter white for heading */
+        font-weight: bold;
+    }
+
+    .content p {
+        line-height: 1.6;
+        margin-bottom: 0; /* Handled by entry gap */
+        font-size: 1em;
+        color: #f0f0f0; /* Slightly off-white */
+    }
+
+/* New style for Education/Experience layout */
+.entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+    .entry h4 {
+        margin: 0;
+        font-size: 1.1em;
+        color: #fff;
+        font-weight: bold;
+        min-width: 50px; /* Helps align the years */
+    }
+
+    .entry p {
+        margin: 0;
+        line-height: 1.5;
+    }
+
+        .entry p strong {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #fff;
+        }
+
+
+/* New container for buttons */
+.button-container {
+    display: flex;
+    justify-content: space-between; /* This pushes them to opposite ends */
+    margin-top: auto; /* Pushes buttons to the bottom */
+}
+
+/* Renamed .resume-button to .btn to be reusable */
+.btn {
+    background-color: #000;
+    color: #fff;
+    padding: 15px 75px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 0.9em;
+}
+
+    .btn:hover {
+        background-color: #333;
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack columns on smaller screens */
+    }
+
+    .sidebar {
+        padding: 40px 20px;
+    }
+
+    .content {
+        padding: 40px 20px;
+        gap: 20px;
+        /* Remove rounded corners when stacked */
+        border-radius: 0;
+    }
+
+    .button-container {
+        flex-direction: column;
+        align-items: center; /* Center buttons */
+        gap: 15px;
+    }
+
+    .btn {
+        width: 80%; /* Make buttons wider */
+        text-align: center;
+    }
+}
+
+
+.connect-group {
+    width: 100%;
+    margin-top: 30px; /* (adjust if you want more/less space) */
+}
+
+.connect-heading {
+    font-size: 1em;
+    color: #888;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.fade-out {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+}
