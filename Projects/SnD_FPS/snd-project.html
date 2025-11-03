@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SND FPS Project - Christopher Wilt</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="snd-project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="project-detail-container">
+        <header class="project-detail-header">
+            <div class="header-left">
+                <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="header-title">
+                    <h1>SND FPS <span class="text-red">PROJECT</span></h1>
+                    <p>Christopher Wilt - Game Developer</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="httpsGas-mask" target="_blank" class="btn-outline">GITHUB REPO</a>
+                <a href="../../index.html" class="btn-outline">HOME PAGE</a>
+            </nav>
+        </header>
+
+        <main>
+            <h2>DEMO</h2>
+            <div class="demo-video-container">
+                <video src="../../Videos/Low_Light_M_A_Shooting_Slow_Mo.mp4" controls playsinline></video>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>PROJECT <span class="text-red">PROGRESS</span></h3>                        <p>
+                            Since its founding in the '80s,
+                            Studio Agatho has been the go-to
+                            company for various design needs.
+                            Its offerings range from graphic design
+                            and branding strategy to website development
+                            and video production.
+                        </p>
+                        <p>
+                            Agatho boasts a global client base and various
+                            industry awards. It has set the standard for
+                            design studios as its clients collaborate with
+                            the highest caliber of creatives, engineers, and
+                            ambassadors.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/TempProject.png" alt="Project progress screenshot">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>MY <span class="text-red">VISION</span></h3>                        <p>
+                            Since its founding in the '80s,
+                            Studio Agatho has been the go-to
+                            company for various design needs.
+                            Its offerings range from graphic design
+                            and branding strategy to website development
+                            and video production.
+                        </p>
+                        <p>
+                            Agatho boasts a global client base and various
+                            industry awards. It has set the standard for
+                            design studios as its clients collaborate with
+                            the highest caliber of creatives, engineers, and
+                            ambassadors.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/TempProject.png" alt="Project vision concept art">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>PROJECT <span class="text-red">CREDITS</span></h3>                        <p>
+                            Since its founding in the '80s,
+                            Studio Agatho has been the go-to 
+                            company for various design needs.
+                            Its offerings range from graphic design 
+                            and branding strategy to website development
+                            and video production.
+                        </p>
+                        <p>
+                            Agatho boasts a global client base and various 
+                            industry awards. It has set the standard for 
+                            design studios as its clients collaborate with
+                            the highest caliber of creatives, engineers, and 
+                            ambassadors.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/TempProject.png" alt="Project credits or team photo">
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    const href = this.getAttribute('href');
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) {
+                        return;
+                    }
+                    event.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 400);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
