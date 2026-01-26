@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SND FPS Project - Christopher Wilt</title>
+
     <link rel="stylesheet" href="../../style.css">
+
     <link rel="stylesheet" href="snd-project.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <nav class="nav-dock">
+        <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="../../Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
+    <div class="container column-layout">
 
-    <div class="project-detail-container">
         <header class="project-detail-header">
             <div class="header-left">
                 <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
@@ -22,7 +30,7 @@
                 </div>
             </div>
             <nav class="header-nav">
-                <a href="httpsGas-mask" target="_blank" class="btn-outline">GITHUB REPO</a>
+                <a href="https://github.com/YourRepoLink" target="_blank" class="btn-outline">GITHUB REPO</a>
                 <a href="../../index.html" class="btn-outline">HOME PAGE</a>
             </nav>
         </header>
@@ -36,7 +44,8 @@
             <div class="content-grid">
                 <article class="content-block">
                     <div class="text-content">
-                        <h3>PROJECT <span class="text-red">PROGRESS</span></h3>                        <p>
+                        <h3>PROJECT <span class="text-red">PROGRESS</span></h3>
+                        <p>
                             Since its founding in the '80s,
                             Studio Agatho has been the go-to
                             company for various design needs.
@@ -59,7 +68,8 @@
 
                 <article class="content-block">
                     <div class="text-content">
-                        <h3>MY <span class="text-red">VISION</span></h3>                        <p>
+                        <h3>MY <span class="text-red">VISION</span></h3>
+                        <p>
                             Since its founding in the '80s,
                             Studio Agatho has been the go-to
                             company for various design needs.
@@ -82,19 +92,20 @@
 
                 <article class="content-block">
                     <div class="text-content">
-                        <h3>PROJECT <span class="text-red">CREDITS</span></h3>                        <p>
+                        <h3>PROJECT <span class="text-red">CREDITS</span></h3>
+                        <p>
                             Since its founding in the '80s,
-                            Studio Agatho has been the go-to 
+                            Studio Agatho has been the go-to
                             company for various design needs.
-                            Its offerings range from graphic design 
+                            Its offerings range from graphic design
                             and branding strategy to website development
                             and video production.
                         </p>
                         <p>
-                            Agatho boasts a global client base and various 
-                            industry awards. It has set the standard for 
+                            Agatho boasts a global client base and various
+                            industry awards. It has set the standard for
                             design studios as its clients collaborate with
-                            the highest caliber of creatives, engineers, and 
+                            the highest caliber of creatives, engineers, and
                             ambassadors.
                         </p>
                     </div>
@@ -107,19 +118,16 @@
     </div>
 
     <script>
+
         document.addEventListener('DOMContentLoaded', () => {
             const allLinks = document.querySelectorAll('a');
             allLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
+                link.addEventListener('click', function (event) {
                     const href = this.getAttribute('href');
-                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) {
-                        return;
-                    }
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
                     event.preventDefault();
                     document.body.classList.add('fade-out');
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 400);
+                    setTimeout(() => { window.location.href = href; }, 400);
                 });
             });
         });

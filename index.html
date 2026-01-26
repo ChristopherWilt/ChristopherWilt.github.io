@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christopher Wilt - Game Developer / Software Engineer</title>
+    <title>Christopher Wilt - Game Developer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
+<body class="home-layout">
+    <nav class="nav-dock">
+        <a href="index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="Projects/projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
     <div class="container">
         <header class="sidebar">
             <div>
@@ -20,7 +25,6 @@
                 <h4 class="connect-heading">CONNECT WITH ME</h4>
                 <div class="social-links">
                     <a href="mailto:ctwilt23@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
-                    <!--<a href="https://instagram.com/yourusername" target="_blank"><i class="fab fa-instagram"></i></a>-->
                     <a href="https://facebook.com/christopher.wilt.507" target="_blank"><i class="fab fa-facebook"></i></a>
                     <a href="https://x.com/ImJustThunder" target="_blank"><i class="fab fa-twitter"></i></a>
                     <a href="https://linkedin.com/in/christopher-wilt-b89561287" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -30,24 +34,19 @@
 
         <main class="content">
             <section class="about-me">
-                <h2>ABOUT ME</h2>
+                <h2>About Me</h2>
                 <h3>Passion To Develop Games</h3>
                 <p>
                     As a passionate student game developer at Full Sail University, I specialize in
-                    programming, multithreading, and debugging, bringing efficiency and innovation
-                    to every project. With expertise in C++ and Unreal Engine, I design immersive
-                    gameplay mechanics, crafting fluid movement systems and advanced player
-                    controllers. My strong analytical mindset allows me to apply probability and
-                    statistics to enhance AI decision-making and game logic. Whether refining physics,
-                    optimizing algorithms, or designing interactive experiences, I merge technical
-                    excellence with creative vision to push the boundaries of game development and
-                    build unforgettable gaming experiences.
-
+                    programming, multithreading, and debugging. With expertise in C++ and Unreal Engine,
+                    I design immersive gameplay mechanics, crafting fluid movement systems and advanced player
+                    controllers. I merge technical excellence with creative vision to push the boundaries
+                    of game development.
                 </p>
             </section>
 
             <section class="education">
-                <h2>EDUCATION</h2>
+                <h2>Education</h2>
                 <div class="entry">
                     <h4>2026</h4>
                     <div>
@@ -59,7 +58,7 @@
             </section>
 
             <section class="experience">
-                <h2>EXPERIENCE</h2>
+                <h2>Academic Experience</h2>
                 <div class="entry">
                     <h4>2025</h4>
                     <div>
@@ -70,40 +69,58 @@
             </section>
 
             <div class="button-container">
-                <a href="Resume/WiltChristopher_Resume.pdf" target="_blank" class="btn">RESUME</a>
-                <a href="Projects/projects.html" class="btn">PROJECTS</a>
+                <a href="Resume/WiltChristopher_Resume.pdf" target="_blank" class="btn">Resume</a>
+                <a href="Projects/projects.html" class="btn">Projects</a>
             </div>
         </main>
     </div>
-    <script>document.addEventListener('DOMContentLoaded', () => {
-            // Find all links on the page
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Link Animation Logic
             const allLinks = document.querySelectorAll('a');
-
             allLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
+                link.addEventListener('click', function (event) {
                     const href = this.getAttribute('href');
-
-                    // Check if it's a link we want to animate.
-                    // We IGNORE:
-                    // - Links opening in a new tab (like your resume)
-                    // - Mail links (mailto:)
-                    // - Simple anchor links (#)
-                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) {
-                        return; // Let the browser handle it normally
-                    }
-
-                    // If it's a page-navigation link (like "PROJECTS"):
-                    event.preventDefault(); // 1. Stop the browser from navigating
-
-                    // 2. Add the fade-out class
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+                    event.preventDefault();
                     document.body.classList.add('fade-out');
-
-                    // 3. Wait for the animation (400ms) to finish, then navigate
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 400); // This time MUST match the 'transition' time in your CSS
+                    setTimeout(() => { window.location.href = href; }, 400);
                 });
             });
-        });</script>
+
+            // 2. AUTO-RESIZE LOGIC
+            const contentBox = document.querySelector('.content');
+
+            function fitContent() {
+                // Only run this on desktop (width > 900px)
+                if (window.innerWidth <= 900) return;
+
+                // Reset to a large font size first
+                let size = 18;
+                contentBox.style.fontSize = size + 'px';
+
+                // While content is spilling out OR content is taller than container
+                // Decrease font size by 0.5px step
+                while (
+                    (contentBox.scrollHeight > contentBox.clientHeight) &&
+                    size > 10 // Safety stop: won't go smaller than 10px
+                ) {
+                    size -= 0.5;
+                    contentBox.style.fontSize = size + 'px';
+                }
+            }
+
+            // Run on load
+            fitContent();
+
+            // Run whenever window resizes
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(fitContent, 100);
+            });
+        });
+    </script>
 </body>
 </html>

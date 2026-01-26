@@ -21,12 +21,12 @@ body {
         opacity: 0;
     }
 
-.projects-container {
+/*.projects-container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 0;
-}
+}*/
 
 /* Header */
 .projects-header {
@@ -139,6 +139,8 @@ body {
 
 .small {
     height: 300px;
+    min-width: 300px;
+    max-width: auto
 }
 
     .small .project-content h3 {

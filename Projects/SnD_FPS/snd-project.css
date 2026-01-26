@@ -21,12 +21,12 @@ body {
         opacity: 0;
     }
 
-.project-detail-container {
+/*.project-detail-container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 0 60px 0; /* Extra padding at bottom */
-}
+    padding: 40px 0 60px 0;*/ /* Extra padding at bottom */
+/*}*/
 
 /* Header */
 .project-detail-header {

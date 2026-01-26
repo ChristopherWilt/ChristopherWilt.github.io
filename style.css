@@ -1,77 +1,163 @@
+/* --- GLOBAL STYLES --- */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #1e1c1c; /* This matches your sidebar color */
+    background-color: #1e1c1c;
+    color: #fff;
+    height: auto;
+    overflow-y: auto;
+    display: block;
+}
+
+/* --- SHARED COMPONENTS --- */
+.btn {
+    background-color: #000;
+    color: #fff;
+    padding: 15px 0;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    text-align: center;
+    display: inline-block;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+    .btn:hover {
+        background-color: #333;
+        transform: translateY(-2px);
+    }
+
+/* --- HOMEPAGE LAYOUT --- */
+body.home-layout {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Locks the main page */
 }
 
 .container {
     display: flex;
-    width: 100%;
-    min-height: 100vh; /* Ensures it takes at least the full viewport height */
-    /* Removed max-width, box-shadow, border-radius, and overflow */
+    width: 90%;
+    max-width: 1300px;
+    /* Fixed height for the card */
+    height: 95vh;
+    max-height: 700px;
+    min-height: 250px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-radius: 25px;
+    background-color: #1e1c1c;
+    overflow: hidden;
 }
 
+/* --- SIDEBAR (Locked in place) --- */
 .sidebar {
-    flex: 3;
+    flex: 1;
     background-color: #1e1c1c;
     color: #fff;
-    padding: 60px 40px;
+    padding: 30px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* CHANGED from flex-start */
-    box-sizing: border-box; /* Add this for better spacing */
+    justify-content: center;
+    min-width: 280px;
     animation: fadeUp 0.6s ease-out forwards;
 }
 
 .profile-photo {
-    width: 250px; /* Changed from 180px */
-    height: 250px; /* Changed from 180px */
+    width: 160px;
+    height: 160px;
     border-radius: 20px;
     object-fit: cover;
     margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .sidebar h1 {
-    margin: 10px 0 5px 0;
-    font-size: 2.2em;
+    margin: 5px 0;
+    font-size: 1.8rem;
 }
 
 .sidebar p {
-    margin: 0 0 30px 0;
-    font-size: 1.1em;
+    margin: 0 0 20px 0;
+    font-size: 1rem;
     color: #bbb;
+}
+
+.connect-group {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.connect-heading {
+    font-size: 0.85rem;
+    color: #888;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .social-links a {
     color: #fff;
-    font-size: 1.8em;
-    margin: 0 12px;
+    font-size: 1.4rem;
+    margin: 0 10px;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.2s;
 }
 
     .social-links a:hover {
-        color: #ff2e54; /* Updated hover color to match red */
+        color: #de2849;
+        transform: translateY(-3px);
     }
 
+/* --- CONTENT (Scrollable Red Box) --- */
 .content {
     flex: 2;
-    background-color: #ff2e54;
+    background-color: #de2849;
     color: #fff;
-    padding: 60px 10%; /* Changed from 60px 50px */
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    border-top-left-radius: 35px;
-    border-bottom-left-radius: 35px;
+    gap: 30px; /* Standard spacing */
+    /* SCROLL LOGIC */
+    overflow-y: auto; /* Enables vertical scrolling */
+    height: 100%; /* Fills the container height */
+    box-sizing: border-box;
     animation: fadeUp 0.6s ease-out 0.2s forwards;
 }
 
+    /* --- CUSTOM SCROLLBAR STYLING --- */
+    /* This makes the scrollbar look nice inside the red box */
+    .content::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .content::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1); /* Subtle dark track */
+    }
+
+    .content::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent white thumb */
+        border-radius: 5px; /* Rounded edges */
+        border: 2px solid #ff2e54; /* Creates padding effect */
+    }
+
+        .content::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(255, 255, 255, 0.7); /* Brighter on hover */
+        }
+
+
     .content h2 {
-        font-size: 1.5em;
-        margin-bottom: 15px;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
         border-bottom: 2px solid rgba(255,255,255,0.3);
         padding-bottom: 10px;
         text-transform: uppercase;
@@ -79,20 +165,19 @@ body {
     }
 
     .content h3 {
-        font-size: 1.3em;
-        margin-bottom: 10px;
-        color: #fff; /* Brighter white for heading */
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        color: #fff;
         font-weight: bold;
     }
 
     .content p {
         line-height: 1.6;
-        margin-bottom: 0; /* Handled by entry gap */
-        font-size: 1em;
-        color: #f0f0f0; /* Slightly off-white */
+        margin-bottom: 0;
+        font-size: 1rem;
+        color: #f0f0f0;
     }
 
-/* New style for Education/Experience layout */
 .entry {
     display: flex;
     align-items: flex-start;
@@ -101,90 +186,59 @@ body {
 
     .entry h4 {
         margin: 0;
-        font-size: 1.1em;
+        font-size: 1.1rem;
         color: #fff;
         font-weight: bold;
-        min-width: 50px; /* Helps align the years */
+        min-width: 50px;
+        padding-top: 3px;
     }
 
-    .entry p {
-        margin: 0;
-        line-height: 1.5;
+    .entry p strong {
+        font-size: 1.1rem;
     }
 
-        .entry p strong {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #fff;
-        }
-
-
-/* New container for buttons */
 .button-container {
     display: flex;
-    justify-content: space-between; /* This pushes them to opposite ends */
-    margin-top: auto; /* Pushes buttons to the bottom */
+    gap: 20px;
+    margin-top: 20px;
+    padding-bottom: 10px; /* Extra space at bottom of scroll */
 }
 
-/* Renamed .resume-button to .btn to be reusable */
-.btn {
-    background-color: #000;
-    color: #fff;
-    padding: 15px 75px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    font-size: 0.9em;
-}
-
-    .btn:hover {
-        background-color: #333;
+    .button-container .btn {
+        flex: 1;
+        padding-left: 0;
+        padding-right: 0;
     }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* --- RESPONSIVE --- */
+@media (max-width: 1000px) {
+    body.home-layout {
+        height: auto;
+        overflow-y: auto;
+        align-items: flex-start;
+    }
+
     .container {
-        flex-direction: column; /* Stack columns on smaller screens */
+        flex-direction: column;
+        height: auto;
+        max-height: none;
+        border-radius: 0;
     }
 
     .sidebar {
-        padding: 40px 20px;
+        padding: 50px 20px 80px;
     }
 
     .content {
-        padding: 40px 20px;
-        gap: 20px;
-        /* Remove rounded corners when stacked */
-        border-radius: 0;
+        padding: 40px 30px 60px;
+        border-radius: 35px 35px 0 0;
+        margin-top: -30px;
+        overflow-y: visible; /* Disable internal scroll on mobile, let page scroll */
     }
 
     .button-container {
         flex-direction: column;
-        align-items: center; /* Center buttons */
-        gap: 15px;
     }
-
-    .btn {
-        width: 80%; /* Make buttons wider */
-        text-align: center;
-    }
-}
-
-
-.connect-group {
-    width: 100%;
-    margin-top: 30px; /* (adjust if you want more/less space) */
-}
-
-.connect-heading {
-    font-size: 1em;
-    color: #888;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    font-weight: bold;
 }
 
 @keyframes fadeUp {
@@ -202,4 +256,119 @@ body {
 body.fade-out {
     opacity: 0;
     transition: opacity 0.4s ease-out;
+}
+
+/* Utility to stack content vertically (for Projects/Detail pages) */
+.container.column-layout {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 40px;
+    /* THE FIXES: */
+    height: auto; /* Allow it to grow as tall as the content */
+    max-height: none; /* Remove the 700px limit */
+    overflow: visible; /* Allow content to be seen */
+    margin: 40px auto; /* Center the card on the page with spacing */
+    min-height: 80vh; /* Ensure it looks substantial even with little content */
+}
+
+    /* Ensure the header and main content behave like blocks */
+    .container.column-layout header,
+    .container.column-layout main {
+        flex: none;
+        width: 100%;
+    }
+
+/* --- FLOATING NAV DOCK --- */
+.nav-dock {
+    position: fixed;
+    /* DEFAULT (Large Desktop): Top Left Vertical Pill */
+    top: 40px;
+    left: 40px;
+    background-color: rgba(30, 28, 28, 0.95);
+    border: 2px solid #ff2e54;
+    border-radius: 30px;
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column; /* Vertical Stack */
+    gap: 25px;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    width: 24px;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+    .nav-dock a {
+        color: #fff;
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+        .nav-dock a:hover {
+            color: #ff2e54;
+            transform: scale(1.2);
+        }
+
+        /* Tooltip text (Appears to the RIGHT of the dock) */
+        .nav-dock a::after {
+            content: attr(title);
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%) translateX(-10px);
+            background-color: #ff2e54;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-dock a:hover::after {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+
+/* --- RESPONSIVE BOTTOM BAR --- */
+/* Trigger this on Laptops, Tablets, and Mobile (anything smaller than 1500px) */
+@media (max-width: 1500px) {
+
+    /* FIX: Add cushion at the bottom so content scrolls ABOVE the dock */
+    body {
+        padding-bottom: 120px !important;
+    }
+
+    .nav-dock {
+        /* Reset Top/Left positioning */
+        top: auto;
+        left: 50%; /* Start at horizontal center */
+        bottom: 20px; /* Stick to bottom */
+        /* THE CENTERING MAGIC: Shifts element back by 50% of its own width */
+        transform: translateX(-50%);
+        /* Switch to Horizontal Row */
+        flex-direction: row;
+        width: auto;
+        height: auto;
+        padding: 12px 35px; /* Comfortable padding */
+        gap: 40px; /* Spread icons out */
+
+        border-radius: 50px; /* Horizontal Pill */
+        background-color: rgba(30, 28, 28, 0.98);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.5); /* Stronger shadow for pop */
+    }
+
+        /* Disable tooltips on mobile/tablet */
+        .nav-dock a::after {
+            display: none;
+        }
 }
