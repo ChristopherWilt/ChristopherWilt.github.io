@@ -12,7 +12,7 @@
     <nav class="nav-dock">
         <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
         <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
-        <a href="../../Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+        <a href="../../Resume/Backend_Systems_Engineer_WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
     </nav>
     <div class="container column-layout">
 
@@ -23,17 +23,17 @@
                 </a>
                 <div class="header-title">
                     <h1>ARCHMAGE <span class="text-red">PROJECT</span></h1>
-                    <p>Christopher Wilt - Game Developer</p>
+                    <p>Unity C# | UI Engineering | System Architecture</p>
                 </div>
             </div>
-            <nav class="header-nav">
-                <a href="https://github.com/KarlEstabine/Archmage" target="_blank" class="btn-outline">GITHUB REPO</a>
-                <a href="../../index.html" class="btn-outline">HOME PAGE</a>
-            </nav>
+            <div class="header-buttons" style="display: flex; gap: 15px;">
+                <a href="https://gist.github.com/ChristopherWilt/8cf3f3be7aa834e1ab74531af9503bf7" target="_blank" class="btn-outline">VIEW CODE SNIPPET</a>
+                <a href="https://www.youtube.com/watch?v=icEfuob_lrk" target="_blank" class="btn-outline">WATCH DEMO</a>
+            </div>
         </header>
 
         <main>
-            <h2>DEMO</h2>
+            <h2>GAMEPLAY SYSTEMS DEMO</h2>
             <div class="demo-video-container">
                 <iframe width="100%"
                         height="500"
@@ -49,76 +49,54 @@
             <div class="content-grid">
                 <article class="content-block">
                     <div class="text-content">
-                        <h3>PROJECT <span class="text-red">PROGRESS</span></h3>
+                        <h2>INTERFACE-DRIVEN <span class="text-red">INTERACTION</span></h2>
                         <p>
-                            Since its founding in the '80s,
-                            Studio Agatho has been the go-to
-                            company for various design needs.
-                            Its offerings range from graphic design
-                            and branding strategy to website development
-                            and video production.
+                            To decouple the player controller from world objects, I implemented an <strong>Interface-based Interaction System</strong> (`I_Interactable`).
                         </p>
                         <p>
-                            Agatho boasts a global client base and various
-                            industry awards. It has set the standard for
-                            design studios as its clients collaborate with
-                            the highest caliber of creatives, engineers, and
-                            ambassadors.
+                            The `Interactor` class utilizes <code>Physics.OverlapSphereNonAlloc</code> for garbage-collection-friendly detection. By checking for the interface rather than specific classes, the system is modular—allowing Chests, Doors, and NPCs to share unified input logic without hard dependencies.
                         </p>
                     </div>
                     <div class="image-content">
-                        <img src="../../Images/Archmage/ArchmageLogo.jpg" alt="Project progress screenshot">
-                    </div>
-                </article>
-
-                <article class="content-block">
-                    <div class="text-content">
-                        <h3>MY <span class="text-red">VISION</span></h3>
-                        <p>
-                            Since its founding in the '80s,
-                            Studio Agatho has been the go-to
-                            company for various design needs.
-                            Its offerings range from graphic design
-                            and branding strategy to website development
-                            and video production.
-                        </p>
-                        <p>
-                            Agatho boasts a global client base and various
-                            industry awards. It has set the standard for
-                            design studios as its clients collaborate with
-                            the highest caliber of creatives, engineers, and
-                            ambassadors.
-                        </p>
-                    </div>
-                    <div class="image-content">
-                        <img src="../../Images/TempProject.png" alt="Project vision concept art">
-                    </div>
-                </article>
-
-                <article class="content-block">
-                    <div class="text-content">
-                        <h3>PROJECT <span class="text-red">CREDITS</span></h3>
-                        <p>
-                            Since its founding in the '80s,
-                            Studio Agatho has been the go-to
-                            company for various design needs.
-                            Its offerings range from graphic design
-                            and branding strategy to website development
-                            and video production.
-                        </p>
-                        <p>
-                            Agatho boasts a global client base and various
-                            industry awards. It has set the standard for
-                            design studios as its clients collaborate with
-                            the highest caliber of creatives, engineers, and
-                            ambassadors.
-                        </p>
-                    </div>
-                    <div class="image-content">
-                        <img src="../../Images/TempProject.png" alt="Project credits or team photo">
+                        <img src="../../Images/Archmage/Archmage_Interaction.png" alt="Interaction System Logic">
                     </div>
                 </article>
             </div>
+
+            <div class="content-grid">
+                <article class="content-block reverse">
+                    <div class="text-content">
+                        <h2>UI & <span class="text-red">EVENT SYSTEMS</span></h2>
+                        <p>
+                            I engineered a responsive Drag-and-Drop Inventory system by implementing Unity's Event Interfaces (`IBeginDragHandler`, `IDragHandler`, `IDropHandler`).
+                        </p>
+                        <p>
+                            The system features complex slot logic where items intelligently snap to valid targets. I implemented an `EquippedSlot` class that not only accepts items but dynamically alters player stats—for example, equipping "Boots" immediately modifies the `PlayerMovement` speed.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Archmage/Archmage_UI_Drag.png" alt="Inventory Drag and Drop UI">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>CORE <span class="text-red">ARCHITECTURE</span></h2>
+                        <p>
+                            The game's lifecycle is managed by a robust <strong>Singleton GameManager</strong>. This central system handles scene transitions, audio persistence, and global game states (Pause, Win, Lose).
+                        </p>
+                        <p>
+                            I implemented a Coroutine-based "Message Log" system that queues in-game events (e.g., "Health Potion Used") and fades them out over time, ensuring the player receives feedback without cluttering the UI.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Archmage/Archmage_Architecture.png" alt="Game State Architecture">
+                    </div>
+                </article>
+            </div>
+
         </main>
     </div>
 

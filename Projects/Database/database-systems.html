@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Systems - Christopher Wilt</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../archmage/archmage-project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="nav-dock">
+        <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="../../Resume/Backend_Systems_Engineer_WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
+    <div class="container column-layout">
+
+        <header class="project-detail-header">
+            <div class="header-left">
+                <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="header-title">
+                    <h1>BACKEND <span class="text-red">SYSTEMS</span></h1>
+                    <p>Java | SQL | Distributed Architecture</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="https://github.com/ChristopherWilt/Backend-Systems-Portfolio" target="_blank" class="btn-outline">VIEW SQL REPO</a>
+                <a href="../../index.html" class="btn-outline">HOME PAGE</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>SECURITY <span class="text-red">ANALYSIS</span></h2>
+                        <p>
+                            Security in distributed systems begins with data visibility. For this project, I architected a <strong>User Session & Security Analysis System</strong> designed to parse and monitor raw web server logs.
+                        </p>
+                        <p>
+                            I designed a normalized relational schema to track User IPs, Session Durations, and Access Patterns. Using complex SQL scripts and <strong>Stored Procedures</strong>, the system automatically flags anomalies—such as potential bot traffic or brute-force attempts—by analyzing User-Agent strings and request frequency.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Database/Weblog_ERD.png" alt="ER Diagram">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>QUERY <span class="text-red">OPTIMIZATION</span></h2>
+                        <p>
+                            Scale requires efficiency. I took a legacy dataset of 30,000+ vehicle records and re-architected it into <strong>Third Normal Form (3NF)</strong>, reducing data redundancy by 60%.
+                        </p>
+                        <p>
+                            To optimize read performance for the application layer, I analyzed query execution plans and implemented <strong>Clustered and Non-Clustered Indexes</strong>. This significantly reduced the execution time for complex joins, ensuring that the backend could handle high-volume search requests with minimal latency.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Database/Vehicle_Schema2.png" alt="Database Schema">
+                    </div>
+                </article>
+                <div class="content-grid">
+                        <div class="image-content">
+
+                            <img src="../../Images/Database/Vehicle_Schema.png"  style="display: block; margin-left: auto; margin-right: 0; width: 40%;" alt="Database Schema">
+                        </div>
+                </div>
+            </div>
+</main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const href = this.getAttribute('href');
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+                    event.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => { window.location.href = href; }, 400);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

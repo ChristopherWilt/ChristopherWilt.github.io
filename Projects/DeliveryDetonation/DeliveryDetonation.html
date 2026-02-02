@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Detonation - Christopher Wilt</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../Archmage/archmage-project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="nav-dock">
+        <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="../../Resume/Backend_Systems_Engineer_WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
+    <div class="container column-layout">
+
+        <header class="project-detail-header">
+            <div class="header-left">
+                <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="header-title">
+                    <h1>DELIVERY <span class="text-red">DETONATION</span></h1>
+                    <p>Technical Lead | Distributed Systems | C++</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="https://github.com/ChristopherWilt/Delivery-Detonation-Source" target="_blank" class="btn-outline">VIEW SOURCE CODE</a>
+                <a href="https://libertystudios.itch.io/delivery-detonation" target="_blank" class="btn-outline">ITCH.IO</a>
+            </nav>
+        </header>
+
+        <main>
+            <h2>DEMO V0.0.3</h2>
+            <div class="demo-video-container">
+                <iframe width="100%"
+                        height="500"
+                        src="https://www.youtube.com/embed/LjAoNrNtNPI"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>SYSTEM <span class="text-red">ARCHITECTURE</span></h2>
+                        <p>
+                            Delivery Detonation is a multiplayer physics platformer running on a custom client-server architecture.
+                        </p>
+                        <p>
+                            As the Technical Lead, I engineered the <strong>Online Session Subsystem</strong> to manage the complete
+                            lifecycle of a multiplayer match. This includes handling the initial handshake, player authentication via
+                            Unique Net IDs, and lobby persistence. The system ensures that if a host migrates or a client disconnects,
+                            the session state is handled gracefully without crashing the game loop.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/DeliveryDetonation/DeliverySessionManagmentCode0.png" alt="Session Management Code">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block reverse">
+                    <div class="text-content">
+                        <h2>PHYSICS <span class="text-red">REPLICATION</span></h2>
+                        <p>
+                            The primary technical challenge was replicating complex physics interactions (carrying and throwing explosive packages) over the network.
+                        </p>
+                        <p>
+                            I implemented <strong>Server-Authoritative validation</strong> for all physics events. When a client attempts to throw a package, the vector calculation is validated on the server before being broadcast to other clients. This prevents "state desync" where an object appears in different locations for different players, ensuring competitive integrity.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/DeliveryDetonation/DeliverySessionManagmentCode1.png" alt="Replication Logic">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>CHARACTER <span class="text-red">STATE MACHINE</span></h2>
+                        <p>
+                            To handle the complexity of a courier who can sprint, jump, slide, and carry volatile cargo simultaneously, I extended the standard <code>UCharacterMovementComponent</code>.
+                        </p>
+                        <p>
+                            I architected a modular <strong>State Machine</strong> to govern movement logic. This system decouples the "Carrying" state from the "Locomotion" state, allowing for complex ability layering—such as preventing a "Wall Run" while holding a "Heavy Package"—without writing spaghetti code in the Tick function.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/DeliveryDetonation/DD_CharacterState.png" alt="Character State Logic">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block reverse">
+                    <div class="text-content">
+                        <h2>UI & <span class="text-red">USER EXPERIENCE</span></h2>
+                        <p>
+                            A robust backend needs a responsive frontend. I designed and implemented the <strong>Lobby & Matchmaking UI</strong> using Unreal Motion Graphics (UMG) and C++ bindings.
+                        </p>
+                        <p>
+                            The interface provides real-time feedback on connection status, player readiness, and server ping. I utilized <strong>Event Delegates</strong> to unbind UI updates from the game logic, ensuring that the HUD updates instantly when the session state changes without polling every frame.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/DeliveryDetonation/DD_UI_Lobby.png" alt="Lobby UI System">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>TECHNICAL <span class="text-red">LEADERSHIP</span></h2>
+                        <p>
+                            Beyond code, I managed the production pipeline for the engineering team. This included setting up the <strong>Perforce</strong> source control environment and managing branching strategies to prevent merge conflicts.
+                        </p>
+                        <p>
+                            I utilized <strong>Jira</strong> for sprint planning, breaking down complex mechanics like "Networked Physics" into atomic tasks. This ensured the project hit every milestone on time while maintaining a clean, stable codebase.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/DeliveryDetonation/DD_Jira_Perforce.png" alt="Production Workflow">
+                    </div>
+                </article>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const href = this.getAttribute('href');
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+                    event.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => { window.location.href = href; }, 400);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

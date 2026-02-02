@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unity FPS Prototype - Christopher Wilt</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../Archmage/archmage-project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="nav-dock">
+        <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="../../Resume/Backend_Systems_Engineer_WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
+    <div class="container column-layout">
+
+        <header class="project-detail-header">
+            <div class="header-left">
+                <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="header-title">
+                    <h1>UNITY FPS <span class="text-red">PROTOTYPE</span></h1>
+                    <p>Team Project | C# | Gameplay Mechanics</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="#" class="btn-outline">VIEW CODE</a>
+            </nav>
+        </header>
+
+        <main>
+            <h2>EARLY DEVELOPMENT SHOWCASE</h2>
+            <div class="demo-video-container">
+                <iframe width="100%"
+                        height="500"
+                        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>CHARACTER <span class="text-red">MECHANICS</span></h2>
+                        <p>
+                            This project marked my first implementation of a 3D <strong>Character Controller</strong>. I engineered a modular movement system that handles gravity, sprinting modifiers, and jump physics.
+                        </p>
+                        <p>
+                            I also implemented a flexible <strong>Buff/Debuff System</strong>. The controller tracks active status effects (like Speed Boosts or Damage Over Time), applying them via Coroutines to ensure temporary effects expire correctly without polluting the `Update` loop.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/UnityFPS/FPS_Gameplay.png" alt="FPS Movement and Combat">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block reverse">
+                    <div class="text-content">
+                        <h2>GAME STATE <span class="text-red">ARCHITECTURE</span></h2>
+                        <p>
+                            To manage the game loop, I built a <strong>Singleton GameManager</strong> that serves as the central hub for the Wave System and UI updates.
+                        </p>
+                        <p>
+                            The manager tracks the "Goal Count" (enemies remaining) and handles the transition between waves. It dynamically updates the HUD—syncing Health Bars, Ammo Counters, and Wave Numbers—ensuring the player always has accurate feedback on the game state.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/UnityFPS/FPS_Manager.png" alt="Game UI and Wave Counter">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>DATA-DRIVEN <span class="text-red">DESIGN</span></h2>
+                        <p>
+                            To allow our designers to balance weapons without editing code, I implemented <strong>ScriptableObjects</strong> for the gun system (`gunStats`).
+                        </p>
+                        <p>
+                            This architecture separated the data (Damage, Fire Rate, Range, Particle Effects) from the logic. It allowed the team to create multiple weapon variations (Pistol, Rifle, Sniper) simply by creating new assets in the Project window, streamlining the collaboration process.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/UnityFPS/FPS_GunStats.png" alt="ScriptableObject Inspector">
+                    </div>
+                </article>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const href = this.getAttribute('href');
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+                    event.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => { window.location.href = href; }, 400);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

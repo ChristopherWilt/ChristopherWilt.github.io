@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SND FPS Project - Christopher Wilt</title>
-
     <link rel="stylesheet" href="../../style.css">
-
     <link rel="stylesheet" href="snd-project.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -19,46 +16,46 @@
     </nav>
     <div class="container column-layout">
 
+
+
         <header class="project-detail-header">
             <div class="header-left">
                 <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <div class="header-title">
-                    <h1>SND FPS <span class="text-red">PROJECT</span></h1>
+                    <h1>FPS <span class="text-red">FRAMEWORK</span></h1>
+                    <p>C++ | Epic Online Services | Multiplayer Architecture</p>
                     <p>Christopher Wilt - Game Developer</p>
                 </div>
             </div>
             <nav class="header-nav">
-                <a href="https://github.com/YourRepoLink" target="_blank" class="btn-outline">GITHUB REPO</a>
+                <a href="https://github.com/ChristopherWilt/FPS-Framework-Source" target="_blank" class="btn-outline">VIEW SOURCE CODE</a>
                 <a href="../../index.html" class="btn-outline">HOME PAGE</a>
             </nav>
         </header>
 
         <main>
-            <h2>DEMO</h2>
+            <!--<h2>DEMO</h2>
             <div class="demo-video-container">
                 <video src="../../Videos/TEMP_SND_DEMO.mp4" controls playsinline></video>
-            </div>
+            </div>-->
 
             <div class="content-grid">
                 <article class="content-block">
                     <div class="text-content">
-                        <h3>PROJECT <span class="text-red">PROGRESS</span></h3>
+                        <h2>PROJECT <span class="text-red">OVERVIEW</span></h2>
                         <p>
-                            Since its founding in the '80s,
-                            Studio Agatho has been the go-to
-                            company for various design needs.
-                            Its offerings range from graphic design
-                            and branding strategy to website development
-                            and video production.
+                            This project is a modular First-Person Shooter framework
+                            engineered in C++ to serve as a scalable foundation for
+                            competitive multiplayer games.
                         </p>
                         <p>
-                            Agatho boasts a global client base and various
-                            industry awards. It has set the standard for
-                            design studios as its clients collaborate with
-                            the highest caliber of creatives, engineers, and
-                            ambassadors.
+                            Unlike standard template projects, this framework integrates
+                            <strong>Epic Online Services (EOS)</strong> for peer-to-peer matchmaking,
+                            lobby management, and secure user authentication. The goal was to build a
+                            reusable backend that supports Triple-A quality mechanics with low-latency
+                            network performance.
                         </p>
                     </div>
                     <div class="image-content">
@@ -68,51 +65,102 @@
 
                 <article class="content-block">
                     <div class="text-content">
-                        <h3>MY <span class="text-red">VISION</span></h3>
+                        <h2>PROJECT <span class="text-red">PROGRESS</span></h2>
                         <p>
-                            Since its founding in the '80s,
-                            Studio Agatho has been the go-to
-                            company for various design needs.
-                            Its offerings range from graphic design
-                            and branding strategy to website development
-                            and video production.
+                            The current status of the project includes a fully functional FPS Player Controller
+                            (First Person and Third person meshes),
+                            weapon systems, health and damage mechanics,
+                            weapon pickups & dropping, BuyMenu (For SND Games),
+                            as well as Animation Systems to drive the character's movement and actions
+                            on both meshes. All with a focus on modularity and reusability with server-authoritative in mind.
                         </p>
                         <p>
-                            Agatho boasts a global client base and various
-                            industry awards. It has set the standard for
-                            design studios as its clients collaborate with
-                            the highest caliber of creatives, engineers, and
-                            ambassadors.
+                            On the networking side, i am currently implementing EOS systems with EIK.
+                            Which includes Lobby Creation/Joining, Matchmaking, and Player Authentication.
+                            So far, the lobby and matchmaking systems are functional, allowing players to create and join sessions seamlessly.
+                            The next steps involve integrating these systems with the gameplay mechanics to ensure smooth multiplayer experiences.
+                            <strong>(Note: The Online Subsytems are still being Developed and Debugged, so the files are not on the source just yet.)</strong>
                         </p>
                     </div>
                     <div class="image-content">
-                        <img src="../../Images/TempProject.png" alt="Project vision concept art">
+                        <img src="../../Images/TempProject.png" alt="Project progress screenshot">
                     </div>
                 </article>
 
                 <article class="content-block">
                     <div class="text-content">
-                        <h3>PROJECT <span class="text-red">CREDITS</span></h3>
+                        <h2>NETWORK <span class="text-red">REPLICATION</span></h2>
                         <p>
-                            Since its founding in the '80s,
-                            Studio Agatho has been the go-to
-                            company for various design needs.
-                            Its offerings range from graphic design
-                            and branding strategy to website development
-                            and video production.
+                            The core challenge of this project was implementing server-authoritative movement and state synchronization.
                         </p>
                         <p>
-                            Agatho boasts a global client base and various
-                            industry awards. It has set the standard for
-                            design studios as its clients collaborate with
-                            the highest caliber of creatives, engineers, and
-                            ambassadors.
+                            I utilized Unreal Engine's replication graph to manage bandwidth efficiently. The weapon system features <strong>client-side prediction</strong> for instant feedback, with server reconciliation to prevent desynchronization. Animation states are replicated via a compressed integer flag system to minimize packet size while maintaining visual fidelity across all clients.
                         </p>
                     </div>
                     <div class="image-content">
                         <img src="../../Images/TempProject.png" alt="Project credits or team photo">
                     </div>
                 </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>MODULAR <span class="text-red">WEAPON SYSTEM</span></h2>
+                        <p>
+                            I architected a data-driven <code>AWeapon</code> class designed for extensibility. Instead of hardcoding behavior, weapons utilize a <strong>Fire Configuration Struct</strong> that dictates Fire Modes (Single, Burst, Auto), Recoil Patterns, and Damage Falloff.
+                        </p>
+                        <p>
+                            The system uses a slot-based <strong>Inventory Component</strong> that handles equipment logic server-side. This ensures that a player cannot equip a weapon they haven't purchased or picked up, preventing cheat exploits while maintaining a flexible "Loadout" system.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/SND/SND_WeaponSystem.png" alt="Weapon Architecture">
+                    </div>
+                </article>
+
+                    <article class="content-block">
+                        <div class="text-content">
+                            <h2>CLIENT-SIDE <span class="text-red">PREDICTION</span></h2>
+                            <p>
+                                In a competitive shooter, "feeling" responsive is paramount. I implemented <strong>Client-Side Prediction</strong> for the firing mechanics.
+                            </p>
+                            <p>
+                                When a player clicks fire, the client immediately plays the muzzle flash and calculates the hit trace locally. The <code>Server_FireShot</code> RPC then validates ammo and recalculates the hit using <strong>Lag Compensation</strong> logic. The server creates the authoritative state, but the client never waits for round-trip latency to see feedback.
+                            </p>
+                        </div>
+                        <div class="image-content">
+                            <img src="../../Images/SND/SND_Networking.png" alt="Replication Logic">
+                        </div>
+                    </article>
+
+                    <article class="content-block">
+                        <div class="text-content">
+                            <h2>DYNAMIC UI & <span class="text-red">ECONOMY</span></h2>
+                            <p>
+                                I engineered a responsive <strong>Buy Menu System</strong> using C++ and UMG. The system dynamically populates weapon columns based on a <code>WeaponsForSale</code> array, allowing designers to add new guns without touching code.
+                            </p>
+                            <p>
+                                The UI logic includes real-time <strong>Affordability Checks</strong>. In `NativeConstruct`, the widgets bind to player delegates to track money. If a player cannot afford an item, the button is automatically disabled and greyed out, providing instant feedback and preventing invalid server requests.
+                            </p>
+                        </div>
+                        <div class="image-content">
+                            <img src="../../Images/SND/SND_BuyMenu.png" alt="Buy Menu UI">
+                        </div>
+                    </article>
+
+                    <article class="content-block">
+                        <div class="text-content">
+                            <h2>MOVEMENT <span class="text-red">STATE MACHINE</span></h2>
+                            <p>
+                                To achieve "Triple-A" fluidity, I extended the standard Character Movement Component to support advanced states like <strong>Sliding</strong>.
+                            </p>
+                            <p>
+                                The sliding mechanic dynamically alters ground friction and braking deceleration in real-time. I implemented a custom `ApplySlidePhysics()` function that shrinks the capsule hitbox and applies a velocity impulse. This state is replicated via <code>Server_StartSliding</code>, ensuring the hitbox matches the visual mesh on all clients.
+                            </p>
+                        </div>
+                        <div class="image-content">
+                            <img src="../../Images/SND/SND_Sliding.png" alt="Movement Logic">
+                        </div>
+                    </article>
             </div>
         </main>
     </div>

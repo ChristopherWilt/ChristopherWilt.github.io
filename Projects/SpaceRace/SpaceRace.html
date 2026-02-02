@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Race - Christopher Wilt</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../archmage/archmage-project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="nav-dock">
+        <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="../../Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
+    <div class="container column-layout">
+
+        <header class="project-detail-header">
+            <div class="header-left">
+                <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="header-title">
+                    <h1>SPACE <span class="text-red">RACE</span></h1>
+                    <p>C++ | Gateware | Audio Engineering</p>
+                </div>
+            </div>
+            <a href="https://github.com/ChristopherWilt/SpaceRace-Source" target="_blank" class="btn">VIEW SOURCE CODE</a>
+        </header>
+
+        <main>
+            <h2>GAMEPLAY DEMO</h2>
+            <div class="demo-video-container">
+                <iframe width="100%"
+                        height="500"
+                        src="https://www.youtube.com/embed/8l4K-7h5iQM"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>ENGINE <span class="text-red">ARCHITECTURE</span></h2>
+                        <p>
+                            Space Race is a 2.5D arcade shooter built using <strong>C++</strong> and the <strong>Gateware</strong> middleware. Unlike engines with pre-built editors, this project required manual management of the game loop and memory.
+                        </p>
+                        <p>
+                            I architected the core <code>Main</code> application loop and the <code>Player</code> class, handling the lifecycle of game entities from initialization to destruction. This included implementing a <strong>State Machine</strong> to handle transitions between the Main Menu, Gameplay, and Game Over states seamlessly.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/SpaceRace/Space_Race_Logo.png" alt="Space Race Gameplay">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>AUDIO & <span class="text-red">MECHANICS</span></h2>
+                        <p>
+                            As the <strong>Audio Engineer</strong>, I designed and implemented a custom soundscape to fit the "Retro Arcade" aesthetic. I managed audio buffers to ensure sound effects triggered instantly upon collision events without stalling the main thread.
+                        </p>
+                        <p>
+                            I also engineered the <strong>Power-Up System</strong>, featuring a "Nuke" ability. This required writing efficient iterators to traverse the active enemy list, applying damage or destruction states to all entities on screen simultaneously while maintaining performance.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/SpaceRace/SpaceRace_MainMenu.png" alt="Space Race Menu or Powerup">
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const href = this.getAttribute('href');
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+                    event.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => { window.location.href = href; }, 400);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
