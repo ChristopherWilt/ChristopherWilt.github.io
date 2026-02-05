@@ -23,17 +23,17 @@
                 </a>
                 <div class="header-title">
                     <h1>DELIVERY <span class="text-red">DETONATION</span></h1>
-                    <p>Technical Lead | Distributed Systems | C++</p>
+                    <p>Technical Lead | Gameplay Design | C++</p>
                 </div>
             </div>
             <nav class="header-nav">
                 <a href="https://github.com/ChristopherWilt/Delivery-Detonation-Source" target="_blank" class="btn-outline">VIEW SOURCE CODE</a>
-                <a href="https://libertystudios.itch.io/delivery-detonation" target="_blank" class="btn-outline">ITCH.IO</a>
+                <a href="https://libertystudios.itch.io/delivery-detonation" target="_blank" class="btn-outline">PLAY ON ITCH.IO</a>
             </nav>
         </header>
 
         <main>
-            <h2>DEMO V0.0.3</h2>
+            <h2>GAMEPLAY DEMO</h2>
             <div class="demo-video-container">
                 <iframe width="100%"
                         height="500"
@@ -54,10 +54,7 @@
                             Delivery Detonation is a multiplayer physics platformer running on a custom client-server architecture.
                         </p>
                         <p>
-                            As the Technical Lead, I engineered the <strong>Online Session Subsystem</strong> to manage the complete
-                            lifecycle of a multiplayer match. This includes handling the initial handshake, player authentication via
-                            Unique Net IDs, and lobby persistence. The system ensures that if a host migrates or a client disconnects,
-                            the session state is handled gracefully without crashing the game loop.
+                            As the Technical Lead, I engineered the <strong>Online Session Subsystem</strong> to manage the complete lifecycle of a multiplayer match. This includes handling the initial handshake, player authentication via Unique Net IDs, and lobby persistence. The system ensures that if a host migrates or a client disconnects, the session state is handled gracefully without crashing the game loop.
                         </p>
                     </div>
                     <div class="image-content">
@@ -68,6 +65,23 @@
 
             <div class="content-grid">
                 <article class="content-block reverse">
+                    <div class="text-content">
+                        <h2>DYNAMIC <span class="text-red">NAVIGATION</span></h2>
+                        <p>
+                            To guide players through chaotic levels without breaking immersion, I designed a <strong>3D Waypoint System</strong> entirely in C++.
+                        </p>
+                        <p>
+                            I implemented a `ProjectWorldToScreen` logic that tracks the active objective (Package or Drop Zone). The system features <strong>Screen Clamping</strong>: if the objective is behind the player, the marker sticks to the edge of the HUD, ensuring the player never loses orientation. The waypoint dynamically updates its icon and color based on the mission state, providing instant visual feedback on "What to do next."
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/DeliveryDetonation/WaypointSystem.png" alt="Waypoint System Logic">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
                     <div class="text-content">
                         <h2>PHYSICS <span class="text-red">REPLICATION</span></h2>
                         <p>
@@ -84,6 +98,23 @@
             </div>
 
             <div class="content-grid">
+                <article class="content-block reverse">
+                    <div class="text-content">
+                        <h2>MISSION <span class="text-red">LOGIC</span></h2>
+                        <p>
+                            I architected the core <code>AGameMode</code> loop to balance tension and pacing. The scoring system uses a "Risk vs. Reward" algorithm: carrying heavier (more volatile) packages grants higher score multipliers but significantly impacts the character's movement physics.
+                        </p>
+                        <p>
+                            I exposed these variables (Base Score, Volatility Multiplier, Timer Duration) to Blueprints, allowing us to rapidly iterate on the game balance without recompiling C++. This data-driven approach allowed us to fine-tune the "fun factor" in real-time playtests.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/DeliveryDetonation/PackageSystem.png" alt="Game Mode Logic">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
                 <article class="content-block">
                     <div class="text-content">
                         <h2>CHARACTER <span class="text-red">STATE MACHINE</span></h2>
@@ -94,14 +125,28 @@
                             I architected a modular <strong>State Machine</strong> to govern movement logic. This system decouples the "Carrying" state from the "Locomotion" state, allowing for complex ability layering—such as preventing a "Wall Run" while holding a "Heavy Package"—without writing spaghetti code in the Tick function.
                         </p>
                     </div>
-                    <div class="image-content">
-                        <img src="../../Images/DeliveryDetonation/DD_CharacterState.png" alt="Character State Logic">
-                    </div>
                 </article>
             </div>
 
             <div class="content-grid">
                 <article class="content-block reverse">
+                    <div class="text-content">
+                        <h2>PHYSICS & <span class="text-red">WITHDRAWAL</span></h2>
+                        <p>
+                            I designed a <strong>Caffeine Dependency System</strong> where the player must maintain momentum to survive. As caffeine levels drop to 0%, the character enters a <strong>"Withdrawal State"</strong> where I dynamically blend in upper-body physics simulation.
+                        </p>
+                        <p>
+                            This makes the character feel "flimsy" and hard to control, as the player fights against the ragdoll physics to aim and move. If the player remains at 0% for too long, a <strong>"Crashout" Event</strong> triggers—a forced state transition that disables input and collapses the character, simulating total exhaustion.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/DeliveryDetonation/CaffieneBar.png" alt="Movement Physics Implementation">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
                     <div class="text-content">
                         <h2>UI & <span class="text-red">USER EXPERIENCE</span></h2>
                         <p>
@@ -112,13 +157,13 @@
                         </p>
                     </div>
                     <div class="image-content">
-                        <img src="../../Images/DeliveryDetonation/DD_UI_Lobby.png" alt="Lobby UI System">
+                        <img src="../../Images/DeliveryDetonation/LobbySessionSystem.png" alt="Lobby UI System">
                     </div>
                 </article>
             </div>
 
             <div class="content-grid">
-                <article class="content-block">
+                <article class="content-block reverse">
                     <div class="text-content">
                         <h2>TECHNICAL <span class="text-red">LEADERSHIP</span></h2>
                         <p>
@@ -127,9 +172,6 @@
                         <p>
                             I utilized <strong>Jira</strong> for sprint planning, breaking down complex mechanics like "Networked Physics" into atomic tasks. This ensured the project hit every milestone on time while maintaining a clean, stable codebase.
                         </p>
-                    </div>
-                    <div class="image-content">
-                        <img src="../../Images/DeliveryDetonation/DD_Jira_Perforce.png" alt="Production Workflow">
                     </div>
                 </article>
             </div>
