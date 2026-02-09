@@ -8,6 +8,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="home-layout">
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(5px);">
+
+        <div style="width: 15px; height: 15px; background-color: #ff2e54; border-radius: 50%; box-shadow: 0 0 15px #ff2e54; margin-bottom: 20px; animation: pulse 1.5s infinite;"></div>
+
+        <h1 style="font-family: Arial, sans-serif; font-size: 2.5rem; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin: 0;">
+            Updates Underway
+        </h1>
+
+        <p style="font-family: monospace; color: #0f0; font-size: 1.1rem; margin-top: 15px;">
+            > Deploying: Infrastructure_Labs<br>
+            > Status: Building_Terraform_Modules...
+        </p>
+
+        <style>
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+
+                50% {
+                    transform: scale(1.2);
+                    opacity: 0.7;
+                }
+
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+        </style>
+    </div>
     <nav class="nav-dock">
         <a href="index.html" title="Home"><i class="fas fa-home"></i></a>
         <a href="Projects/projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
@@ -131,8 +163,10 @@
                     </p>
                     <p>
                         I started simple—HTML and Java—but my time at Full Sail pushed me into the deep end.
-                        Moving from high-level Unity and Unreal Engine scripting to <strong>Graphics Programming, Linux Systems,
-                        and Database Architecture</strong> changed my perspective. I realized I didn't just want
+                        Moving from high-level Unity and Unreal Engine scripting to <strong>
+                            Graphics Programming, Linux Systems,
+                            and Database Architecture
+                        </strong> changed my perspective. I realized I didn't just want
                         to make games; I also wanted to engineer the invisible backend systems that make them scalable and responsive.
                     </p>
                     <p>
@@ -140,9 +174,9 @@
                         When I'm not optimizing replication graphs, Im spending time with the family,
                         or I'm usually in the garage.
                         I am currently fixing my BMW E46 325CI's Transmission, but I plan on building a convertible version
-                        of the <strong>BMW M3 GTR from <em>Need For Speed: Most Wanted</em></strong>. 
+                        of the <strong>BMW M3 GTR from <em>Need For Speed: Most Wanted</em></strong>.
                         No one has successfully built a convertible version of this car yet, so I plan to be the first once i get the funds to do so.
-                        It’s a mechanical nightmare, but just like systems engineering, I love the challenge of making 
+                        It’s a mechanical nightmare, but just like systems engineering, I love the challenge of making
                         complex moving parts work together.
                     </p>
                 </section>
