@@ -102,15 +102,30 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const allLinks = document.querySelectorAll('a');
+
+            // Handle Link Clicks (Fade Out)
             allLinks.forEach(link => {
                 link.addEventListener('click', function (event) {
                     const href = this.getAttribute('href');
-                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+                    // Don't fade for external links, mailto, or anchors
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) {
+                        return;
+                    }
                     event.preventDefault();
                     document.body.classList.add('fade-out');
-                    setTimeout(() => { window.location.href = href; }, 400);
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 400);
                 });
             });
+        });
+
+        // Handle "Back" Button (Force Fade In)
+        window.addEventListener('pageshow', (event) => {
+            // "pageshow" fires when the page is loaded OR restored from cache
+            if (event.persisted) {
+                document.body.classList.remove('fade-out');
+            }
         });
     </script>
 </body>

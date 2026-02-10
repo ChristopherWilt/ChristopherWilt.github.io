@@ -207,24 +207,30 @@
 
 
     <script>
+        // This runs immediately when the page is shown, even from the "Back" cache.
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                document.body.classList.remove('fade-out');
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Link Animation Logic
+            // Link Animation Logic
             const allLinks = document.querySelectorAll('a');
             allLinks.forEach(link => {
                 link.addEventListener('click', function (event) {
                     const href = this.getAttribute('href');
+
+                    // Ignore external links, mailto, or anchors
                     if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+
                     event.preventDefault();
-                    // Drop volume just before navigating
-                    if (typeof setSmoothVolume === 'function') {
-                        setSmoothVolume(0.1, 400);
-                    }
                     document.body.classList.add('fade-out');
                     setTimeout(() => { window.location.href = href; }, 400);
                 });
             });
 
-            // 2. AUTO-RESIZE LOGIC
+            // AUTO-RESIZE LOGIC
             const contentBox = document.querySelector('.content');
 
             function fitContent() {
