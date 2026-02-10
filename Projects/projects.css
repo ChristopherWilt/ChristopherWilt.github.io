@@ -164,6 +164,44 @@ body {
     animation-delay: 0.6s;
 }
 
+.category-section {
+    margin-bottom: 80px; /* Space between categories */
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: var(--main-white);
+    border-bottom: 2px solid var(--main-red);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+}
+
+/* Badge for "In Progress" projects */
+.badge-wip {
+    background-color: #ff9900;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    text-transform: uppercase;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* Update grid to handle 3 items nicely */
+.project-grid-tri {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
