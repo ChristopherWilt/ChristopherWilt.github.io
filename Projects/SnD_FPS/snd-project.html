@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SND FPS Project - Christopher Wilt</title>
+    <title>Multiplayer FPS Framework - Christopher Wilt</title>
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="snd-project.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -15,8 +15,6 @@
         <a href="../../Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
     </nav>
     <div class="container column-layout">
-
-
 
         <header class="project-detail-header">
             <div class="header-left">
@@ -36,131 +34,130 @@
         </header>
 
         <main>
-            <!--<h2>DEMO</h2>
-            <div class="demo-video-container">
-                <video src="../../Videos/TEMP_SND_DEMO.mp4" controls playsinline></video>
-            </div>-->
-
             <div class="content-grid">
+
                 <article class="content-block">
                     <div class="text-content">
                         <h2>PROJECT <span class="text-red">OVERVIEW</span></h2>
                         <p>
-                            This project is a modular First-Person Shooter framework
-                            engineered in C++ to serve as a scalable foundation for
-                            competitive multiplayer games.
+                            This project is a modular First-Person Shooter framework engineered in C++ to serve as a scalable foundation for competitive multiplayer games.
                         </p>
                         <p>
-                            Unlike standard template projects, this framework integrates
-                            <strong>Epic Online Services (EOS)</strong> for peer-to-peer matchmaking,
-                            lobby management, and secure user authentication. The goal was to build a
-                            reusable backend that supports Triple-A quality mechanics with low-latency
-                            network performance.
+                            Unlike standard template projects, this framework integrates <strong>Epic Online Services (EOS)</strong> with EIK for peer-to-peer matchmaking, lobby management, and secure user authentication. So far, the lobby and matchmaking systems are functional, allowing players to create and join sessions seamlessly. <em>(Note: The Online Subsystems are still being developed and debugged, so the files are not on the source just yet.)</em>
                         </p>
                     </div>
                     <div class="image-content">
-                        <img src="../../Images/TempProject.png" alt="Project progress screenshot">
+                        <img src="../../Images/FPSFramework/CurrentInGameScreenshot.png" alt="Project progress screenshot">
                     </div>
                 </article>
 
                 <article class="content-block">
                     <div class="text-content">
-                        <h2>PROJECT <span class="text-red">PROGRESS</span></h2>
+                        <h2>MODULAR HUD & <span class="text-red">ECONOMY</span></h2>
                         <p>
-                            The current status of the project includes a fully functional FPS Player Controller
-                            (First Person and Third person meshes),
-                            weapon systems, health and damage mechanics,
-                            weapon pickups & dropping, BuyMenu (For SND Games),
-                            as well as Animation Systems to drive the character's movement and actions
-                            on both meshes. All with a focus on modularity and reusability with server-authoritative in mind.
+                            I engineered a responsive <strong>Buy Menu System</strong> using C++ and UMG, which dynamically populates weapon columns based on a <code>WeaponsForSale</code> array. The UI logic includes real-time affordability checks; if a player cannot afford an item, the button is automatically disabled, preventing invalid server requests.
                         </p>
                         <p>
-                            On the networking side, i am currently implementing EOS systems with EIK.
-                            Which includes Lobby Creation/Joining, Matchmaking, and Player Authentication.
-                            So far, the lobby and matchmaking systems are functional, allowing players to create and join sessions seamlessly.
-                            The next steps involve integrating these systems with the gameplay mechanics to ensure smooth multiplayer experiences.
-                            <strong>(Note: The Online Subsytems are still being Developed and Debugged, so the files are not on the source just yet.)</strong>
+                            Beyond the economy, the UI utilizes a <strong>Master HUD Architecture</strong> (<code>UModularPlayerHUD</code>) to control gameplay widgets. This includes a procedural crosshair that dynamically scales based on movement and fire-spread, and a networked minimap that uses a <code>Multicast_PingMinimap</code> RPC to broadcast enemy locations when unsuppressed weapons are fired. The tactical Killfeed was optimized using <code>TWeakObjectPtr</code> and timer handles to gracefully manage message decay and prevent memory leaks.
+                        </p>
+                        <p>
+                            Again everything in the system is designed to be modular and data-driven, allowing for easy adjustments to the scaling behavior and visual style without modifying core logic.
+                            The Minimap, for example, is built to be flexible; the same ping system can be repurposed for tactical equipment like flashbangs or heartbeat sensors by simply changing the icon and parameters in the RPC call, demonstrating the framework's adaptability for future feature expansion. The Mini-Map also shows FOV indicators that dynamically adjust based on the player's current weapon, providing critical situational awareness in combat scenarios or when a you or a team-mate is aiming down sights.
                         </p>
                     </div>
                     <div class="image-content">
-                        <img src="../../Images/TempProject.png" alt="Project progress screenshot">
+                            <!--<img src="../../Images/FPSFramework/CurrentInGameScreenshot.png" alt="Project progress screenshot">-->
+                            <img src="../../Images/FPSFramework/Crosshair.png">
+                            <div class="media-row">
+                                <img class="ui-square" src="../../Images/FPSFramework/MinimapRedDot.png" alt="UI Icon Example">
+
+                                <video class="ui-square" autoplay loop muted playsinline>
+                                    <source src="../../Videos/FPSFramework_MiniMapFOS.mp4" type="video/mp4">
+                                </video>
+
+                            </div>
                     </div>
                 </article>
 
                 <article class="content-block">
                     <div class="text-content">
-                        <h2>NETWORK <span class="text-red">REPLICATION</span></h2>
+                        <h2>DYNAMIC <span class="text-red">COMPASS SYSTEM</span></h2>
                         <p>
-                            The core challenge of this project was implementing server-authoritative movement and state synchronization.
+                            To provide precise spatial awareness, I engineered a dynamic top-bar compass system. The C++ backend feeds the player's normalized and absolute yaw to the UI, but the UI layer handles the heavy lifting of visual formatting using optimized Blueprint math.
                         </p>
                         <p>
-                            I utilized Unreal Engine's replication graph to manage bandwidth efficiently. The weapon system features <strong>client-side prediction</strong> for instant feedback, with server reconciliation to prevent desynchronization. Animation states are replicated via a compressed integer flag system to minimize packet size while maintaining visual fidelity across all clients.
+                            Instead of expensive tick-based conditional branches, the center text calculator uses a highly optimized modulo algorithm. By adding an offset of 22 to the player's yaw, dividing by 45, and applying modulo 8, the 360-degree rotation is instantly converted into an index (0-7) that drives a Select node for the 8 cardinal directions.
+                        </p>
+                        <p>
+                            The sliding strip markers are generated dynamically. The widget calculates if a specific tick falls on a 45-degree interval using modulo division; if it does, a Widget Switcher swaps the standard degree number for its corresponding cardinal letter, resulting in a clean, modern tactical display.
                         </p>
                     </div>
                     <div class="image-content">
-                        <img src="../../Images/TempProject.png" alt="Project credits or team photo">
+                        <video class="ui-clip" autoplay loop muted playsinline>
+                            <source src="../../Videos/FPSFramework_Compass.mp4" type="video/mp4">
+                        </video>
+                        <div class="media-row">
+                            <img class="ui-square" src="../../Images/FPSFramework/CompassWBP.png" alt="UI Icon Example">
+                            <img class="ui-square" src="../../Images/FPSFramework/CompassMarker.png" alt="UI Icon Example">
+
+
+                        </div>
                     </div>
                 </article>
 
                 <article class="content-block">
                     <div class="text-content">
-                        <h2>MODULAR <span class="text-red">WEAPON SYSTEM</span></h2>
+                        <h2>ADVANCED <span class="text-red">WEAPON SYSTEM</span></h2>
                         <p>
-                            I architected a data-driven <code>AWeapon</code> class designed for extensibility. Instead of hardcoding behavior, weapons utilize a <strong>Fire Configuration Struct</strong> that dictates Fire Modes (Single, Burst, Auto), Recoil Patterns, and Damage Falloff.
+                            I architected a data-driven <code>AWeapon</code> class designed for extensibility, utilizing a Fire Configuration Struct for modes and recoil. The standout feature is the <strong>"True Bore Alignment"</strong> ADS system.  This automated calibration function freezes component updates and utilizes Quaternion math (<code>FQuat::FindBetweenNormals</code>) to perfectly align any weapon’s barrel vector with the camera’s forward vector at runtime, procedurally zeroing any optic.
                         </p>
                         <p>
-                            The system uses a slot-based <strong>Inventory Component</strong> that handles equipment logic server-side. This ensures that a player cannot equip a weapon they haven't purchased or picked up, preventing cheat exploits while maintaining a flexible "Loadout" system.
+                            The inventory relies on a <code>UInventoryComponent</code> that supports a universal weapon slot toggle, enabling modular loadout swapping. Physics-based interactions allow dropped weapons to use randomized "Pop and Spin" torque. Players interact with these items via an optimized proximity trace that calculates a dot-product "look-score". Furthermore, weapon impacts are optimized using a <strong>Global Decal Pool</strong> capped at 50 instances to strictly preserve rendering budgets.
                         </p>
                     </div>
                     <div class="image-content">
-                        <img src="../../Images/SND/SND_WeaponSystem.png" alt="Weapon Architecture">
+                        <div class="media-column">
+                            <img class="ui-standard" src="../../Images/FPSFramework/CalculateADS.png" alt="Slide Physics C++ Code Snippet">
+                            <img class="ui-standard" src="../../Images/FPSFramework/DropWeapon.png" alt="Server Fire RPC Code Snippet">
+                        </div>
                     </div>
                 </article>
 
-                    <article class="content-block">
-                        <div class="text-content">
-                            <h2>CLIENT-SIDE <span class="text-red">PREDICTION</span></h2>
-                            <p>
-                                In a competitive shooter, "feeling" responsive is paramount. I implemented <strong>Client-Side Prediction</strong> for the firing mechanics.
-                            </p>
-                            <p>
-                                When a player clicks fire, the client immediately plays the muzzle flash and calculates the hit trace locally. The <code>Server_FireShot</code> RPC then validates ammo and recalculates the hit using <strong>Lag Compensation</strong> logic. The server creates the authoritative state, but the client never waits for round-trip latency to see feedback.
-                            </p>
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>MOVEMENT & <span class="text-red">PREDICTION</span></h2>
+                        <p>
+                            To achieve "Triple-A" fluidity, I extended the Character Movement Component to support states like <strong>Sliding</strong>.  This dynamically alters ground friction and shrinks the capsule hitbox via a custom <code>ApplySlidePhysics()</code> function. The state is replicated securely, while procedural arm interpolation (<code>FMath::VInterpTo</code>) blends the raw input sway into the first-person mesh to create a responsive combat "glide."
+                        </p>
+                        <p>
+                            In a competitive shooter, feeling responsive is paramount. I implemented <strong>Client-Side Prediction</strong> for the firing mechanics. When a player fires, the client immediately calculates the hit trace locally for zero-latency feedback. The <code>Server_FireShot</code> RPC then validates ammo and recalculates the hit using Lag Compensation logic. Animation states are replicated via a compressed integer flag system to minimize packet size while maintaining exact visual fidelity.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <img class="ui-standard" src="../../Images/FPSFramework/SlidePhysicsCode.png" alt="Slide Physics C++ Code Snippet">
+                            <img class="ui-standard" src="../../Images/FPSFramework/ServerFire.png" alt="Server Fire RPC Code Snippet">
                         </div>
-                        <div class="image-content">
-                            <img src="../../Images/SND/SND_Networking.png" alt="Replication Logic">
-                        </div>
-                    </article>
+                    </div>
+                </article>
 
-                    <article class="content-block">
-                        <div class="text-content">
-                            <h2>DYNAMIC UI & <span class="text-red">ECONOMY</span></h2>
-                            <p>
-                                I engineered a responsive <strong>Buy Menu System</strong> using C++ and UMG. The system dynamically populates weapon columns based on a <code>WeaponsForSale</code> array, allowing designers to add new guns without touching code.
-                            </p>
-                            <p>
-                                The UI logic includes real-time <strong>Affordability Checks</strong>. In `NativeConstruct`, the widgets bind to player delegates to track money. If a player cannot afford an item, the button is automatically disabled and greyed out, providing instant feedback and preventing invalid server requests.
-                            </p>
-                        </div>
-                        <div class="image-content">
-                            <img src="../../Images/SND/SND_BuyMenu.png" alt="Buy Menu UI">
-                        </div>
-                    </article>
 
-                    <article class="content-block">
-                        <div class="text-content">
-                            <h2>MOVEMENT <span class="text-red">STATE MACHINE</span></h2>
-                            <p>
-                                To achieve "Triple-A" fluidity, I extended the standard Character Movement Component to support advanced states like <strong>Sliding</strong>.
-                            </p>
-                            <p>
-                                The sliding mechanic dynamically alters ground friction and braking deceleration in real-time. I implemented a custom `ApplySlidePhysics()` function that shrinks the capsule hitbox and applies a velocity impulse. This state is replicated via <code>Server_StartSliding</code>, ensuring the hitbox matches the visual mesh on all clients.
-                            </p>
-                        </div>
-                        <div class="image-content">
-                            <img src="../../Images/SND/SND_Sliding.png" alt="Movement Logic">
-                        </div>
-                    </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>DEVELOPMENT <span class="text-red">ROADMAP</span></h2>
+                        <p>
+                            The framework is continuously evolving. The next phase of development focuses on expanding the combat sandbox, refining player locomotion, and scaling the architecture to support multiple game modes.
+                        </p>
+                        <ul>
+                            <li style="margin-bottom: 10px;"><strong>Advanced Weapon Mechanics:</strong> Implementing procedural weapon sway, wall-collision avoidance, and a robust attachment system, alongside tactical and lethal equipment integration.</li>
+                            <li style="margin-bottom: 10px;"><strong>Locomotion & Player State:</strong> Adding a mantle system, networked spectator states, full-body animation refinements, and configurable health regeneration.</li>
+                            <li style="margin-bottom: 10px;"><strong>Expanded Game Modes:</strong> Engineering a dedicated C++ Bomb class to finalize Search and Destroy, while scaling the backend to support Team Deathmatch, Free-For-All, and Capture the Flag.</li>
+                            <li><strong>UI & Social Integration:</strong> Completing the out-of-match experience with a Start Menu, Lobby System, Friends List, and advanced HUD elements (multi-kill tracking, stance indicators, and stacked damage numbers).</li>
+                        </ul>
+                    </div>
+                </article>
+
             </div>
         </main>
     </div>
@@ -188,7 +185,6 @@
 
         // Handle "Back" Button (Force Fade In)
         window.addEventListener('pageshow', (event) => {
-            // "pageshow" fires when the page is loaded OR restored from cache
             if (event.persisted) {
                 document.body.classList.remove('fade-out');
             }
