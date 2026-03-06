@@ -57,9 +57,6 @@
                             The `Interactor` class utilizes <code>Physics.OverlapSphereNonAlloc</code> for garbage-collection-friendly detection. By checking for the interface rather than specific classes, the system is modular—allowing Chests, Doors, and NPCs to share unified input logic without hard dependencies.
                         </p>
                     </div>
-                    <div class="image-content">
-                        <img src="../../Images/Archmage/Archmage_Interaction.png" alt="Interaction System Logic">
-                    </div>
                 </article>
             </div>
 
@@ -74,9 +71,6 @@
                             The system features complex slot logic where items intelligently snap to valid targets. I implemented an `EquippedSlot` class that not only accepts items but dynamically alters player stats—for example, equipping "Boots" immediately modifies the `PlayerMovement` speed.
                         </p>
                     </div>
-                    <div class="image-content">
-                        <img src="../../Images/Archmage/Archmage_UI_Drag.png" alt="Inventory Drag and Drop UI">
-                    </div>
                 </article>
             </div>
 
@@ -90,9 +84,6 @@
                         <p>
                             I implemented a Coroutine-based "Message Log" system that queues in-game events (e.g., "Health Potion Used") and fades them out over time, ensuring the player receives feedback without cluttering the UI.
                         </p>
-                    </div>
-                    <div class="image-content">
-                        <img src="../../Images/Archmage/Archmage_Architecture.png" alt="Game State Architecture">
                     </div>
                 </article>
             </div>

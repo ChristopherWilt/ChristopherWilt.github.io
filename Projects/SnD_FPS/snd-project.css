@@ -148,7 +148,8 @@ main h2 {
     margin-bottom: 15px;
 }
 
-.image-content img {
+.image-content img,
+.image-content video {
     width: 100%;
     border-radius: 15px;
     object-fit: cover;
@@ -166,6 +167,55 @@ main h2 {
 
 .content-block:nth-of-type(3) {
     animation-delay: 0.6s;
+}
+
+/* Special class for ultra-wide UI clips (like the compass) */
+.image-content .ui-clip {
+    width: 100%;
+    height: auto; /* Overrides the 100% height so it doesn't stretch vertically */
+    border-radius: 15px;
+    object-fit: contain; /* Ensures the entire width is visible without cropping */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Optional: Adds a nice shadow to ground it */
+}
+
+/* Container to hold multiple media items side-by-side */
+.image-content .media-row {
+    display: flex;
+    gap: 20px; /* Slightly more breathing room between them */
+    width: 100%;
+    justify-content: center; /* Centers the smaller squares inside the right column */
+    align-items: center;
+}
+
+
+/* Container to stack media items vertically */
+.image-content .media-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between the top and bottom image */
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Standard aspect ratio class for regular screenshots */
+.image-content .ui-standard {
+    width: 100%;
+    max-width: 450px; /* Limits how huge the images get on desktop */
+    height: auto; /* Overrides the 100% height to prevent vertical stretching */
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    object-fit: contain; /* Ensures the whole code snippet is visible without cropping */
+}
+
+/* 1:1 Square class for images and videos */
+.image-content .ui-square {
+    width: 45%; /* Instead of forcing 100%, they take up a smaller chunk */
+    max-width: 250px; /* HARD CAP: They will never grow larger than 250px */
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 
