@@ -66,16 +66,13 @@
                         </p>
                     </div>
                     <div class="image-content">
-                            <!--<img src="../../Images/FPSFramework/CurrentInGameScreenshot.png" alt="Project progress screenshot">-->
-                            <img src="../../Images/FPSFramework/Crosshair.png">
-                            <div class="media-row">
-                                <img class="ui-square" src="../../Images/FPSFramework/MinimapRedDot.png" alt="UI Icon Example">
-
-                                <video class="ui-square" autoplay loop muted playsinline>
-                                    <source src="../../Videos/FPSFramework_MiniMapFOS.mp4" type="video/mp4">
-                                </video>
-
-                            </div>
+                        <img src="../../Images/FPSFramework/Crosshair.png">
+                        <div class="media-row">
+                            <img class="ui-square" src="../../Images/FPSFramework/MinimapRedDot.png" alt="UI Icon Example">
+                            <video class="ui-square" autoplay loop muted playsinline>
+                                <source src="../../Videos/FPSFramework_MiniMapFOS.mp4" type="video/mp4">
+                            </video>
+                        </div>
                     </div>
                 </article>
 
@@ -99,8 +96,6 @@
                         <div class="media-row">
                             <img class="ui-square" src="../../Images/FPSFramework/CompassWBP.png" alt="UI Icon Example">
                             <img class="ui-square" src="../../Images/FPSFramework/CompassMarker.png" alt="UI Icon Example">
-
-
                         </div>
                     </div>
                 </article>
@@ -109,7 +104,10 @@
                     <div class="text-content">
                         <h2>ADVANCED <span class="text-red">WEAPON SYSTEM</span></h2>
                         <p>
-                            I architected a data-driven <code>AWeapon</code> class designed for extensibility, utilizing a Fire Configuration Struct for modes and recoil. The standout feature is the <strong>"True Bore Alignment"</strong> ADS system.  This automated calibration function freezes component updates and utilizes Quaternion math (<code>FQuat::FindBetweenNormals</code>) to perfectly align any weapon’s barrel vector with the camera’s forward vector at runtime, procedurally zeroing any optic.
+                            I architected a data-driven <code>AWeapon</code> class designed for extensibility. The standout feature is the <strong>Socket-Driven Procedural ADS System</strong>. I completely stripped out hard-coded camera positions and live-tuning in favor of a dynamic offset calculation.
+                        </p>
+                        <p>
+                            The system checks for active optic attachments; if none exist, it falls back to the base weapon's <code>SightSocket</code> and <code>MuzzleSocket</code>. It then procedurally aligns the weapon to the center of the player's screen over a variable, time-based float (ADS Speed). This ensures perfect optical centering for any modular sight attachment without requiring manual adjustments per weapon.
                         </p>
                         <p>
                             The inventory relies on a <code>UInventoryComponent</code> that supports a universal weapon slot toggle, enabling modular loadout swapping. Physics-based interactions allow dropped weapons to use randomized "Pop and Spin" torque. Players interact with these items via an optimized proximity trace that calculates a dot-product "look-score". Furthermore, weapon impacts are optimized using a <strong>Global Decal Pool</strong> capped at 50 instances to strictly preserve rendering budgets.
@@ -117,8 +115,8 @@
                     </div>
                     <div class="image-content">
                         <div class="media-column">
-                            <img class="ui-standard" src="../../Images/FPSFramework/CalculateADS.png" alt="Slide Physics C++ Code Snippet">
-                            <img class="ui-standard" src="../../Images/FPSFramework/DropWeapon.png" alt="Server Fire RPC Code Snippet">
+                            <img class="ui-standard" src="../../Images/FPSFramework/CalculateADS.png" alt="ADS Alignment Logic Snippet">
+                            <img class="ui-standard" src="../../Images/FPSFramework/DropWeapon.png" alt="Physics Drop Logic Snippet">
                         </div>
                     </div>
                 </article>
@@ -141,19 +139,93 @@
                     </div>
                 </article>
 
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>SKELETAL MESH & <span class="text-red">RETARGETING</span></h2>
+                        <p>
+                            To support modern AAA mechanics like reciprocating slides and physical magazine drops, the core weapon architecture was upgraded to utilize fully rigged <code>USkeletalMeshComponents</code>. This allows attachments to parent dynamically directly to moving bones via socket tags.
+                        </p>
+                        <p>
+                            A major technical victory was successfully retargeting the <em>Infima Games Low Poly Weapon Anim Pack</em> from its custom legacy UE4 skeleton to the UE5 Manny skeleton. After auto-alignment failed, I manually set the root retarget bone to the pelvis and meticulously adjusted the clavicle and arm translation settings. This achieved a 98% perfect alignment, bridging legacy assets into a modern UE5 environment.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img class="ui-standard" src="../../Images/FPSFramework/SkelMeshSetup.png" alt="Skeletal Mesh Setup">
+                    </div>
+                </article>
 
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>MODULAR <span class="text-red">RECOIL DYNAMICS</span></h2>
+                        <p>
+                            I engineered a hybrid, data-driven recoil solver that decouples logic from the weapon class via <code>UDataAssets</code>. It supports immediate hot-swapping between two primary modes: <strong>Pattern-Based</strong> (Valorant-style deterministic VectorCurve sprays with a custom Stochastic Sway system) and <strong>Procedural</strong> (CoD-style randomized variance).
+                        </p>
+                        <p>
+                            This is layered with a procedural Spring-Mass-Damper (<code>SpringInterp</code>) system for independent visual weapon kick and camera roll. The dynamic ADS system calculates the offset between the camera and a "SightSocket" in real-time, procedurally aligning the weapon to the center screen over a time-based float for true modular optics.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img class="ui-standard" src="../../Images/FPSFramework/RecoilDataAsset.png" alt="Recoil Data Asset Configuration">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>MATCH FLOW & <span class="text-red">STATE MACHINE</span></h2>
+                        <p>
+                            The core logic was refactored for strict server authority. The server-only <code>ATDMGameMode</code> dictates match phases. The <code>AFPSGameState</code> safely replicates global timers and calculates a <code>WinLossStatusText</code>, driving dynamic HUD elements to show real-time "WINNING/LOSING" status.
+                        </p>
+                        <p>
+                            During the 15-second <code>PreRound</code> phase, player inputs are intercepted and frozen, allowing players to navigate preset class arrays and push a custom <code>FPlayerLoadout</code> selection to the server. Upon elimination, an asynchronous respawn system un-possesses the pawn, waits for a customizable delay, and securely spawns a fresh character body using the native <code>RestartPlayer</code> routine.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img class="ui-standard" src="../../Images/FPSFramework/RoundStateMachine.png" alt="Match State Machine Code">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>AAA <span class="text-red">KILLCAM REPLAY</span></h2>
+                        <p>
+                            I engineered a server-authorized replay system split into three specialized classes to ensure 1:1 visual parity without memory bloat. The <code>UKillCamRecorderComponent</code> captures compressed <code>FPlayerSnapshot</code> structs (transform, control rotation, weapon class pointer, firing state) every 0.05 seconds, actively trimming data older than 5 seconds.
+                        </p>
+                        <p>
+                            The local spectator actor (<code>AKillCamGhost</code>) dynamically spawns and destroys weapon classes based on the recorded timeline. To preserve immersion, it forces visibility on 1st-person meshes and hides live actors. Background combatants (<code>AKillCamOtherPlayer</code>) synchronize to a Master Clock, firing collision-safe VFX traces that explicitly ignore live players.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img class="ui-standard" src="../../Images/FPSFramework/KillCamLogic.png" alt="Kill Cam Component Logic">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>EOS ARCHITECTURE & <span class="text-red">SOCIAL OVERLAY</span></h2>
+                        <p>
+                            The backend relies on Epic Online Services (EOS) via the EOS Integration Kit. To mimic AAA lobby flows, the framework uses <code>bUseLobbiesIfAvailable</code> to create persistent data lobbies on the main menu, keeping parties together with full Voice Chat support without needing an active server IP.
+                        </p>
+                        <p>
+                            The C++ subsystem binds directly to the Epic Games Social Overlay (Shift+F3) via <code>OnSessionUserInviteAcceptedDelegate</code>, intercepting accepted invites to seamlessly pull players into the host's party. Additionally, I wrote a custom <code>FSaneEOSLogWriter</code> that actively scrubs sensitive Dev Portal credentials before writing output logs, and utilized <code>ClientReturnToMainMenuWithTextReason</code> to gracefully handle party state edge cases.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img class="ui-standard" src="../../Images/FPSFramework/EOS_LobbyMenu.png" alt="EOS Main Menu Lobby">
+                    </div>
+                </article>
 
                 <article class="content-block">
                     <div class="text-content">
                         <h2>DEVELOPMENT <span class="text-red">ROADMAP</span></h2>
                         <p>
-                            The framework is continuously evolving. The next phase of development focuses on expanding the combat sandbox, refining player locomotion, and scaling the architecture to support multiple game modes.
+                            The framework is continuously evolving. The immediate next phase of development focuses on scaling the Epic Online Services (EOS) backend for public and custom matchmaking, alongside expanding the combat sandbox and the out-of-match user experience.
                         </p>
                         <ul>
+                            <li style="margin-bottom: 10px;"><strong>EOS Matchmaking & Custom Games:</strong> Expanding the backend architecture to support seamless <strong>Public Matchmaking</strong> flows, successfully routing persistent main-menu parties into active UDP server sessions. Engineering a comprehensive <strong>Custom Games Setup</strong> menu, allowing party hosts to configure map selections and game mode rules, and dynamically injecting these variables into the EOS Session Settings.</li>
+                            <li style="margin-bottom: 10px;"><strong>Persistent Loadouts & Settings:</strong> Developing an out-of-match <strong>Custom Loadout Builder</strong> and a robust, data-driven <strong>Settings System</strong> (Audio, Video, Keybinds), utilizing local save architecture (and eventually EOS Player Data Storage) to securely store and retrieve user preferences across sessions.</li>
                             <li style="margin-bottom: 10px;"><strong>Advanced Weapon Mechanics:</strong> Implementing procedural weapon sway, wall-collision avoidance, and a robust attachment system, alongside tactical and lethal equipment integration.</li>
-                            <li style="margin-bottom: 10px;"><strong>Locomotion & Player State:</strong> Adding a mantle system, networked spectator states, full-body animation refinements, and configurable health regeneration.</li>
-                            <li style="margin-bottom: 10px;"><strong>Expanded Game Modes:</strong> Engineering a dedicated C++ Bomb class to finalize Search and Destroy, while scaling the backend to support Team Deathmatch, Free-For-All, and Capture the Flag.</li>
-                            <li><strong>UI & Social Integration:</strong> Completing the out-of-match experience with a Start Menu, Lobby System, Friends List, and advanced HUD elements (multi-kill tracking, stance indicators, and stacked damage numbers).</li>
+                            <li style="margin-bottom: 10px;"><strong>Locomotion & Expanded Modes:</strong> Adding a mantle system and networked spectator states. Engineering a dedicated C++ Bomb class to finalize the Search and Destroy loop, while scaling the match state machine to natively support Free-For-All and Capture the Flag.</li>
+                            <li><strong>UI & Social Expansion:</strong> Completing the out-of-match visual experience, polishing the EOS Friends List UI, and refining advanced in-game HUD elements (multi-kill tracking, stance indicators, and stacked damage numbers).</li>
                         </ul>
                     </div>
                 </article>
