@@ -3,212 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christopher Wilt - Game Developer / Systems Engineer</title>
+    <title>Christopher Wilt - Systems & Full-Stack Software Engineer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Adding Inter font for that ultra-premium tech feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body class="home-layout">
-    <!--*** NOTE: The following block is a overlay for site updates ***-->
-    <!--<div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; backdrop-filter: blur(5px);">
+    <!-- Ambient Background Glow -->
+    <div class="ambient-glow"></div>
 
-        <div style="width: 15px; height: 15px; background-color: #ff2e54; border-radius: 50%; box-shadow: 0 0 15px #ff2e54; margin-bottom: 20px; animation: pulse 1.5s infinite;"></div>
-
-        <h1 style="font-family: Arial, sans-serif; font-size: 2.5rem; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin: 0;">
-            Updates Underway
-        </h1>
-
-        <p style="font-family: monospace; color: #0f0; font-size: 1.1rem; margin-top: 15px;">
-            > Deploying: Infrastructure_Labs<br>
-            > Status: Building_Terraform_Modules...
-        </p>
-
-        <style>
-            @keyframes pulse {
-                0% {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-
-                50% {
-                    transform: scale(1.2);
-                    opacity: 0.7;
-                }
-
-                100% {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-            }
-        </style>
-    </div>-->
-    <nav class="nav-dock">
+    <nav class="nav-dock glass-panel">
         <a href="index.html" title="Home"><i class="fas fa-home"></i></a>
         <a href="Projects/projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
         <a href="Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
     </nav>
-    <div class="container">
+
+    <div class="container glass-panel">
         <header class="sidebar">
-            <div>
+            <div class="profile-wrapper">
                 <img src="Images/profilepic.jpg" alt="Christopher Wilt" class="profile-photo">
-                <h1>Christopher Wilt</h1>
-                <p>Systems Engineer / Gameplay Programmer</p>
+                <div class="profile-ring"></div>
             </div>
+            <h1>Christopher Wilt</h1>
+            <p class="subtitle">Systems & Full-Stack Engineer</p>
 
             <div class="connect-group">
-                <h4 class="connect-heading">CONNECT WITH ME</h4>
                 <div class="social-links">
-                    <a href="mailto:ctwilt23@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+                    <a href="mailto:ctwilt23@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
                     <a href="https://github.com/ChristopherWilt" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/christopher-wilt-b89561287" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://linkedin.com/in/christopher-t-wilt" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </header>
 
         <main class="content">
             <section class="about-me">
-                <h2>ENGINEERING <span class="text-red">ANY</span> SYSTEM. SOLVING <span class="text-red">ANY</span> PROBLEM.</h2>
-                <p>
-                    I am a multi-disciplinary Software Engineer who refuses to be pigeonholed. In an industry that demands specialization, my strength lies in <strong>adaptability</strong>.
+                <h2>ENGINEERING <span class="text-gradient">ANY</span> SYSTEM. SOLVING <span class="text-gradient">ANY</span> PROBLEM.</h2>
+                <p class="lead-text">
+                    I am a multi-disciplinary Systems, Full-Stack, and Software Engineer who refuses to be pigeonholed. In an industry that demands narrow specialization, my core competitive advantage lies in <strong>absolute technical adaptability</strong> and an obsession with scalable architecture.
                 </p>
                 <p>
-                    Whether I am rapid-prototyping gameplay mechanics in <strong>Unity (C#)</strong>, architecting server-authoritative replication in <strong>Unreal Engine 5 (C++)</strong>,
-                    or engineering backend infrastructure with <strong>Python & SQL</strong>, I deliver shipping-quality code.
-                    I pride myself on being a "force multiplier"—I don't just learn new tools quickly; I master them to solve whatever problem the team throws at me.
+                    I operate seamlessly across the entire engineering stack. Whether I am engineering Vulkan PBR rendering pipelines and thread-safe OS schedulers in bare-metal <strong>C++</strong>, designing autonomous AI swarm logic, building responsive cross-platform web and mobile frontends in <strong>React / Next.js</strong>, or automating enterprise cloud infrastructure with <strong>Terraform & AWS</strong>, I deliver high-performance, shipping-quality code. I act as a force multiplier—dissecting complex, ambiguous technical bottlenecks and engineering clean, deterministic solutions.
                 </p>
 
-                <section class="intro-block">
-                    <h2>TECHNICAL <span class="text-red">VERSATILITY</span></h2>
+                <section class="intro-block mt-4">
+                    <h2>TECHNICAL <span class="text-gradient">EXPERTISE MATRIX</span></h2>
 
                     <div class="skills-grid">
-                        <div class="skill-category">
-                            <h3><i class="fas fa-gamepad"></i> Game Engines</h3>
-                            <p>
-                                <span class="tab-space">
-                                    • <strong>Unreal Engine 5</strong> (Source C++)
-                                </span>
-                            </p>
-                            <p>
-                                <span class="tab-space">
-                                    • <strong>Unity</strong> (C# Scripting & Architecture)
-                                </span>
-                            </p>
-                            <p>
-                                <span class="tab-space">
-                                    • Engine-Agnostic Systems Design
-                                </span>
-                            </p>
+                        <div class="skill-card">
+                            <div class="card-icon"><i class="fas fa-code"></i></div>
+                            <h3>Languages</h3>
+                            <ul>
+                                <li><strong>C++</strong> (Systems & Memory)</li>
+                                <li><strong>JavaScript / TypeScript</strong></li>
+                                <li><strong>C#</strong> (Tools & Logic)</li>
+                                <li><strong>Python</strong> (Automation & Data)</li>
+                                <li><strong>SQL</strong> (Data Engineering)</li>
+                                <li><strong>Java</strong> (Object-Oriented Core)</li>
+                            </ul>
                         </div>
 
-                        <div class="skill-category">
-                            <h3><i class="fas fa-code"></i> Languages</h3>
-                            <p>
-                                <span class="tab-space">
-                                    • <strong>C++</strong> (Systems & Memory)
-                                </span>
-                            </p>
-                            <p>
-                                <span class="tab-space">
-                                    • <strong>C#</strong> (Tools & Gameplay)
-                                </span>
-                            </p>
-                            <p>
-                                <span class="tab-space">
-                                    • <strong>Python</strong> (Automation)
-                                </span>
-                            </p>
-                            <p>
-                                <span class="tab-space">
-                                    • <strong>SQL</strong> (Data Architecture)
-                                </span>
-                            </p>
-                            <p>
-                                <span class="tab-space">
-                                    • <strong>Java</strong> (Object Oriented Design)
-                                </span>
-                            </p>
+                        <div class="skill-card">
+                            <div class="card-icon"><i class="fas fa-server"></i></div>
+                            <h3>Full-Stack & Cloud</h3>
+                            <ul>
+                                <li><strong>React, Next.js, React Native</strong></li>
+                                <li>State & Async Flow Optimization</li>
+                                <li>3NF Relational Databases & Indexing</li>
+                                <li>Infrastructure as Code (Terraform)</li>
+                                <li>Cloud Environments (AWS EC2)</li>
+                                <li>Enterprise VCS (Perforce / Git)</li>
+                            </ul>
                         </div>
 
-                        <div class="skill-category">
-                            <h3><i class="fas fa-network-wired"></i> Core Competencies</h3>
-                            <p>
-                                <span class="tab-space">
-                                    • Server-Authoritative Architecture
-                                </span>
-                            </p>
-                            <p>
-                                <span class="tab-space">
-                                    • Client-Side Prediction & Replication
-                                </span>
-                            </p>
-                            <p>
-                                <span class="tab-space">
-                                    • Epic Online Services (EOS)
-                                </span>
-                            </p>
-                            <p>
-                                <span class="tab-space">
-                                    • Multithreading & Concurrency
-                                </span>
-                            </p>
+                        <div class="skill-card">
+                            <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                            <h3>Systems & Architecture</h3>
+                            <ul>
+                                <li>Vulkan 1.3 & Graphics Pipelines</li>
+                                <li>Multi-Threading & OS Internals</li>
+                                <li>AI Swarm Logic & Pathfinding</li>
+                                <li>Server-Authoritative Infrastructure</li>
+                                <li>Non-blocking Sockets & Network I/O</li>
+                                <li>3D Math (Vectors & Quaternions)</li>
+                            </ul>
                         </div>
                     </div>
                 </section>
 
-
-                <h2>THE <span class="text-red">MISSION</span></h2>
-                <section class="about-block">
+                <h2 class="mt-4">PRODUCTION <span class="text-gradient">PROVENANCE</span></h2>
+                <section class="about-block premium-block">
                     <p>
-                        My journey into engineering started with competitive gaming—grinding tournaments in <em>CS:GO</em> and <em>Valorant</em>—but it quickly evolved into a curiosity about the machinery behind the screen.
-                        This competitive background directly drives my current flagship project: engineering a low-latency, server-authoritative Multiplayer FPS framework from the ground up in C++ and Unreal Engine 5.
-                        I taught myself to code at 16, starting with Java, but realized I needed to go deeper.
+                        My journey into engineering started with competitive gaming—grinding tournaments in <em>CS:GO</em> and <em>Valorant</em>—which quickly evolved into a fascination with low-latency data processing and real-time synchronization. I taught myself to code at 16 using Java to understand the machinery behind the screen, establishing a lifelong habit of diving beneath consumer software abstractions.
                     </p>
                     <p>
-                        At Full Sail University, I didn't just learn to make games; I learned to engineer software. I tackled everything from <strong>Graphics Programming</strong> and <strong>Linux Systems</strong>
-                        to <strong>Database Architecture</strong>. I realized that my talent isn't just in one specific language—it's in my ability to dissect complex systems and rebuild them better.
+                        At Full Sail University, I specialized in core computer science vectors, graduating in April 2026. My training covered everything from <strong>Linux Systems Administration</strong> and <strong>Advanced Database Management</strong> to native <strong>Graphics Programming</strong>, low-level resource optimization, and autonomous AI design. I focus heavily on writing clean, modular code that respects hardware constraints, eliminates thread contention, and guarantees data consistency.
                     </p>
-                    <p>
-                        <strong>My Career Goal:</strong> I am looking to launch my career in the games industry, and I am ready to work. Whether you need a Gameplay Programmer to tune mechanics,
-                        a Backend Engineer to scale services, or a Systems Engineer to optimize performance, I have the foundation and the drive to execute on Day 1.
-                    </p>
+                    
+                    <h3 class="subsection-title">Flagship Architecture</h3>
+                    <ul class="project-list">
+                        <li>
+                            <strong>The Veil (<a href="https://theveilwedding.com" target="_blank" style="color: var(--accent-red); text-decoration: none;">TheVeilWedding.com</a>):</strong> As the founder and sole developer, I architected and engineered a comprehensive, production-grade B2B/B2C wedding planner, social ecosystem, and e-commerce marketplace. The system utilizes a highly optimized Next.js frontend, cross-platform React Native mobile architecture, complex async third-party integrations, and a normalized SQL backend with custom indexing to ensure instantaneous UI state management.
+                        </li>
+                        <li>
+                            <strong>Custom C++ Environments & Engines:</strong> Engineered an EnTT data-driven ECS architecture supporting hardware-accelerated Vulkan 1.3 PBR rendering pipelines, multi-threaded OS dispatchers, and adversarial Alpha-Beta pruning AI algorithms directly on bare-metal memory allocations.
+                        </li>
+                        <li>
+                            <strong>Multiplayer FPS Framework:</strong> Built completely in C++ and Unreal Engine 5, I engineered a highly modular, server-authoritative networking loop. The framework integrates epic session handling, customized network weapon state machines, precise recoil, and strict server-side validation to eliminate replication desync.
+                        </li>
+                        <li>
+                            <strong>Core Gameplay Systems:</strong> Developed modular, data-driven system mechanics across distinct test beds, including <em>Archmage</em> (Unity RPG), <em>SpaceRace</em> (Custom C++ Arcade), and <em>Delivery Detonation</em> (3D third-person physics-based platformer built to isolate complex environmental collision matrices).
+                        </li>
+                    </ul>
                 </section>
 
-                <h2>LONG TERM <span class="text-red">VISION</span></h2>
-                <section class="about-block">
+                <h2 class="mt-4">LONG TERM <span class="text-gradient">VISION</span></h2>
+                <section class="about-block premium-block">
                     <p>
-                        Outside of software, I apply my engineering mindset to automotive restoration. My long-term passion project is engineering a convertible version of the
-                        <strong>BMW M3 GTR from <em>Need for Speed: Most Wanted</em></strong>.
+                        My ultimate trajectory is to operate at the absolute pinnacle of software architecture. I am driven by the pursuit of mastering enterprise-scale systems, mitigating complex data bottlenecks, and eventually leading high-performance engineering teams that dictate the industry standard for technical excellence. 
                     </p>
                     <p>
-                        This isn't just a car build; it's a mechanical engineering challenge that requires custom fabrication, structural reinforcement, and powertrain integration.
-                        While this project is part of my 2-year roadmap, I am currently laying the groundwork for the build—planning the logistics and acquiring the resources to bring this "impossible" spec to reality.
-                        It serves as a constant reminder that with enough planning and engineering discipline, complex systems can be bent to your will.
+                        Beyond enterprise engineering, I am aggressively building my foundation as a technology entrepreneur. As the founder of <strong>The Veil</strong> (<a href="https://theveilwedding.com" target="_blank" style="color: var(--accent-red); text-decoration: none;">TheVeilWedding.com</a>), architecting and launching this platform serves as the primary catalyst for a broader roadmap: creating highly scalable, self-sustaining software ecosystems. My definitive long-term goal is to establish an independent technology studio—bringing my brothers into the fold to build a generational engineering legacy defined by flawless code, uncompromised performance, and robust infrastructure.
                     </p>
                 </section>
             </section>
 
-            <section class="education">
-                <h2>Education</h2>
+            <section class="education premium-block mt-4">
+                <div class="edu-header">
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    <span class="date-badge">Class of 04 / 2026</span>
+                </div>
                 <div class="entry">
-                    <h4>04 / 2026</h4>
-                    <div>
-                        <p><strong>Bachelor of Science in Computer Science</strong></p>
-                        <p>Game Development Concentration</p>
-                        <p>Full Sail University | Winter Park, FL</p>
+<div>
+                        <p class="degree"><strong>Bachelor of Science in Game Development</strong></p>
+                        <p class="focus">Core Focus: Systems Architecture & Software Engineering</p>
+                        <p class="location">Full Sail University | Winter Park, FL</p>
                     </div>
                 </div>
             </section>
 
             <div class="button-container">
-                <a href="Resume/WiltChristopher_Resume.pdf" target="_blank" class="btn">View Resume</a>
-                <a href="Projects/projects.html" class="btn">View Technical Projects</a>
+                <a href="Resume/WiltChristopher_Resume.pdf" target="_blank" class="btn btn-primary">View Resume <i class="fas fa-arrow-right"></i></a>
+                <a href="Projects/projects.html" class="btn btn-secondary">Technical Projects</a>
             </div>
         </main>
     </div>
 
-
-
     <script>
-        // This runs immediately when the page is shown, even from the "Back" cache.
         window.addEventListener('pageshow', (event) => {
             if (event.persisted) {
                 document.body.classList.remove('fade-out');
@@ -216,51 +158,16 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Link Animation Logic
             const allLinks = document.querySelectorAll('a');
             allLinks.forEach(link => {
                 link.addEventListener('click', function (event) {
                     const href = this.getAttribute('href');
-
-                    // Ignore external links, mailto, or anchors
                     if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
 
                     event.preventDefault();
                     document.body.classList.add('fade-out');
                     setTimeout(() => { window.location.href = href; }, 400);
                 });
-            });
-
-            // AUTO-RESIZE LOGIC
-            const contentBox = document.querySelector('.content');
-
-            function fitContent() {
-                // Only run this on desktop (width > 900px)
-                if (window.innerWidth <= 900) return;
-
-                // Reset to a large font size first
-                let size = 18;
-                contentBox.style.fontSize = size + 'px';
-
-                // While content is spilling out OR content is taller than container
-                // Decrease font size by 0.5px step
-                while (
-                    (contentBox.scrollHeight > contentBox.clientHeight) &&
-                    size > 10 // Safety stop: won't go smaller than 10px
-                ) {
-                    size -= 0.5;
-                    contentBox.style.fontSize = size + 'px';
-                }
-            }
-
-            // Run on load
-            fitContent();
-
-            // Run whenever window resizes
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(fitContent, 100);
             });
         });
     </script>

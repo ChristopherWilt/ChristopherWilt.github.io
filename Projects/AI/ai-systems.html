@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Core Systems Architecture - Christopher Wilt</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../project-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="nav-dock">
+        <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="../../Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
+
+    <div class="container column-layout">
+        <header class="project-detail-header">
+            <div class="header-left">
+                <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="header-title">
+                    <h1>AI CORE SYSTEMS <span class="text-red">ARCHITECTURE</span></h1>
+                    <p>C++ | C# | Decision Trees | Adversarial Search Optimization</p>
+                    <p>Christopher Wilt - Systems Engineer</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+               <a href="../../index.html" class="btn-outline">HOME PAGE</a>
+            </nav>
+        </header> 
+
+        <main>
+            <h2>LOW-LEVEL ARTIFICIAL INTELLIGENCE LAB HOARDS</h2>
+            
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>01. Adversarial Tree Search & Alpha-Beta Pruning (C#)</h3>
+                        <p>
+                            Engineered a highly optimized look-ahead decision agent modeled on an adversarial tree structure, maximizing calculation efficiency through strict logic pruning.
+                        </p>
+                        <p>
+                            Architected a recursive <strong>Alpha-Beta MiniMax Engine</strong> to predict optimal opponent response trajectories several turns in advance. Implemented mathematical branch cutoffs ($β \le \alpha$) to prune unoptimized game tree paths, stopping exponential calculation inflation. Developed smart forfeit handlers to smoothly route execution states when a player is forced to pass a turn.
+                        </p>
+                        <p>
+                            Designed a phase-based adaptive heuristic utility calculator. The evaluation logic checks game progression metrics, shifting its scoring bias automatically from early positional matrix weighting to mid-game movement restrictions, and final-stage absolute piece count evaluations. Integrated real-time visual tracking endpoints to map decision vectors across external analytics software.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>02. Autonomous Swarm Steering & Emergent Flocking Simulation (C#)</h3>
+                        <p>
+                            Moved past basic individual pathfinding scripts to implement complex group simulation kinematics derived from <strong>Craig Reynolds' Autonomous Agent Vectors</strong>.
+                        </p>
+                        <p>
+                            Engineered real-time vector field evaluation systems to calculate group dynamics. The tracking functions monitor collective swarm positions to generate centripetal attraction (Cohesion), while balancing group headings to align velocities (Alignment). Written a local repulsion mechanic (Separation) that scales forces inversely via distance math to avoid internal entity collisions.
+                        </p>
+                        <p>
+                            Integrated these component vectors into a single kinematic acceleration loop. Scaled calculations dynamically using delta-time values to protect agent behavior continuity against runtime frame rate fluctuations, maximizing mass multi-entity throughput.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>03. Heuristic Pathfinding & Non-Blocking Timesliced Search (C++)</h3>
+                        <p>
+                            Developed a high-performance implementation of the <strong>A* Pathfinding Algorithm</strong> over coordinate grids, balancing heuristic evaluations with strict execution time budgets.
+                        </p>
+                        <p>
+                            Architected a search pipeline calculating given movement costs (<code>g</code>) and estimated Euclidean distances (<code>h</code>) to process overall path weight parameters. Used fast hash-map lookups to manage visited node configurations, cutting evaluation durations in large layout spaces. Handled row-offset validation rules to safely isolate connectivity vectors across non-standard grid geometry.
+                        </p>
+                        <p>
+                            To prevent severe CPU thread starvation spikes during deep map inspections, engineered a non-blocking <strong>Timesliced Update System</strong>. The pathfinder splits search operations across specific temporal frames, allowing the main engine game loop to retain high rendering speeds while long-range route data computes in the background.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>04. N-ary Behavior Tree Infrastructure & Memory Auditing (C++)</h3>
+                        <p>
+                            Built the underlying core engine architecture and custom memory-managed container foundations that empower modular AI decision-making.
+                        </p>
+                        <p>
+                            Bypassed heavy standard library components to engineer a template-based, singly-linked <code>QueueList</code> container from scratch. Written custom <code>Iterator</code> wrappers—overloading pointer increments and dereferences—to allow memory-safe asset traversals across internal allocation layouts in constant time.
+                        </p>
+                        <p>
+                            Constructed an abstract <code>Behavior</code> base class to form the parent-child relationships of an N-ary tree system. Developed the three foundational logic validation traversals (Breadth-First, Pre-Order, and Post-Order recursive searches) to aggregate action results. Built static validation variables to perform strict compile-level memory leak tracking across all live node trees.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const href = this.getAttribute('href');
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+                    event.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => { window.location.href = href; }, 400);
+                });
+            });
+        });
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) document.body.classList.remove('fade-out');
+        });
+    </script>
+</body>
+</html>
