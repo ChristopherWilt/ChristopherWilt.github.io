@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Platform - Christopher Wilt</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../Archmage/archmage-project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="nav-dock">
+        <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="../../Resume/WiltChristopher_Resume_DevOpsEngineer.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
+    <div class="container column-layout">
+
+        <header class="project-detail-header">
+            <div class="header-left">
+                <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="header-title">
+                    <h1>NEXUS <span class="text-red">PLATFORM</span></h1>
+                    <p>Terraform | Azure | Docker | CI/CD</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="https://github.com/ChristopherWilt/Nexus-Platform" target="_blank" class="btn-outline">VIEW PROJECTS REPO</a>
+                <a href="../../index.html" class="btn-outline">HOME PAGE</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>CLOUD <span class="text-red">INFRASTRUCTURE</span></h2>
+                        <p>
+                            Modern deployment requires scalable and reproducible environments. For the Nexus Platform, I utilized <strong>Infrastructure as Code (IaC)</strong> via Terraform to architect a fully containerized cloud deployment.
+                        </p>
+                        <p>
+                            The modular Terraform configuration automatically provisions a secure Azure Virtual Network, an Azure Container Registry (ACR), and a Linux Web App. By containerizing a lightweight Nginx web server with Docker, the infrastructure ensures environmental consistency from local development to production.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Nexus/Terraform_Architecture.png" alt="Terraform Cloud Architecture Diagram">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>ZERO-TRUST <span class="text-red">SECURITY</span></h2>
+                        <p>
+                            Backend data protection was a primary focus of this architecture. I deployed an Azure SQL database utilizing strict <strong>Virtual Network rules</strong> to restrict all access exclusively to the application subnet, isolating the database from public internet exposure.
+                        </p>
+                        <p>
+                            To prevent sensitive credentials from being exposed in the deployment pipeline, I implemented <strong>Azure Key Vault</strong>. The Terraform configuration dynamically generates complex SQL administrator passwords, stores them securely as secrets within the vault, and applies them to the database without hardcoding any values.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Nexus/Security_VNet.png" alt="Azure Security and Key Vault Implementation">
+                    </div>
+                </article>
+            </div>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>AUTOMATED <span class="text-red">PIPELINE</span></h2>
+                        <p>
+                            To bridge the gap between code integration and live deployment, I engineered a continuous integration and continuous deployment (CI/CD) pipeline using <strong>GitHub Actions</strong>.
+                        </p>
+                        <p>
+                            Configured via a <code>deploy.yml</code> workflow, the pipeline listens for pushes to the main branch. Upon triggering, it securely authenticates with Azure, builds the latest Docker image, pushes it to the Azure Container Registry, and triggers a redeployment of the web app, ensuring zero-touch updates.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Nexus/Github_Actions.png" alt="GitHub Actions CI/CD Pipeline">
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a');
+
+            // 1. Handle Link Clicks (Fade Out)
+            allLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const href = this.getAttribute('href');
+                    // Don't fade for external links, mailto, or anchors
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) {
+                        return;
+                    }
+                    event.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 400);
+                });
+            });
+        });
+
+        // 2. THE FIX: Handle "Back" Button (Force Fade In)
+        window.addEventListener('pageshow', (event) => {
+            // "pageshow" fires when the page is loaded OR restored from cache
+            if (event.persisted) {
+                document.body.classList.remove('fade-out');
+            }
+        });
+    </script>
+</body>
+</html>
