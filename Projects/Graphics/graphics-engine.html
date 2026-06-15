@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphics & Engine Engineering - Christopher Wilt</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../project-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="nav-dock">
+        <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="../../Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
+
+    <div class="container column-layout">
+        <header class="project-detail-header">
+            <div class="header-left">
+                <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="header-title">
+                    <h1>GRAPHICS & <span class="text-red">ENGINE SYSTEMS</span></h1>
+                    <p>Vulkan 1.3 | C++ | Low-Level Rendering & Systems Architecture</p>
+                    <p>Christopher Wilt - Systems Engineer</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="../../index.html" class="btn-outline">HOME PAGE</a>
+            </nav>
+        </header>
+
+        <main>
+            <h2>HARDWARE CORE ENGINES & LOW-LEVEL API PIPELINES</h2>
+            
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>01. Data-Driven Vulkan ECS Level Loading Engine</h3>
+                        <p>
+                            Engineered a robust, highly optimized 3D Level Loading & Rendering Runtime Engine utilizing the <strong>EnTT Entity Component System (ECS)</strong> library and hardware-accelerated Vulkan surfaces.
+                        </p>
+                        <p>
+                            Bypassed traditional object-oriented game loops to construct a Data-Oriented Design (DOD) workflow where game scenes exist as flat, cache-friendly arrays of components (<code>CPULevel</code>, <code>GeometryData</code>, <code>GPUInstance</code>). Implemented reactive system interceptors using EnTT lifecycles, ensuring that parsing a scene file instantly triggers a cascade of signal functions that stream geometry parameters to optimal GPU memory blocks.
+                        </p>
+                        <p>
+                            Designed a performance-critical <strong>Flyweight Instancing Factory</strong>. When runtime entities replicate, the system intercepts resource cloning requests, establishing instances that share a central memory pool containing pre-cached indices and vertex bounds. Packed individual model matrices and material details down through instanced transform buffers to fire high-throughput draw cycles without pipeline stalling.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Graphics/image_1ce57f.png" alt="Vulkan ECS level loader visualization" class="ui-clip">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>02. Hardware-Accelerated Vulkan PBR Rendering Engine</h3>
+                        <p>
+                            Developed a production-grade, bare-metal <strong>Vulkan 1.3 Rendering Pipeline</strong> from the ground up, implementing full physically-based shading logic directly on GPU hardware kernels.
+                        </p>
+                        <p>
+                            Architected a high-fidelity shader system (HLSL) running microfacet Cook-Torrance specular BRDF mathematics. The engine processes diffuse <strong>Image-Based Lighting (IBL)</strong> and specular reflections by loading and sampling from high-dynamic-range cube maps, integrating a pre-computed 2D BRDF Look-Up Table (LUT) to enforce real-time conservation of light energy across dielectric and metallic matrices.
+                        </p>
+                        <p>
+                            Fully managed the lifecycle of low-level graphics structures, orchestrating allocation matrices across <code>VkPipeline</code>, descriptor pools, uniform buffer blocks, and custom storage views. Integrated asset parsers using the <code>TinyGLTF</code> structure to read raw asset streams, piping vertex maps directly into hardware-bound staging lines without wasting CPU clock cycles.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Graphics/Vulkan_PBR_Complete.png" alt="Hardware-accelerated Vulkan PBR rendering screenshot" class="ui-clip">
+                    </div>
+                </article>
+
+                <h2 style="grid-column: 1 / -1; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px;">CHRONOLOGICAL C++ SOFTWARE RASTERIZATION REPOSITORY (CPU Only)</h2>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>03. Dynamic Illumination & Shading Software Pipeline</h3>
+                        <p>
+                            The final software rasterization milestone: a fully textured, single-threaded <strong>3D Stonehenge Environment</strong> running pixel-by-pixel entirely on the CPU inside a raw 1D pointer allocation.
+                        </p>
+                        <p>
+                            Engineered a multi-light illumination processor tracking concurrent ambient, directional, and point light calculations. Implemented inverse-square distance falloff using localized linear and quadratic decay matrices. Computed per-vertex <strong>Gouraud Shading</strong> using normal vector dot products (<code>NdotL</code>), blending parameters across manual barycentric rasterizer passes.
+                        </p>
+                        <p>
+                            Optimized the rendering pipeline by introducing a strict <strong>Backface Cross-Product Culling check</strong>, calculating polygon normal orientations against view vectors to drop hidden meshes before rendering. Integrated custom trigonometric tracking for spherical orbit cameras and generated a procedural 3,000-star coordinate clipping field.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Graphics/image_1eb7b8.png" alt="Stonehenge 3D lit environment software rendering" class="ui-clip">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>04. Barycentric Rasterization & Depth Occlusion Buffering</h3>
+                        <p>
+                            Advanced the software engine into solid-geometry processing by constructing mathematical polygon-filling routines that replicate GPU raster logic on raw memory blocks.
+                        </p>
+                        <p>
+                            Engineered solid triangle fills utilizing <strong>Barycentric coordinate planar interpolation</strong>. To protect execution performance, the loops compute custom 2D horizontal bounding frames for every asset, bounding pixel tracking strictly to the geometric footprint of the mesh. 
+                        </p>
+                        <p>
+                            Architected a parallel 1D depth-sorting allocation map (Z-Buffer), checking clip depths before executing color overrides to manage element occlusion. Mitigated perspective image warping by developing <strong>Perspective-Correct Affine UV Mapping</strong>, dividing texture dimensions by homogeneous clip reciprocals (<code>1/w</code>) to secure texture alignment.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Graphics/image_1ebf73.png" alt="Perspective-correct textured cube software rendering" class="ui-clip">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>05. 3D Projective Mathematics & MVP Pipeline</h3>
+                        <p>
+                            Laid the fundamental mathematical algorithms required to translate three-dimensional coordinates into flat two-dimensional screen space frames.
+                        </p>
+                        <p>
+                            Hand-coded a custom 3D vector and matrix math engine including structural implementations for <code>Vec3</code>, <code>Vec4</code>, and <code>Matrix4x4</code> systems. Coded multi-dimensional matrix transformation algorithms alongside a detailed 4x4 matrix inversion routine derived from determinants and adjugate matrices.
+                        </p>
+                        <p>
+                            Built a functional <strong>Model-View-Projection (MVP) pipeline</strong> to shift model arrays through world, camera view, and clip matrices. Executed 4D homogeneous perspective coordinate division loops to map normalized coordinate systems straight to screen-space dimensions. Wrote strict near-plane clip safeguards (<code>w > 0.001f</code>) to intercept visual clipping errors behind the camera path.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Graphics/image_1ec63e.png" alt="3D Wireframe Cube Projection screenshot" class="ui-clip">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>06. Parametric Line Rasterization & Structural Wireframes</h3>
+                        <p>
+                            Progressed from baseline pixel mapping to generating structural visual assets by defining linear geometric vector calculations.
+                        </p>
+                        <p>
+                            Engineered a custom <strong>Parametric Line-Drawing Rasterizer</strong>, tracing geometric changes across coordinate axis paths to plot contiguous, unbroken lines without referencing third-party graphics tools. Managed sub-pixel position floats using <code>std::round()</code> loops to map point positions cleanly into discrete buffer spaces, wrapping structural indices via modulo arithmetic loops to close poly-mesh perimeters automatically.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Graphics/image_1ec9dd.png" alt="Wireframe octagon rasterization screenshot" class="ui-clip">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>07. Flat Pixel Memory Mapping & Alpha Blit Routines</h3>
+                        <p>
+                            The underlying layer of the engine architecture: asserting direct command over visual hardware windows by interacting with raw heap blocks without engine abstraction overlays.
+                        </p>
+                        <p>
+                            Managed a dedicated flat 1D pixel array buffer, writing 2D coordinate-to-1D index translation functions to map memory locations. Implemented bitwise shifting algorithms to translate pixel color streams from storage BGRA setups to runtime ARGB outputs. Created a fast block image transfer (BLIT) sprite engine complete with alpha-blending math to eradicate color outline defects around transparent graphics edges.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Graphics/image_1ed144.png" alt="2D Sprite software blitting screenshot" class="ui-clip">
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const href = this.getAttribute('href');
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+                    event.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => { window.location.href = href; }, 400);
+                });
+            });
+        });
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) document.body.classList.remove('fade-out');
+        });
+    </script>
+</body>
+</html>

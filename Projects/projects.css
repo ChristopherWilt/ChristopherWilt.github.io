@@ -1,229 +1,179 @@
-/* Using the same colors from your style.css */
-:root {
-    --dark-bg: #1e1c1c;
-    --main-red: #ff2e54;
-    --main-white: #fff;
-    --light-gray: #bbb;
-}
+/* --- PREMIUM PROJECTS GRID --- */
 
-body {
-    background-color: var(--dark-bg);
-    color: var(--main-white);
-    font-family: Arial, sans-serif;
-    margin: 0;
-    /* This body style will be overridden by the fade-out class */
-    opacity: 1;
-    transition: opacity 0.4s ease-out;
-}
-
-    /* This is the class the JavaScript adds */
-    body.fade-out {
-        opacity: 0;
-    }
-
-/*.projects-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 0;
-}*/
-
-/* Header */
 .projects-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
-    /* Apply the fade-up animation */
-    animation: fadeUp 0.6s ease-out forwards;
-}
-
-.header-title h1 {
-    font-size: 2.8em;
-    margin: 0;
-    letter-spacing: 1px;
-    font-weight: bold;
-}
-
-.text-red {
-    color: var(--main-red);
-}
-
-.header-title p {
-    color: var(--light-gray);
-    margin: 5px 0 0 0;
-    font-size: 1.1em;
-}
-
-/* Home Page Button */
-.btn-outline {
-    color: var(--main-white);
-    border: 2px solid var(--main-white);
-    padding: 12px 24px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-}
-
-    .btn-outline:hover {
-        background-color: var(--main-white);
-        color: var(--dark-bg);
-    }
-
-/* Base Project Card Style */
-.project-card {
-    position: relative;
-    border-radius: 25px;
-    border: 3px solid var(--main-red);
-    overflow: hidden; /* Keeps video/img inside rounded corners */
-    background-color: #222; /* Fallback color */
-    /* Apply the fade-up animation (staggered) */
-    opacity: 0; /* Start hidden */
-    animation: fadeUp 0.6s ease-out 0.2s forwards;
-}
-
-/* Video & Image Background */
-.project-background {
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Fills the container */
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    filter: brightness(0.6); /* Dims the bg so text is readable */
-    transition: transform 0.3s ease;
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.project-card:hover .project-background {
-    transform: scale(1.05); /* Slight zoom on hover */
-}
-
-/* Text & Button Overlay */
-.project-content {
-    position: relative;
-    z-index: 2; /* On top of the background */
-    padding: 30px;
-    height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Pushes title and button apart */
-    align-items: flex-start;
-}
-
-    .project-content h3 {
-        margin: 0;
-        font-size: 2.8em;
-    }
-
-    /* We reuse the .btn class from your main style.css */
-    .project-content .btn {
-        align-self: flex-end; /* Puts button in bottom-right */
-    }
-
-/* Layout for Featured Project */
-.featured {
-    height: 450px;
-    margin-bottom: 30px;
-}
-
-/* Layout for Small Projects Grid */
-.project-grid-small {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2x2 grid */
-    gap: 30px;
-}
-
-.small {
-    height: 300px;
-    min-width: 300px;
-    max-width: auto
-}
-
-    .small .project-content h3 {
-        font-size: 2em;
-    }
-
-/* We stagger the animation for the small grid */
-.project-grid-small .project-card:nth-child(1) {
-    animation-delay: 0.3s;
-}
-
-.project-grid-small .project-card:nth-child(2) {
-    animation-delay: 0.4s;
-}
-
-.project-grid-small .project-card:nth-child(3) {
-    animation-delay: 0.5s;
-}
-
-.project-grid-small .project-card:nth-child(4) {
-    animation-delay: 0.6s;
-}
-
-.category-section {
-    margin-bottom: 80px; /* Space between categories */
-}
-
-.section-title {
-    font-size: 1.8rem;
-    color: var(--main-white);
-    border-bottom: 2px solid var(--main-red);
-    padding-bottom: 10px;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    display: inline-block;
-}
-
-/* Badge for "In Progress" projects */
-.badge-wip {
-    background-color: #ff9900;
-    color: #000;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    z-index: 10;
-    text-transform: uppercase;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-}
-
-/* Update grid to handle 3 items nicely */
-.project-grid-tri {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-}
-
-
-/* Responsive Adjustments */
 @media (max-width: 768px) {
     .projects-header {
         flex-direction: column;
         gap: 25px;
         text-align: center;
     }
+}
 
-    .project-grid-small {
-        grid-template-columns: 1fr; /* Stack on mobile */
-    }
+.header-title h1 {
+    font-size: 2.8rem;
+    margin: 0;
+    letter-spacing: -1px;
+    font-weight: 800;
+}
 
-    .featured {
-        height: 350px;
-    }
+.header-title p {
+    color: var(--text-muted);
+    margin: 8px 0 0 0;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
 
-    .small {
-        height: 250px;
-    }
+/* Base Project Card Style */
+.project-card {
+    position: relative;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    overflow: hidden; 
+    background: rgba(20, 20, 20, 0.4);
+    opacity: 0; 
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: flex; 
+    flex-direction: column;
+    max-width: 100%; /* Force card to stay in screen bounds */
+}
 
-    .project-content h3 {
-        font-size: 2em;
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 46, 84, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 46, 84, 0.1);
+}
+
+.project-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    filter: brightness(0.4) saturate(1.2); 
+    transition: all 0.5s ease;
+}
+
+.project-card:hover .project-background {
+    transform: scale(1.05); 
+    filter: brightness(0.3);
+}
+
+/* Text & Button Overlay */
+.project-content {
+    position: relative;
+    z-index: 2; 
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: flex-start;
+    flex-grow: 1; 
+    width: 100%;
+}
+
+.project-content h3 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    color: #fff;
+}
+
+.project-content .btn {
+    align-self: flex-end; 
+    margin-top: 3rem; 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 10;
+    white-space: normal; /* Fixes text cut off in project cards */
+    max-width: 100%;
+}
+
+.project-grid-tri {
+    display: grid;
+    /* auto-fit automatically stretches 1 or 2 items to fill the row perfectly */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 2rem; 
+    width: 100%;
+}
+
+.small {
+    min-height: 320px; 
+    height: 100%;
+}
+
+/* ... keep your .category-section and other styles here ... */
+
+@media (max-width: 1200px) {
+    /* Slightly smaller minimum width for tablets before snapping to 1 column */
+    .project-grid-tri { 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
     }
+}
+
+@media (max-width: 768px) {
+    /* Forces strict single column on mobile */
+    .project-grid-tri { grid-template-columns: 1fr; }
+    .header-title h1 { font-size: 2rem; } 
+}
+
+.small {
+    min-height: 320px; 
+    height: 100%;
+}
+
+.category-section {
+    margin-bottom: 80px; 
+    width: 100%;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #fff;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    overflow-wrap: break-word;
+}
+
+.section-title i {
+    color: var(--accent-red);
+}
+
+.badge-wip {
+    background: rgba(255, 153, 0, 0.15);
+    color: #ffb84d;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 153, 0, 0.3);
+    backdrop-filter: blur(5px);
 }

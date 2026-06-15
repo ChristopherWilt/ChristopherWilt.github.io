@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unity FPS Prototype - Christopher Wilt</title>
+    <title>Nexus Platform - Christopher Wilt</title>
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="../project-detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -12,7 +12,7 @@
     <nav class="nav-dock">
         <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
         <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
-        <a href="../../Resume/Backend_Systems_Engineer_WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+        <a href="../../Resume/WiltChristopher_Resume_DevOpsEngineer.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
     </nav>
     <div class="container column-layout">
 
@@ -22,59 +22,30 @@
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <div class="header-title">
-                    <h1>UNITY FPS <span class="text-red">PROTOTYPE</span></h1>
-                    <p>Team Project | C# | Gameplay Mechanics</p>
+                    <h1>NEXUS <span class="text-red">PLATFORM</span></h1>
+                    <p>Terraform | Azure | Docker | CI/CD</p>
                 </div>
             </div>
             <nav class="header-nav">
-                <a href="#" class="btn-outline">VIEW CODE</a>
+                <a href="https://github.com/ChristopherWilt/Nexus-Platform" target="_blank" class="btn-outline">VIEW PROJECTS REPO</a>
+                <a href="../../index.html" class="btn-outline">HOME PAGE</a>
             </nav>
         </header>
 
         <main>
-            <h2>EARLY DEVELOPMENT SHOWCASE</h2>
-            <div class="demo-video-container">
-                <iframe width="100%"
-                        height="500"
-                        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                        title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen>
-                </iframe>
-            </div>
-
             <div class="content-grid">
                 <article class="content-block">
                     <div class="text-content">
-                        <h2>CHARACTER <span class="text-red">MECHANICS</span></h2>
+                        <h2>CLOUD <span class="text-red">INFRASTRUCTURE</span></h2>
                         <p>
-                            This project marked my first implementation of a 3D <strong>Character Controller</strong>. I engineered a modular movement system that handles gravity, sprinting modifiers, and jump physics.
+                            Modern deployment requires scalable and reproducible environments. For the Nexus Platform, I utilized <strong>Infrastructure as Code (IaC)</strong> via Terraform to architect a fully containerized cloud deployment.
                         </p>
                         <p>
-                            I also implemented a flexible <strong>Buff/Debuff System</strong>. The controller tracks active status effects (like Speed Boosts or Damage Over Time), applying them via Coroutines to ensure temporary effects expire correctly without polluting the `Update` loop.
-                        </p>
-                    </div>
-                    <div class="image-content">
-                        <img src="../../Images/UnityFPS/FPS_Gameplay.png" alt="FPS Movement and Combat">
-                    </div>
-                </article>
-            </div>
-
-            <div class="content-grid">
-                <article class="content-block reverse">
-                    <div class="text-content">
-                        <h2>GAME STATE <span class="text-red">ARCHITECTURE</span></h2>
-                        <p>
-                            To manage the game loop, I built a <strong>Singleton GameManager</strong> that serves as the central hub for the Wave System and UI updates.
-                        </p>
-                        <p>
-                            The manager tracks the "Goal Count" (enemies remaining) and handles the transition between waves. It dynamically updates the HUD—syncing Health Bars, Ammo Counters, and Wave Numbers—ensuring the player always has accurate feedback on the game state.
+                            The modular Terraform configuration automatically provisions a secure Azure Virtual Network, an Azure Container Registry (ACR), and a Linux Web App. By containerizing a lightweight Nginx web server with Docker, the infrastructure ensures environmental consistency from local development to production.
                         </p>
                     </div>
                     <div class="image-content">
-                        <img src="../../Images/UnityFPS/FPS_Manager.png" alt="Game UI and Wave Counter">
+                        <img src="../../Images/Nexus/Terraform_Architecture.png" alt="Terraform Cloud Architecture Diagram">
                     </div>
                 </article>
             </div>
@@ -82,20 +53,36 @@
             <div class="content-grid">
                 <article class="content-block">
                     <div class="text-content">
-                        <h2>DATA-DRIVEN <span class="text-red">DESIGN</span></h2>
+                        <h2>ZERO-TRUST <span class="text-red">SECURITY</span></h2>
                         <p>
-                            To allow our designers to balance weapons without editing code, I implemented <strong>ScriptableObjects</strong> for the gun system (`gunStats`).
+                            Backend data protection was a primary focus of this architecture. I deployed an Azure SQL database utilizing strict <strong>Virtual Network rules</strong> to restrict all access exclusively to the application subnet, isolating the database from public internet exposure.
                         </p>
                         <p>
-                            This architecture separated the data (Damage, Fire Rate, Range, Particle Effects) from the logic. It allowed the team to create multiple weapon variations (Pistol, Rifle, Sniper) simply by creating new assets in the Project window, streamlining the collaboration process.
+                            To prevent sensitive credentials from being exposed in the deployment pipeline, I implemented <strong>Azure Key Vault</strong>. The Terraform configuration dynamically generates complex SQL administrator passwords, stores them securely as secrets within the vault, and applies them to the database without hardcoding any values.
                         </p>
                     </div>
                     <div class="image-content">
-                        <img src="../../Images/UnityFPS/FPS_GunStats.png" alt="ScriptableObject Inspector">
+                        <img src="../../Images/Nexus/Security_VNet.png" alt="Azure Security and Key Vault Implementation">
                     </div>
                 </article>
             </div>
 
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h2>AUTOMATED <span class="text-red">PIPELINE</span></h2>
+                        <p>
+                            To bridge the gap between code integration and live deployment, I engineered a continuous integration and continuous deployment (CI/CD) pipeline using <strong>GitHub Actions</strong>.
+                        </p>
+                        <p>
+                            Configured via a <code>deploy.yml</code> workflow, the pipeline listens for pushes to the main branch. Upon triggering, it securely authenticates with Azure, builds the latest Docker image, pushes it to the Azure Container Registry, and triggers a redeployment of the web app, ensuring zero-touch updates.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/Nexus/Github_Actions.png" alt="GitHub Actions CI/CD Pipeline">
+                    </div>
+                </article>
+            </div>
         </main>
     </div>
 
@@ -103,7 +90,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const allLinks = document.querySelectorAll('a');
 
-            // Handle Link Clicks (Fade Out)
+            // 1. Handle Link Clicks (Fade Out)
             allLinks.forEach(link => {
                 link.addEventListener('click', function (event) {
                     const href = this.getAttribute('href');
@@ -120,7 +107,7 @@
             });
         });
 
-        // Handle "Back" Button (Force Fade In)
+        // 2. THE FIX: Handle "Back" Button (Force Fade In)
         window.addEventListener('pageshow', (event) => {
             // "pageshow" fires when the page is loaded OR restored from cache
             if (event.persisted) {

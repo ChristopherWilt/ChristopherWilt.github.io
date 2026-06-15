@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Core Systems Architecture - Christopher Wilt</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../project-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="nav-dock">
+        <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="../../Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
+
+    <div class="container column-layout">
+        <header class="project-detail-header">
+            <div class="header-left">
+                <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="header-title">
+                    <h1>AI CORE SYSTEMS <span class="text-red">ARCHITECTURE</span></h1>
+                    <p>C++ | C# | Decision Trees | Adversarial Search Optimization</p>
+                    <p>Christopher Wilt - Systems Engineer</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+               <a href="../../index.html" class="btn-outline">HOME PAGE</a>
+            </nav>
+        </header> 
+
+        <main>
+            <h2>LOW-LEVEL ARTIFICIAL INTELLIGENCE LAB HOARDS</h2>
+            
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>01. Adversarial Tree Search & Alpha-Beta Pruning (C#)</h3>
+                        <p>
+                            Engineered a highly optimized look-ahead decision agent modeled on an adversarial tree structure, maximizing calculation efficiency through strict logic pruning.
+                        </p>
+                        <p>
+                            Architected a recursive <strong>Alpha-Beta MiniMax Engine</strong> to predict optimal opponent response trajectories several turns in advance. Implemented mathematical branch cutoffs ($β \le \alpha$) to prune unoptimized game tree paths, stopping exponential calculation inflation. Developed smart forfeit handlers to smoothly route execution states when a player is forced to pass a turn.
+                        </p>
+                        <p>
+                            Designed a phase-based adaptive heuristic utility calculator. The evaluation logic checks game progression metrics, shifting its scoring bias automatically from early positional matrix weighting to mid-game movement restrictions, and final-stage absolute piece count evaluations. Integrated real-time visual tracking endpoints to map decision vectors across external analytics software.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Recursive Alpha-Beta MiniMax Engine
+public float AlphaBeta(Node node, int depth, float alpha, float beta, bool isMaximizing) {
+    if (depth == 0 || node.IsTerminal()) {
+        return CalculateAdaptiveHeuristic(node);
+    }
+
+    if (isMaximizing) {
+        float maxEval = float.NegativeInfinity;
+        foreach (Node child in node.GetValidMoves()) {
+            float eval = AlphaBeta(child, depth - 1, alpha, beta, false);
+            maxEval = Mathf.Max(maxEval, eval);
+            alpha = Mathf.Max(alpha, eval);
+            
+            // 2. Mathematical Branch Cutoff
+            if (beta &lt;= alpha) break; // Prune unoptimized tree paths
+        }
+        return maxEval;
+    } else {
+        float minEval = float.PositiveInfinity;
+        foreach (Node child in node.GetValidMoves()) {
+            float eval = AlphaBeta(child, depth - 1, alpha, beta, true);
+            minEval = Mathf.Min(minEval, eval);
+            beta = Mathf.Min(beta, eval);
+            
+            if (beta &lt;= alpha) break; 
+        }
+        return minEval;
+    }
+}</pre>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>02. Autonomous Swarm Steering & Emergent Flocking Simulation (C#)</h3>
+                        <p>
+                            Moved past basic individual pathfinding scripts to implement complex group simulation kinematics derived from <strong>Craig Reynolds' Autonomous Agent Vectors</strong>.
+                        </p>
+                        <p>
+                            Engineered real-time vector field evaluation systems to calculate group dynamics. The tracking functions monitor collective swarm positions to generate centripetal attraction (Cohesion), while balancing group headings to align velocities (Alignment). Written a local repulsion mechanic (Separation) that scales forces inversely via distance math to avoid internal entity collisions.
+                        </p>
+                        <p>
+                            Integrated these component vectors into a single kinematic acceleration loop. Scaled calculations dynamically using delta-time values to protect agent behavior continuity against runtime frame rate fluctuations, maximizing mass multi-entity throughput.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Calculate Group Dynamics
+Vector3 cohesion = Vector3.zero;
+Vector3 alignment = Vector3.zero;
+Vector3 separation = Vector3.zero;
+
+foreach (Agent neighbor in swarm) {
+    float distance = Vector3.Distance(transform.position, neighbor.position);
+    if (distance &gt; 0 &amp;&amp; distance &lt; perceptionRadius) {
+        cohesion += neighbor.position;
+        alignment += neighbor.velocity;
+        // Scale repulsion inversely via distance
+        separation += (transform.position - neighbor.position) / distance;
+        neighborCount++;
+    }
+}
+
+if (neighborCount &gt; 0) {
+    cohesion = (cohesion / neighborCount) - transform.position;
+    alignment /= neighborCount;
+}
+
+// 2. Kinematic Acceleration Scaled by Delta-Time
+Vector3 steering = (cohesion * wCohesion) + (alignment * wAlign) + (separation * wSep);
+velocity += steering * Time.deltaTime;
+transform.position += velocity * Time.deltaTime;</pre>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>03. Heuristic Pathfinding & Non-Blocking Timesliced Search (C++)</h3>
+                        <p>
+                            Developed a high-performance implementation of the <strong>A* Pathfinding Algorithm</strong> over coordinate grids, balancing heuristic evaluations with strict execution time budgets.
+                        </p>
+                        <p>
+                            Architected a search pipeline calculating given movement costs (<code>g</code>) and estimated Euclidean distances (<code>h</code>) to process overall path weight parameters. Used fast hash-map lookups to manage visited node configurations, cutting evaluation durations in large layout spaces. Handled row-offset validation rules to safely isolate connectivity vectors across non-standard grid geometry.
+                        </p>
+                        <p>
+                            To prevent severe CPU thread starvation spikes during deep map inspections, engineered a non-blocking <strong>Timesliced Update System</strong>. The pathfinder splits search operations across specific temporal frames, allowing the main engine game loop to retain high rendering speeds while long-range route data computes in the background.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Timesliced Update System (Non-Blocking)
+ExecutionStatus Pathfinder::ProcessSearch(float timeBudgetMs) {
+    auto startTime = std::chrono::high_resolution_clock::now();
+
+    while (!openSet.empty()) {
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        std::chrono::duration&lt;float, std::milli&gt; elapsed = currentTime - startTime;
+        
+        // Yield CPU back to main engine loop if budget exceeded
+        if (elapsed.count() &gt;= timeBudgetMs) {
+            return ExecutionStatus::PENDING; 
+        }
+
+        Node* current = GetLowestFCostNode(openSet);
+        if (current == targetNode) return ExecutionStatus::COMPLETE;
+
+        // 2. Heuristic Euclidean Evaluations
+        for (Node* neighbor : GetValidNeighbors(current)) {
+            float gCost = current-&gt;gCost + CalculateDistance(current, neighbor);
+            if (gCost &lt; neighbor-&gt;gCost) {
+                neighbor-&gt;gCost = gCost;
+                neighbor-&gt;hCost = GetEuclideanDistance(neighbor, targetNode);
+                neighbor-&gt;fCost = neighbor-&gt;gCost + neighbor-&gt;hCost;
+            }
+        }
+    }
+    return ExecutionStatus::FAILED;
+}</pre>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>04. N-ary Behavior Tree Infrastructure & Memory Auditing (C++)</h3>
+                        <p>
+                            Built the underlying core engine architecture and custom memory-managed container foundations that empower modular AI decision-making.
+                        </p>
+                        <p>
+                            Bypassed heavy standard library components to engineer a template-based, singly-linked <code>QueueList</code> container from scratch. Written custom <code>Iterator</code> wrappers—overloading pointer increments and dereferences—to allow memory-safe asset traversals across internal allocation layouts in constant time.
+                        </p>
+                        <p>
+                            Constructed an abstract <code>Behavior</code> base class to form the parent-child relationships of an N-ary tree system. Developed the three foundational logic validation traversals (Breadth-First, Pre-Order, and Post-Order recursive searches) to aggregate action results. Built static validation variables to perform strict compile-level memory leak tracking across all live node trees.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Template-Based Container & Iterator Wrapper
+template &lt;typename T&gt;
+class QueueList {
+private:
+    struct Node { T data; Node* next; };
+    Node* head;
+
+public:
+    class Iterator {
+        Node* current;
+    public:
+        Iterator(Node* node) : current(node) {}
+        T&amp; operator*() { return current-&gt;data; } 
+        Iterator&amp; operator++() { current = current-&gt;next; return *this; }
+        bool operator!=(const Iterator&amp; other) const { return current != other.current; }
+    };
+
+// 2. Strict Compile-Level Memory Auditing
+#ifdef _DEBUG
+    static inline int activeNodeAllocations = 0;
+#endif
+
+// Constructor / Destructor memory tracking
+    QueueList() { /* ... */ }
+    ~QueueList() { 
+        Clear(); 
+        assert(activeNodeAllocations == 0 &amp;&amp; "Memory Leak Detected!");
+    }
+};</pre>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const href = this.getAttribute('href');
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+                    event.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => { window.location.href = href; }, 400);
+                });
+            });
+        });
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) document.body.classList.remove('fade-out');
+        });
+    </script>
+</body>
+</html>
