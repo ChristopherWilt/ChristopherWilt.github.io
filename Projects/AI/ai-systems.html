@@ -49,6 +49,40 @@
                             Designed a phase-based adaptive heuristic utility calculator. The evaluation logic checks game progression metrics, shifting its scoring bias automatically from early positional matrix weighting to mid-game movement restrictions, and final-stage absolute piece count evaluations. Integrated real-time visual tracking endpoints to map decision vectors across external analytics software.
                         </p>
                     </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Recursive Alpha-Beta MiniMax Engine
+public float AlphaBeta(Node node, int depth, float alpha, float beta, bool isMaximizing) {
+    if (depth == 0 || node.IsTerminal()) {
+        return CalculateAdaptiveHeuristic(node);
+    }
+
+    if (isMaximizing) {
+        float maxEval = float.NegativeInfinity;
+        foreach (Node child in node.GetValidMoves()) {
+            float eval = AlphaBeta(child, depth - 1, alpha, beta, false);
+            maxEval = Mathf.Max(maxEval, eval);
+            alpha = Mathf.Max(alpha, eval);
+            
+            // 2. Mathematical Branch Cutoff
+            if (beta &lt;= alpha) break; // Prune unoptimized tree paths
+        }
+        return maxEval;
+    } else {
+        float minEval = float.PositiveInfinity;
+        foreach (Node child in node.GetValidMoves()) {
+            float eval = AlphaBeta(child, depth - 1, alpha, beta, true);
+            minEval = Mathf.Min(minEval, eval);
+            beta = Mathf.Min(beta, eval);
+            
+            if (beta &lt;= alpha) break; 
+        }
+        return minEval;
+    }
+}</pre>
+                        </div>
+                    </div>
                 </article>
 
                 <article class="content-block">
@@ -63,6 +97,36 @@
                         <p>
                             Integrated these component vectors into a single kinematic acceleration loop. Scaled calculations dynamically using delta-time values to protect agent behavior continuity against runtime frame rate fluctuations, maximizing mass multi-entity throughput.
                         </p>
+                    </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Calculate Group Dynamics
+Vector3 cohesion = Vector3.zero;
+Vector3 alignment = Vector3.zero;
+Vector3 separation = Vector3.zero;
+
+foreach (Agent neighbor in swarm) {
+    float distance = Vector3.Distance(transform.position, neighbor.position);
+    if (distance &gt; 0 &amp;&amp; distance &lt; perceptionRadius) {
+        cohesion += neighbor.position;
+        alignment += neighbor.velocity;
+        // Scale repulsion inversely via distance
+        separation += (transform.position - neighbor.position) / distance;
+        neighborCount++;
+    }
+}
+
+if (neighborCount &gt; 0) {
+    cohesion = (cohesion / neighborCount) - transform.position;
+    alignment /= neighborCount;
+}
+
+// 2. Kinematic Acceleration Scaled by Delta-Time
+Vector3 steering = (cohesion * wCohesion) + (alignment * wAlign) + (separation * wSep);
+velocity += steering * Time.deltaTime;
+transform.position += velocity * Time.deltaTime;</pre>
+                        </div>
                     </div>
                 </article>
 
@@ -79,6 +143,39 @@
                             To prevent severe CPU thread starvation spikes during deep map inspections, engineered a non-blocking <strong>Timesliced Update System</strong>. The pathfinder splits search operations across specific temporal frames, allowing the main engine game loop to retain high rendering speeds while long-range route data computes in the background.
                         </p>
                     </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Timesliced Update System (Non-Blocking)
+ExecutionStatus Pathfinder::ProcessSearch(float timeBudgetMs) {
+    auto startTime = std::chrono::high_resolution_clock::now();
+
+    while (!openSet.empty()) {
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        std::chrono::duration&lt;float, std::milli&gt; elapsed = currentTime - startTime;
+        
+        // Yield CPU back to main engine loop if budget exceeded
+        if (elapsed.count() &gt;= timeBudgetMs) {
+            return ExecutionStatus::PENDING; 
+        }
+
+        Node* current = GetLowestFCostNode(openSet);
+        if (current == targetNode) return ExecutionStatus::COMPLETE;
+
+        // 2. Heuristic Euclidean Evaluations
+        for (Node* neighbor : GetValidNeighbors(current)) {
+            float gCost = current-&gt;gCost + CalculateDistance(current, neighbor);
+            if (gCost &lt; neighbor-&gt;gCost) {
+                neighbor-&gt;gCost = gCost;
+                neighbor-&gt;hCost = GetEuclideanDistance(neighbor, targetNode);
+                neighbor-&gt;fCost = neighbor-&gt;gCost + neighbor-&gt;hCost;
+            }
+        }
+    }
+    return ExecutionStatus::FAILED;
+}</pre>
+                        </div>
+                    </div>
                 </article>
 
                 <article class="content-block">
@@ -94,10 +191,42 @@
                             Constructed an abstract <code>Behavior</code> base class to form the parent-child relationships of an N-ary tree system. Developed the three foundational logic validation traversals (Breadth-First, Pre-Order, and Post-Order recursive searches) to aggregate action results. Built static validation variables to perform strict compile-level memory leak tracking across all live node trees.
                         </p>
                     </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Template-Based Container & Iterator Wrapper
+template &lt;typename T&gt;
+class QueueList {
+private:
+    struct Node { T data; Node* next; };
+    Node* head;
+
+public:
+    class Iterator {
+        Node* current;
+    public:
+        Iterator(Node* node) : current(node) {}
+        T&amp; operator*() { return current-&gt;data; } 
+        Iterator&amp; operator++() { current = current-&gt;next; return *this; }
+        bool operator!=(const Iterator&amp; other) const { return current != other.current; }
+    };
+
+// 2. Strict Compile-Level Memory Auditing
+#ifdef _DEBUG
+    static inline int activeNodeAllocations = 0;
+#endif
+
+// Constructor / Destructor memory tracking
+    QueueList() { /* ... */ }
+    ~QueueList() { 
+        Clear(); 
+        assert(activeNodeAllocations == 0 &amp;&amp; "Memory Leak Detected!");
+    }
+};</pre>
+                        </div>
+                    </div>
                 </article>
             </div>
-        </main>
-    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

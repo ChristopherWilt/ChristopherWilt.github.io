@@ -35,7 +35,7 @@
         <main>
             <h2>SYSTEMS MULTITHREADING LAB ARCHIVE</h2>
             
-            <div class="content-grid">
+<div class="content-grid">
                 <article class="content-block">
                     <div class="text-content">
                         <h3>01. Asynchronous Pipelines (Promises & Futures)</h3>
@@ -74,6 +74,30 @@
                             To prove thread scheduling control, the engine purposefully spawns execution threads in reverse chronological order, but forces a forward-sequential, orderly execution loop. Threads evaluate runtime index states using lambda conditions, instantly sleeping via a condition variable cascade if out of sequence.
                         </p>
                     </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Spawning threads in reverse chronological order
+for (int i = threadCount - 1; i >= 0; i--) {
+    perThreadData[i].id = i;
+    threads.emplace_back(ThreadEntryPoint, &amp;perThreadData[i]);
+}
+
+// 2. Forcing forward-sequential execution (Inside Worker)
+std::unique_lock&lt;std::mutex&gt; lock(*threadData-&gt;sharedMutex);
+
+// Lambda condition evaluates runtime index state
+threadData-&gt;conditionVar-&gt;wait(lock, [&amp;]() {
+    return threadData-&gt;id == *threadData-&gt;currentThread;
+});
+
+/* --- CRITICAL SECTION (Memory Mutation) --- */
+
+// Increment turn and cascade wake-up to next thread
+*threadData-&gt;currentThread = (*threadData-&gt;currentThread + 1) % threadCount;
+threadData-&gt;conditionVar-&gt;notify_all();</pre>
+                        </div>
+                    </div>
                 </article>
 
                 <article class="content-block">
@@ -83,11 +107,32 @@
                             Designed a strict turn-based alternating worker execution matrix, isolating and resolving hardware I/O resource contention across detached tracking processes.
                         </p>
                         <p>
-                            Engineered a dual-thread coordinating routine forcing alternating execution phases across a single shared board memory context. Threads pass system access tokens using conditional handshakes, executing <code>notify_one()</code> calls to toggle state parameters without burning CPU cycles on polling spinlocks.
+                            Engineered a dual-thread coordinating routine forcing alternating execution phases across a single shared board memory context. Threads pass system access tokens using conditional handshakes, executing <code>notify_all()</code> calls to toggle state parameters without burning CPU cycles on polling spinlocks.
                         </p>
                         <p>
                             Resolved console output corruption by building a custom, synchronized variadic logging mechanism. Wrapping variadic print buffers (<code>va_list</code>, <code>vprintf</code>) inside an internal static mutex wrapper completely guarantees that interleaved string streams from hundreds of concurrent processes do not shatter text data structures.
                         </p>
+                    </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Thread locks mutex and waits for its specific turn
+std::unique_lock&lt;std::mutex&gt; lock(*threadData-&gt;sharedMutex);
+
+threadData-&gt;conditionVar-&gt;wait(lock, [&amp;]() {
+    return threadData-&gt;id == *threadData-&gt;currentThread;
+});
+
+/* --- CRITICAL SECTION (Thread-Safe Operation) --- */
+printf("RunType 3 - Thread %d: %s\n", 
+    threadData-&gt;id, threadData-&gt;sharedString);
+
+// 2. Pass the baton to the next thread in sequence
+*threadData-&gt;currentThread = (*threadData-&gt;currentThread + 1) % threadData-&gt;threadCount;
+
+// 3. Notify all waiting threads to re-evaluate condition
+threadData-&gt;conditionVar-&gt;notify_all();</pre>
+                        </div>
                     </div>
                 </article>
 
@@ -104,6 +149,29 @@
                             Integrated condition variable thread queues to throttle access when bit availability fills completely. When an execution thread finishes, it clears its respective bit mapping and triggers a broad <code>notify_all()</code> call, prompting waiting worker contexts to validate allocations without runtime lag spikes.
                         </p>
                     </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Await Available Bit in 32-bit Integer
+std::unique_lock&lt;std::mutex&gt; lock(resourceMutex);
+cv.wait(lock, [&amp;]() { return freeMask != 0; });
+
+// 2. Find and Claim Resource (Bitwise AND / NOT)
+int bitIndex = 0;
+while ((freeMask &amp; (1 &lt;&lt; bitIndex)) == 0) {
+    bitIndex++;
+}
+freeMask &amp;= ~(1 &lt;&lt; bitIndex); // Flip specific bit to 0 (Claimed)
+lock.unlock();
+
+/* --- EXECUTE HARDWARE CONTEXT --- */
+
+// 3. Release Resource &amp; Notify (Bitwise OR)
+lock.lock();
+freeMask |= (1 &lt;&lt; bitIndex); // Flip specific bit back to 1 (Free)
+cv.notify_all();</pre>
+                        </div>
+                    </div>
                 </article>
 
                 <article class="content-block">
@@ -119,10 +187,38 @@
                             Implemented synchronization barriers using condition blocks to prevent premature thread execution. Spawns threads into a suspended state, validating memory pooling maps completely before issuing a parallel notification wave to guarantee pristine concurrent load-testing environments.
                         </p>
                     </div>
+                    <div class="image-content">
+                        <div class="media-column">
+                            <pre style="background: rgba(0,0,0,0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #0f0; font-family: monospace; font-size: 0.85rem; width:100%; box-sizing:border-box; overflow-x:auto;">
+// 1. Synchronization Barrier (Suspend until all threads ready)
+std::unique_lock&lt;std::mutex&gt; syncLock(syncMutex);
+if (++readyCount == totalThreads) {
+    startBarrier.notify_all();
+} else {
+    startBarrier.wait(syncLock);
+}
+syncLock.unlock();
+
+// 2. Hybrid Locking Routine to Prevent Deadlock
+while (true) {
+    primaryMutex.lock(); // Blocking claim on primary asset
+    
+    // Non-blocking inspection of secondary asset
+    if (secondaryMutex.try_lock()) { 
+        /* --- EXECUTE CRITICAL SECTION --- */
+        secondaryMutex.unlock();
+        primaryMutex.unlock();
+        break; 
+    } else {
+        // Conflict detected: Abandon claims and yield CPU
+        primaryMutex.unlock();
+        std::this_thread::yield(); 
+    }
+}</pre>
+                        </div>
+                    </div>
                 </article>
             </div>
-        </main>
-    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

@@ -35,7 +35,7 @@
                 <div class="project-grid-tri">
                     <!-- NEW: GRAPHICS & ENGINE SYSTEMS -->
                     <div class="project-card small">
-                        <img src="../Images/Systems/image_1ce57f.png" alt="Vulkan ECS Loader" class="project-background">
+                        <img src="../Images/Graphics/image_1ce57f.png" alt="Vulkan ECS Loader" class="project-background">
                         <div class="project-content">
                             <h3>Graphics & Engine Systems</h3>
                             <a href="./Graphics/graphics-engine.html" class="btn btn-primary">VIEW ENGINE</a>
@@ -43,7 +43,7 @@
                     </div>
                     <!-- NEW: CONCURRENCY & OS INTERNALS -->
                     <div class="project-card small">
-                        <pre style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; background: rgba(10, 10, 10, 0.85); color: #00ff00; font-family: monospace; font-size: 0.65rem; padding: 20px; box-sizing: border-box; overflow: hidden; pointer-events: none; opacity: 0.35; z-index: 1;">
+                        <pre style="position: absolute; top: 80px; left: 0; width: 100%; height: 100%; margin: 0; background: rgba(10, 10, 10, 0.85); color: #00ff00; font-family: monospace; font-size: 0.65rem; padding: 20px; box-sizing: border-box; overflow: hidden; pointer-events: none; opacity: 0.35; z-index: 1;">
                         // Thread Loop
                         while (!exitFlag) {
                             if (mtx.try_lock()) {
@@ -58,9 +58,27 @@
                     </div>
 
                     <!-- NEW: AI CORE SYSTEMS ARCHITECTURE -->
-                    <div class="project-card small">
-                        <img src="../Images/Systems/image_1eb7b8.png" alt="AI Spatial Pathfinding" class="project-background" style="filter: brightness(0.25) blur(1px);">
-                        <div class="project-content">
+<div class="project-card small">
+                        <pre style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; background: rgba(10, 10, 10, 0.85); color: #00e5ff; font-family: monospace; font-size: 0.65rem; padding: 20px; box-sizing: border-box; overflow: hidden; pointer-events: none; opacity: 0.35; z-index: 1;">
+public float AlphaBeta(Node n, int depth, float a, float b, bool isMax) {
+    if (depth == 0 || n.IsTerminal()) {
+        return CalcAdaptiveHeuristic(n);
+    }
+
+    if (isMax) {
+        float maxEval = float.NegativeInfinity;
+        foreach (Node child in n.GetValidMoves()) {
+            float eval = AlphaBeta(child, depth - 1, a, b, false);
+            maxEval = Mathf.Max(maxEval, eval);
+            a = Mathf.Max(a, eval);
+            
+            // Mathematical Branch Cutoff
+            if (b &lt;= a) break; // Prune
+        }
+        return maxEval;
+    }
+}</pre>
+                        <div class="project-content" style="z-index: 2; position: relative;">
                             <h3>AI Core Systems</h3>
                             <a href="AI/ai-systems.html" class="btn btn-primary">VIEW SYSTEMS</a>
                         </div>
@@ -85,6 +103,24 @@
                         <div class="project-content">
                             <h3>IaC (Terraform)</h3>
                             <a href="NexusPlatform/NexusPlatform.html" class="btn btn-primary">VIEW PROJECT</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="category-section">
+                <h2 class="section-title"><i class="fas fa-globe"></i> SaaS & Web Platforms</h2>
+                <div class="project-grid-tri">
+                    <div class="project-card small">
+                        <span class="badge-wip" style="background: rgba(255, 46, 84, 0.15); color: #ff2e54; border-color: rgba(255, 46, 84, 0.3);">LIVE PLATFORM</span>
+                        
+                        <img src="../Images/TheVeil/TheVeil_Preview.png" alt="The Veil Platform" class="project-background">
+                        
+                        <div class="project-content">
+                            <h3>The Veil</h3>
+                            <a href="https://theveilwedding.com" target="_blank" class="btn btn-primary">
+                                VISIT WEBSITE <i class="fas fa-external-link-alt" style="margin-left: 8px;"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
