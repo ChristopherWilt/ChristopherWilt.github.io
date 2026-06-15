@@ -1,6 +1,5 @@
 /* --- PREMIUM PROJECT DETAIL PAGES --- */
 
-/* 1. AUTO-GENERATE AMBIENT GLOW (No HTML div needed) */
 body::before {
     content: '';
     position: fixed;
@@ -15,7 +14,6 @@ body::before {
     opacity: 0.5;
 }
 
-/* 2. FORCE GLASS BACKGROUNDS ON CONTAINERS */
 .container.column-layout, 
 .nav-dock {
     background: rgba(20, 20, 20, 0.65) !important;
@@ -25,7 +23,7 @@ body::before {
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* 3. RESTORE & UPGRADE BUTTON STYLES (.btn-outline intercept) */
+/* 3. BUTTON OVERLAP FIX */
 .btn-outline {
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
@@ -41,6 +39,10 @@ body::before {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    white-space: normal; /* Fixes text overflowing buttons */
+    height: auto;
+    text-align: center;
+    max-width: 100%;
 }
 
 .btn-outline:hover {
@@ -59,12 +61,14 @@ body::before {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding-bottom: 2rem;
     animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    width: 100%;
 }
 
 .header-left {
     display: flex;
     align-items: center;
     gap: 20px;
+    min-width: 0; /* Prevents flexbox horizontal scroll */
 }
 
 .back-arrow {
@@ -80,6 +84,7 @@ body::before {
     justify-content: center;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
 }
 
 .back-arrow:hover {
@@ -89,12 +94,17 @@ body::before {
     box-shadow: 0 0 15px rgba(255, 46, 84, 0.2);
 }
 
+.header-title {
+    min-width: 0; /* Allows text to wrap properly */
+}
+
 .header-title h1 {
     font-size: 2.5rem;
     margin: 0;
     font-weight: 800;
     letter-spacing: -1px;
     color: #fff;
+    overflow-wrap: break-word;
 }
 
 .header-title p {
@@ -107,6 +117,7 @@ body::before {
 .header-nav {
     display: flex;
     gap: 15px;
+    flex-wrap: wrap; /* Prevents buttons from clipping out of screen */
 }
 
 /* Main Content Typography */
@@ -130,6 +141,7 @@ main > h2 {
     opacity: 0;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     background: rgba(10, 10, 10, 0.6);
+    max-width: 100%;
 }
 
 .demo-video-container video, .demo-video-container iframe {
@@ -142,15 +154,21 @@ main > h2 {
     padding-top: 60px;
     display: grid;
     gap: 60px; 
+    width: 100%;
 }
 
 .content-block {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 50px;
     align-items: center;
     opacity: 0;
     animation: fadeUp 0.8s ease-out forwards;
+    width: 100%;
+}
+
+.text-content {
+    min-width: 0; /* Let grid shrink content properly */
 }
 
 .text-content h2 {
@@ -159,6 +177,7 @@ main > h2 {
     margin: 0 0 1.5rem 0;
     color: #fff;
     letter-spacing: -0.5px;
+    overflow-wrap: break-word;
 }
 
 .text-content p {
@@ -166,6 +185,7 @@ main > h2 {
     line-height: 1.8;
     font-size: 1.05rem;
     margin-bottom: 1.5rem;
+    overflow-wrap: break-word;
 }
 
 .text-content ul {
@@ -179,6 +199,10 @@ main > h2 {
     color: #fff;
 }
 
+.image-content {
+    max-width: 100%;
+}
+
 .image-content img,
 .image-content video {
     width: 100%;
@@ -189,49 +213,15 @@ main > h2 {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
-/* Staggered Animations */
 .content-block:nth-of-type(1) { animation-delay: 0.2s; }
 .content-block:nth-of-type(2) { animation-delay: 0.3s; }
 .content-block:nth-of-type(3) { animation-delay: 0.4s; }
 
-/* Media Arrangements */
-.image-content .ui-clip {
-    width: 100%;
-    height: auto; 
-    border-radius: 16px;
-    object-fit: contain; 
-}
-
-.image-content .media-row {
-    display: flex;
-    gap: 20px; 
-    width: 100%;
-    justify-content: center; 
-    align-items: center;
-    margin-top: 1.5rem;
-}
-
-.image-content .media-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; 
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.image-content .ui-standard {
-    width: 100%;
-    max-width: 450px; 
-    height: auto; 
-}
-
-.image-content .ui-square {
-    width: 45%; 
-    max-width: 250px; 
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-}
+.image-content .ui-clip { width: 100%; height: auto; border-radius: 16px; object-fit: contain; }
+.image-content .media-row { display: flex; gap: 20px; width: 100%; justify-content: center; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; }
+.image-content .media-column { display: flex; flex-direction: column; gap: 20px; width: 100%; justify-content: center; align-items: center; }
+.image-content .ui-standard { width: 100%; max-width: 450px; height: auto; }
+.image-content .ui-square { width: 45%; max-width: 250px; aspect-ratio: 1 / 1; object-fit: cover; }
 
 @media (max-width: 900px) {
     .project-detail-header {
@@ -243,6 +233,7 @@ main > h2 {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
+        width: 100%;
     }
     .back-arrow {
         position: absolute;
@@ -254,13 +245,15 @@ main > h2 {
         width: 100%;
         gap: 10px;
     }
-    .content-block { grid-template-columns: 1fr; }
+    .content-block { grid-template-columns: minmax(0, 1fr); }
     .content-block:nth-of-type(even) .image-content { order: -1; }
-    .text-content h2 { font-size: 1.8rem; }
     
-    /* Ensure mobile buttons look clean stacked */
+    .text-content h2 { font-size: 1.6rem; }
+    .header-title h1 { font-size: 2rem; }
+    
     .btn-outline {
         width: 100%;
         text-align: center;
+        padding: 1rem;
     }
 }

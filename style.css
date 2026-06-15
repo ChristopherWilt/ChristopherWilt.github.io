@@ -14,7 +14,16 @@
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* --- UNIVERSAL RESET & SIZING FIX --- */
+*, *::before, *::after {
+    box-sizing: border-box; /* Crucial to stop horizontal scrolling */
+}
+
 /* --- BASE STYLES --- */
+html {
+    font-size: 16px; /* Desktop Base Scale */
+}
+
 body {
     font-family: var(--font-sans);
     margin: 0;
@@ -23,6 +32,18 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    width: 100%;
+}
+
+/* Text Wrapping to Prevent Cut-offs */
+p, h1, h2, h3, h4, h5, h6, li, span {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Ambient Background Glow */
@@ -64,7 +85,6 @@ body.home-layout {
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    box-sizing: border-box;
 }
 
 .container {
@@ -159,7 +179,7 @@ body.home-layout {
     filter: drop-shadow(0 0 10px var(--accent-glow));
 }
 
-/* --- CONTENT AREA (The major upgrade) --- */
+/* --- CONTENT AREA --- */
 .content {
     flex: 1;
     padding: 4rem;
@@ -167,7 +187,6 @@ body.home-layout {
     scroll-behavior: smooth;
 }
 
-/* Custom Scrollbar */
 .content::-webkit-scrollbar { width: 6px; }
 .content::-webkit-scrollbar-track { background: transparent; }
 .content::-webkit-scrollbar-thumb { 
@@ -327,6 +346,7 @@ body.home-layout {
     display: flex;
     gap: 1rem;
     margin-top: 3rem;
+    flex-wrap: wrap; /* Allows buttons to stack safely */
 }
 
 .btn {
@@ -338,11 +358,14 @@ body.home-layout {
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s ease;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     flex: 1;
+    text-align: center;
+    white-space: normal; /* Fixes button text overlap */
+    max-width: 100%;
 }
 
 .btn-primary {
@@ -379,7 +402,7 @@ body.home-layout {
     padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center; /* <--- This forces perfect center alignment */
+    align-items: center; 
     gap: 2rem;
     z-index: 9999;
 }
@@ -392,7 +415,7 @@ body.home-layout {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 24px; /* <--- Prevents icons from shifting off-center */
+    width: 24px; 
 }
 
 .nav-dock a:hover {
@@ -400,7 +423,7 @@ body.home-layout {
     transform: scale(1.2);
 }
 
-/* --- RESPONSIVE DESIGN --- */
+/* --- RESPONSIVE DESIGN (THE NATIVE "ZOOM" FIX) --- */
 @media (max-width: 1200px) {
     .container { flex-direction: column; height: auto; max-height: 90vh; }
     .sidebar { flex: none; border-right: none; border-bottom: 1px solid var(--glass-border); padding: 2rem; }
@@ -413,8 +436,44 @@ body.home-layout {
 }
 
 @media (max-width: 768px) {
+    /* THIS SHRINKS THE GLOBAL SCALE NATIVELY - ACTS LIKE A ZOOM OUT */
+    html { font-size: 12px; } 
+
     body.home-layout { padding: 1rem; padding-bottom: 6rem; }
+    
+    /* --- NEW FIX: SMALLER TOP BAR ON MOBILE --- */
+    .sidebar { 
+        padding: 1.5rem 1rem; /* Reduces empty space around the edges */
+    }
+    .profile-wrapper {
+        width: 110px; /* Shrinks the profile picture */
+        height: 110px;
+        margin-bottom: 1rem; /* Brings the name closer to the picture */
+    }
+    .sidebar h1 {
+        font-size: 1.5rem; /* Scales down your name slightly */
+    }
+    .sidebar .subtitle {
+        font-size: 0.85rem; /* Scales down the title slightly */
+    }
+    .connect-group { 
+        margin-top: 1.5rem; /* Brings social links closer to the text */
+    }
+    .social-links {
+        margin-top: 1rem;
+    }
+    /* ------------------------------------------ */
+
     .button-container { flex-direction: column; }
+    .content { padding: 1.5rem; }
+    
+    .container.column-layout {
+        padding: 2rem 1rem 6rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    html { font-size: 11px; } /* Shrinks slightly more for smaller phones */
 }
 
 @keyframes fadeUp {
@@ -426,10 +485,10 @@ body.fade-out { opacity: 0; transition: opacity 0.4s ease-out; }
 
 /* --- UTILITY FOR SUBPAGES (Projects & Details) --- */
 .container.column-layout {
-    display: flex; /* Restores structural flex without locking height */
+    display: flex; 
     flex-direction: column;
     align-items: stretch;
-    width: 90%;
+    width: 100%; /* Changed from 90% to 100% to stop mobile squishing */
     max-width: 1400px;
     height: auto !important;
     max-height: none !important;
@@ -439,30 +498,26 @@ body.fade-out { opacity: 0; transition: opacity 0.4s ease-out; }
     min-height: 100vh;
 }
 
-/* We removed display: block here so .projects-header keeps its flexbox! */
 .container.column-layout header,
 .container.column-layout main {
     flex: none;
     width: 100%;
 }
 
-/* Prevent sub-page buttons from stretching */
 .column-layout .btn {
     flex: none;
     display: inline-flex;
     width: max-content;
+    max-width: 100%;
 }
 
-/* --- BULLETPROOF MOBILE SUBPAGES --- */
-/* Matches your original behavior: removes floating margins/borders on small screens */
+/* Bulletproof Mobile Subpages */
 @media (max-width: 1000px) {
     .container.column-layout {
         width: 100%;
-        margin: 0; /* Removes side margins */
-        padding: 3rem 1.5rem 6rem 1.5rem; /* Flush edges, extra room at bottom */
-        border-radius: 0; /* Removes rounded corners */
-        border-left: none;
-        border-right: none;
-        border-top: none;
+        margin: 0; 
+        padding: 3rem 1.5rem 6rem 1.5rem; 
+        border-radius: 0; 
+        border: none;
     }
 }
