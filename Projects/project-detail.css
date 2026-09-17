@@ -176,6 +176,13 @@ main > h2 {
     min-width: 0; /* Let grid shrink content properly */
 }
 
+/* A content block with no companion image spans the full width instead of
+   leaving a dead column. */
+.content-block.text-only {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 900px;
+}
+
 .text-content h2 {
     font-size: 2rem;
     font-weight: 800;
@@ -245,6 +252,8 @@ main > h2 {
         top: 2rem;
         right: 2rem;
     }
+    /* Keep header text clear of the floating back arrow */
+    .header-title { padding-right: 70px; }
     .header-nav {
         flex-direction: column;
         width: 100%;

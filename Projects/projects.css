@@ -177,3 +177,98 @@
     border: 1px solid rgba(255, 153, 0, 0.3);
     backdrop-filter: blur(5px);
 }
+/* --- FEATURED FLAGSHIP CARD --- */
+.project-grid-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+}
+
+.project-card.featured {
+    min-height: 420px;
+}
+
+.project-card.featured .project-background {
+    filter: brightness(0.26) saturate(1.1);
+    object-position: right top;
+}
+
+.project-card.featured .project-content {
+    padding: 2.6rem;
+    gap: 2rem;
+    max-width: 780px;
+}
+
+.project-card.featured h3 {
+    font-size: 2.6rem;
+    margin-bottom: 1rem;
+}
+
+.card-blurb {
+    color: #d6d6d6;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    margin: 0 0 1.5rem 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+}
+
+.tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    color: #e5e7eb;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-self: flex-start;
+    width: 100%;
+}
+
+/* The generic card rule pushes a lone button to the bottom-right; inside an
+   action row the buttons sit together on the left instead. */
+.card-actions .btn {
+    align-self: auto;
+    margin-top: 0;
+}
+
+.badge-live {
+    background: rgba(255, 46, 84, 0.15);
+    color: #ff2e54;
+    border: 1px solid rgba(255, 46, 84, 0.35);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+@media (max-width: 768px) {
+    .project-card.featured .project-content { padding: 1.8rem 1.4rem; }
+    .project-card.featured h3 { font-size: 1.9rem; }
+    .card-blurb { font-size: 0.95rem; }
+    .card-actions .btn { width: 100%; text-align: center; }
+    .badge-live { position: static; display: inline-block; margin-bottom: 1rem; }
+}

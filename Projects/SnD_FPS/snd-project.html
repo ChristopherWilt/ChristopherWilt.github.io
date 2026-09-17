@@ -139,7 +139,7 @@
                     </div>
                 </article>
 
-                <article class="content-block">
+                <article class="content-block text-only">
                     <div class="text-content">
                         <h2>SKELETAL MESH & <span class="text-red">RETARGETING</span></h2>
                         <p>
@@ -149,12 +149,9 @@
                             A major technical victory was successfully retargeting the <em>Infima Games Low Poly Weapon Anim Pack</em> from its custom legacy UE4 skeleton to the UE5 Manny skeleton. After auto-alignment failed, I manually set the root retarget bone to the pelvis and meticulously adjusted the clavicle and arm translation settings. This achieved a 98% perfect alignment, bridging legacy assets into a modern UE5 environment.
                         </p>
                     </div>
-                    <div class="image-content">
-                        <img class="ui-standard" src="../../Images/FPSFramework/SkelMeshSetup.png" alt="Skeletal Mesh Setup">
-                    </div>
                 </article>
 
-                <article class="content-block">
+                <article class="content-block text-only">
                     <div class="text-content">
                         <h2>MODULAR <span class="text-red">RECOIL DYNAMICS</span></h2>
                         <p>
@@ -164,12 +161,9 @@
                             This is layered with a procedural Spring-Mass-Damper (<code>SpringInterp</code>) system for independent visual weapon kick and camera roll. The dynamic ADS system calculates the offset between the camera and a "SightSocket" in real-time, procedurally aligning the weapon to the center screen over a time-based float for true modular optics.
                         </p>
                     </div>
-                    <div class="image-content">
-                        <img class="ui-standard" src="../../Images/FPSFramework/RecoilDataAsset.png" alt="Recoil Data Asset Configuration">
-                    </div>
                 </article>
 
-                <article class="content-block">
+                <article class="content-block text-only">
                     <div class="text-content">
                         <h2>MATCH FLOW & <span class="text-red">STATE MACHINE</span></h2>
                         <p>
@@ -179,12 +173,9 @@
                             During the 15-second <code>PreRound</code> phase, player inputs are intercepted and frozen, allowing players to navigate preset class arrays and push a custom <code>FPlayerLoadout</code> selection to the server. Upon elimination, an asynchronous respawn system un-possesses the pawn, waits for a customizable delay, and securely spawns a fresh character body using the native <code>RestartPlayer</code> routine.
                         </p>
                     </div>
-                    <div class="image-content">
-                        <img class="ui-standard" src="../../Images/FPSFramework/RoundStateMachine.png" alt="Match State Machine Code">
-                    </div>
                 </article>
 
-                <article class="content-block">
+                <article class="content-block text-only">
                     <div class="text-content">
                         <h2>AAA <span class="text-red">KILLCAM REPLAY</span></h2>
                         <p>
@@ -194,12 +185,9 @@
                             The local spectator actor (<code>AKillCamGhost</code>) dynamically spawns and destroys weapon classes based on the recorded timeline. To preserve immersion, it forces visibility on 1st-person meshes and hides live actors. Background combatants (<code>AKillCamOtherPlayer</code>) synchronize to a Master Clock, firing collision-safe VFX traces that explicitly ignore live players.
                         </p>
                     </div>
-                    <div class="image-content">
-                        <img class="ui-standard" src="../../Images/FPSFramework/KillCamLogic.png" alt="Kill Cam Component Logic">
-                    </div>
                 </article>
 
-                <article class="content-block">
+                <article class="content-block text-only">
                     <div class="text-content">
                         <h2>EOS ARCHITECTURE & <span class="text-red">SOCIAL OVERLAY</span></h2>
                         <p>
@@ -208,9 +196,6 @@
                         <p>
                             The C++ subsystem binds directly to the Epic Games Social Overlay (Shift+F3) via <code>OnSessionUserInviteAcceptedDelegate</code>, intercepting accepted invites to seamlessly pull players into the host's party. Additionally, I wrote a custom <code>FSaneEOSLogWriter</code> that actively scrubs sensitive Dev Portal credentials before writing output logs, and utilized <code>ClientReturnToMainMenuWithTextReason</code> to gracefully handle party state edge cases.
                         </p>
-                    </div>
-                    <div class="image-content">
-                        <img class="ui-standard" src="../../Images/FPSFramework/EOS_LobbyMenu.png" alt="EOS Main Menu Lobby">
                     </div>
                 </article>
 

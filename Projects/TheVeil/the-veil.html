@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Veil - Wedding Platform | Christopher Wilt</title>
+    <meta name="description" content="The Veil - a full-stack wedding planning platform and vendor marketplace. Next.js 15, React Native, Postgres with row-level security, Stripe Connect, and Deno edge functions.">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../project-detail.css">
+    <link rel="stylesheet" href="veil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="nav-dock">
+        <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
+        <a href="../../Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+    </nav>
+
+    <div class="container column-layout">
+
+        <header class="project-detail-header">
+            <div class="header-left">
+                <a href="../projects.html" class="back-arrow" aria-label="Back to projects">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <div class="header-title">
+                    <h1>THE <span class="text-red">VEIL</span></h1>
+                    <p>Next.js 15 | React Native (Expo) | PostgreSQL + RLS | Stripe Connect | Deno Edge Functions</p>
+                    <p>Founder &amp; Lead Systems Architect &mdash; solo build, April 2026 &rarr; Present</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="https://theveilwedding.com" target="_blank" class="btn-outline">VISIT THEVEILWEDDING.COM</a>
+                <a href="../../index.html" class="btn-outline">HOME PAGE</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- ================= HERO ================= -->
+            <section class="veil-hero">
+                <img src="../../Images/TheVeil/TheVeil_Logo.png" alt="The Veil logo" class="veil-logo">
+                <div class="veil-hero-copy">
+                    <p class="veil-kicker">Live Product &mdash; iOS, Android &amp; Web</p>
+                    <h2>A wedding platform in two halves that share one database.</h2>
+                    <p>
+                        The Veil is a consumer planning app for couples and their guests, a vendor CRM and marketplace
+                        for the businesses they hire, and a single Postgres instance underneath both &mdash; where the
+                        permission model, the pricing authority and the audit trail actually live. I designed, built,
+                        secured and shipped all three surfaces solo: schema, API, edge functions, mobile client, web
+                        client, payments, moderation tooling and the go-to-market machinery.
+                    </p>
+                    <p>
+                        The interesting engineering here is not the feature list. It is that a guest, a co-planner,
+                        a day-of coordinator, a vendor and a staff member all read from the same tables, and the
+                        database &mdash; not the client &mdash; decides what each of them is allowed to see.
+                    </p>
+                </div>
+            </section>
+
+            <!-- ================= STAT STRIP ================= -->
+            <section class="stat-strip">
+                <div class="stat"><span class="stat-num">143K</span><span class="stat-label">Lines of Code</span></div>
+                <div class="stat"><span class="stat-num">257</span><span class="stat-label">SQL Migrations</span></div>
+                <div class="stat"><span class="stat-num">37</span><span class="stat-label">Edge Functions</span></div>
+                <div class="stat"><span class="stat-num">33</span><span class="stat-label">App Screens</span></div>
+                <div class="stat"><span class="stat-num">3</span><span class="stat-label">Shipped Surfaces</span></div>
+                <div class="stat"><span class="stat-num">1</span><span class="stat-label">Engineer</span></div>
+            </section>
+
+            <h2 class="veil-section-head">SYSTEM <span class="text-red">ARCHITECTURE</span></h2>
+
+            <!-- ================= ARCHITECTURE ================= -->
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>01. Two Products, One Source of Truth</h3>
+                        <p>
+                            The platform deploys as <strong>two independent builds out of one repository</strong>. The
+                            consumer app is an Expo / React Native codebase that compiles to iOS, Android <em>and</em> a
+                            web bundle from the same source. The marketing site and the vendor portal are a separate
+                            Next.js 15 application. They are deliberately decoupled: different frameworks, different
+                            build steps, and a marketing typo should never trigger a React Native bundle rebuild.
+                        </p>
+                        <p>
+                            Both talk to the same PostgreSQL 17 instance through an anonymous key, which means
+                            <strong>row-level security is the only real boundary</strong> &mdash; there is no trusted
+                            middle tier to hide behind. Anything that must not be forgeable (prices, entitlements,
+                            wedding dates, role checks) is resolved server-side inside Postgres or a Deno edge function.
+                        </p>
+                    </div>
+                    <div class="image-content">
+<pre class="arch-diagram">
+        ┌──────────────────────────────────┐
+        │   PostgreSQL 17  ·  us-east-1    │
+        │   auth · storage · RLS · edge    │
+        └────────────────┬─────────────────┘
+                         │  anon key + RLS
+         ┌───────────────┴────────────────┐
+         │                                │
+┌────────▼─────────┐          ┌───────────▼──────────┐
+│  CONSUMER APP    │          │  NEXT.JS 15          │
+│  Expo / RN + Web │          │                      │
+│  iOS · Android   │          │  (marketing)  public │
+│  app.theveil…    │          │  /portal  vendor CRM │
+│                  │          │  /admin   staff ops  │
+└──────────────────┘          └──────────────────────┘
+</pre>
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>02. The Permission Model Is Two Predicates, Not a Roles Table</h3>
+                        <p>
+                            Five distinct human roles touch a single wedding &mdash; host, secondary host, co-planner,
+                            day-of coordinator and plain guest &mdash; and none of them exist as a row in a roles table.
+                            Access is <strong>derived</strong> by two SQL predicates that every shared table is guarded
+                            with, which means a role can never drift out of sync with the permission it implies.
+                        </p>
+                        <p>
+                            That produces two enforcement tiers. <strong>Tier A &mdash; money</strong> (registry,
+                            cash funds, Stripe Connect accounts, payment links, shipping address) is restricted to the
+                            host and an active secondary host; a co-planner or coordinator is denied every write.
+                            <strong>Tier B &mdash; planning</strong> (guest list, itinerary, seating, notes, vows,
+                            vendor bookings, activity log) is open to collaborators.
+                        </p>
+                        <p>
+                            Module-level delegation is enforced <em>in the database</em>, not the UI. Before that
+                            migration landed, a co-planner granted only the itinerary could still write the guest list
+                            and the couple's vows through the API &mdash; the toggle existed, but only the client
+                            respected it. The database function now mirrors the client's permission check exactly, and
+                            an absent key is a denial. Self-escalation is blocked twice over: a collaborator without
+                            guest-list access cannot see their own row to edit it, and a trigger raises if they try.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <div class="role-matrix">
+                            <div class="rm-head"><span>Role</span><span>Money</span><span>Planning</span></div>
+                            <div class="rm-row"><span>Host</span><span class="yes">yes</span><span class="yes">yes</span></div>
+                            <div class="rm-row"><span>Secondary host (partner)</span><span class="yes">yes</span><span class="yes">yes</span></div>
+                            <div class="rm-row"><span>Fiancé-group guest</span><span class="no">no</span><span class="yes">yes</span></div>
+                            <div class="rm-row"><span>Co-planner</span><span class="no">no</span><span class="yes">scoped</span></div>
+                            <div class="rm-row"><span>Day-of coordinator</span><span class="no">no</span><span class="yes">scoped</span></div>
+                            <div class="rm-row"><span>Plain guest</span><span class="no">no</span><span class="no">no</span></div>
+                        </div>
+                        <p class="img-caption">
+                            Seven permission keys map module grants to the exact tables they gate. A partial unique
+                            index allows exactly one day-of coordinator per wedding.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>03. Guests Never Touch Tables Directly</h3>
+                        <p>
+                            A plain guest reads <strong>zero rows</strong> of the guest list &mdash; including their own.
+                            Every guest action instead runs through a <code>SECURITY DEFINER</code> function scoped to
+                            the caller's claimed seat: RSVP status, dietary notes, plus-ones, party members, table
+                            assignment. The guard lives in the function signature, so there is no policy surface for a
+                            crafted request to probe.
+                        </p>
+                        <p>
+                            The same pattern secures partner linking. The secondary-host table has <strong>no UPDATE
+                            policy at all</strong>; every legitimate transition &mdash; invite, accept, disconnect &mdash;
+                            runs through a definer function. Restoring a "convenient" policy there would silently
+                            reopen a privilege-escalation path, so the reasoning is written into the migration header
+                            rather than left in someone's memory.
+                        </p>
+                        <p>
+                            The product payoff is the <strong>Guest Passport</strong>: a guest scans a QR roster code or
+                            opens an invite link and gets the itinerary, dress code, their seating assignment, the
+                            registry and a message thread &mdash; with no account, no app install, and no access to a
+                            single byte of the couple's private planning data.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/TheVeil/App_Home.png" alt="The Veil consumer app home dashboard" class="phone-shot">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>04. Two Storage Models, Side by Side &mdash; On Purpose</h3>
+                        <p>
+                            The couple's private build &mdash; every wedding profile, the budget, style attributes,
+                            registry state, DIY progress &mdash; lives as a single <code>jsonb</code> document mirrored
+                            to device storage. It is one round trip, it works offline, and nothing about it needs a
+                            join. That is the right shape for data exactly one person edits.
+                        </p>
+                        <p>
+                            Everything <em>collaborative</em> is fully relational: guest list, itinerary events, seating
+                            tables, table assignments, registry items, vendor bookings and roughly twenty more, each
+                            with its own RLS policies. That is the right shape for data a second person has to be
+                            allowed &mdash; and denied &mdash; access to.
+                        </p>
+                        <p>
+                            The consequence is the part worth knowing, and it is documented in the architecture notes
+                            precisely because it bites: <strong>wiping the relational tables does not wipe the wedding.</strong>
+                            The device re-uploads its document on next open, so any "delete my data" path has to address
+                            both models or it will appear to have silently failed.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/TheVeil/App_FloorPlanner.png" alt="Drag-and-drop floor planner with seating assignment" class="phone-shot">
+                    </div>
+                </article>
+            </div>
+
+            <h2 class="veil-section-head">MONEY, <span class="text-red">AI &amp; MARKETPLACE</span></h2>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>05. Payments: The Client Never Sends a Price</h3>
+                        <p>
+                            Five payment flows run through Stripe and RevenueCat: consumer subscriptions on web,
+                            the same subscriptions through the app stores, guest contributions to cash funds,
+                            couple-to-vendor booking payments, and vendor Pro subscriptions. Platform fees are charged
+                            at the edge &mdash; 1.5% on cash funds (waived on Plus) and 3% on vendor bookings (waived on
+                            Pro).
+                        </p>
+                        <p>
+                            The client sends a <strong>plan name</strong>, never an amount. The edge function looks up
+                            the price, because a client that could send an amount could send <code>$1</code>. Three
+                            runtimes cannot share a module, so each display constant carries a comment naming the
+                            edge-function constant it must match &mdash; the function charges the card, so the function
+                            wins.
+                        </p>
+                        <p>
+                            The Stripe webhook is the <strong>single writer</strong> of booking rows on payment, keyed
+                            on the checkout session id and idempotent against Stripe's at-least-once delivery. That one
+                            row then feeds both the couple's budget ledger and the day-of vendor sheet, so the two
+                            physically cannot disagree about who is showing up.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <div class="fee-table">
+                            <div class="ft-row ft-head"><span>Flow</span><span>Fee</span></div>
+                            <div class="ft-row"><span>Couple subscribes to Plus</span><span>&mdash;</span></div>
+                            <div class="ft-row"><span>Guest contributes to a cash fund</span><span>1.5% &middot; <em>0% on Plus</em></span></div>
+                            <div class="ft-row"><span>Couple pays a vendor</span><span>3% &middot; <em>0% on Pro</em></span></div>
+                            <div class="ft-row"><span>Vendor subscribes to Pro</span><span>&mdash;</span></div>
+                        </div>
+                        <p class="img-caption">
+                            Entitlement for the one-time "whole wedding" plan is a hard expiry column set to the
+                            wedding date plus 60 days &mdash; and the wedding date is resolved server-side, never taken
+                            from the request, because a client-supplied date is a date a client can set to 2099.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>06. The AI DJ &mdash; Three Signals, Thirteen Briefs</h3>
+                        <p>
+                            The music engine takes three inputs and the entire job is keeping them distinct.
+                            <strong>The questionnaire</strong> is explicit instruction, so it wins as a hard constraint.
+                            <strong>Spotify</strong> supplies taste texture &mdash; and the genre tags inferred for a
+                            couple's artists turn out to be far more useful than the artist names, because nobody wants
+                            their most-played track playing at their parents' dance. <strong>The moment</strong> supplies
+                            function.
+                        </p>
+                        <p>
+                            "Processional" is a job, not a genre: it has to carry a person up an aisle at walking pace,
+                            so its brief asks for a singable melody at roughly 60&ndash;80 BPM with an unmistakable
+                            downbeat. All thirteen sections of the night carry their own sonic brief. Six of them used
+                            to fall through to "curate appropriate wedding music", which is no direction at all &mdash;
+                            cocktail hour and the last dance were being handed the same prompt.
+                        </p>
+                        <p>
+                            The earlier version also requested a Spotify scope it never actually held, so the taste
+                            lookup silently 403'd and fell through to the literal string "Popular Artists". Fixing that
+                            was less about prompting than about noticing a failure that looked like a working feature.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/TheVeil/App_Itinerary.png" alt="Live itinerary with AI-generated events" class="phone-shot">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>07. A Checklist That Is a Dependency Graph</h3>
+                        <p>
+                            The planning checklist is generated from the couple's date, budget and location as a set of
+                            tasks carrying <strong>day offsets relative to the wedding</strong>, a category, an
+                            estimated cost, and an index pointing at the task each one depends on. Booking a
+                            photographer depends on booking a venue; the graph knows it.
+                        </p>
+                        <p>
+                            Because deadlines are stored as offsets rather than dates, moving the wedding re-derives
+                            every deadline instead of invalidating the list &mdash; the app detects the drift and offers
+                            to resync. Tasks also <strong>auto-complete from real state elsewhere in the system</strong>:
+                            confirm a budget and "Establish Initial Budget" closes itself, set a guest count and
+                            "Create Guest List" closes itself.
+                        </p>
+                        <p>
+                            The generator falls back to a hand-authored template when the model is unavailable, so a
+                            failed AI call degrades into a perfectly usable default plan rather than an empty screen.
+                            It ships on the free tier deliberately: it is the feature that proves the product works
+                            before anyone is asked to pay.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/TheVeil/App_Checklist.png" alt="AI-generated live checklist with auto-completed tasks" class="phone-shot">
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>08. The Cold-Start Engine</h3>
+                        <p>
+                            A marketplace with no vendors is worthless to a couple, and a marketplace with no couples is
+                            worthless to a vendor. The incumbents solved that over a decade with a sales team. The
+                            engineering answer is to <strong>refuse to have an empty directory on day one</strong>:
+                            real local businesses sourced from Google Places render as storefronts before any of them
+                            have an account.
+                        </p>
+                        <p>
+                            When a couple enquires about an unclaimed business, one call materialises a real profile row
+                            with a null owner and another finds the vendor and reaches out on the couple's behalf. The
+                            outreach is therefore never cold &mdash; it is <em>"a couple asked about you, by name, this
+                            week."</em> The vendor claims the storefront through a verification flow and the enquiry is
+                            already sitting in their inbox.
+                        </p>
+                        <p>
+                            Two decisions in there I would defend anywhere. The system <strong>refuses to invent an
+                            email address</strong>: it fetches the listing's own site and looks for an address the
+                            business actually published, and returns <em>not found</em> rather than guessing at
+                            <code>info@</code>. And live sending is gated behind an exact opt-in secret &mdash; unset,
+                            misspelled or forgotten all fail toward <em>never emailing a real business</em>, redirecting
+                            to an internal address instead.
+                        </p>
+                    </div>
+                    <div class="image-content">
+<pre class="arch-diagram">
+ Couple browses a category
+        │
+        ▼
+ Sees a REAL local business
+ with no Veil account yet
+        │
+        ├─► create_unclaimed_business()
+        │     materialises the storefront
+        │
+        └─► inquire-unclaimed-vendor
+              finds a published address,
+              reaches out on their behalf
+        │
+        ▼
+ Vendor claims the storefront
+ (request → verify)
+        │
+        ▼
+ Enquiry is waiting in the inbox
+ Free: 3% on platform bookings
+ Pro:  0% + verified badge
+</pre>
+                    </div>
+                </article>
+            </div>
+
+            <h2 class="veil-section-head">THE BUSINESS <span class="text-red">SURFACES</span></h2>
+
+            <div class="content-grid">
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>09. Vendor Portal, Staff Console &amp; Moderation</h3>
+                        <p>
+                            The Next.js side ships two authenticated products beyond the public site. The
+                            <strong>vendor portal</strong> is a working CRM: storefront editor, enquiry pipeline with a
+                            per-event day sheet, threaded messaging, availability calendar, billing, team seats and a
+                            social profile. The <strong>staff console</strong> covers acquisition, revenue, health,
+                            moderation, audit, outreach campaigns and the cold-start funnel.
+                        </p>
+                        <p>
+                            Staff access is ranked <code>sales &lt; ops &lt; owner</code> and checked in Postgres, never
+                            in the browser. Sales sees aggregates and never sees anything naming a couple. The staff
+                            table itself has RLS enabled with <strong>no policies at all</strong> and grants revoked:
+                            a staff list that staff can edit from a web page is a staff list that can be escalated, so
+                            adding someone is a deliberate act at the database. The page reads it and cannot write to it.
+                        </p>
+                        <p>
+                            Moderation removes a post by hiding rather than deleting, and every decision records who
+                            made it on both the report and the post &mdash; so a wrong call is recoverable and the
+                            evidence survives the decision.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/TheVeil/TheVeil_Site.png" alt="The Veil marketing site" class="ui-clip">
+                        <p class="img-caption">theveilwedding.com &mdash; the public site, vendor portal and staff console all ship from one Next.js 15 application.</p>
+                    </div>
+                </article>
+
+                <article class="content-block">
+                    <div class="text-content">
+                        <h3>10. Pricing as an Engineering Problem</h3>
+                        <p>
+                            Weddings invert subscription economics: a couple does not renew, they have the wedding and
+                            leave forever. So the product sells <strong>three durations of one identical feature
+                            set</strong> rather than three feature tiers &mdash; monthly, annual, and a one-time
+                            "through your wedding day" plan. A couple splitting a feature list across three prices has
+                            to work out what they are giving up, and the honest answer is nothing.
+                        </p>
+                        <p>
+                            Because onboarding captures the wedding date, the paywall <strong>reads it and leads with
+                            the plan that actually covers the wedding</strong>. Eighteen months out, an annual plan
+                            would expire weeks before the day &mdash; the worst possible moment and a refund
+                            conversation waiting to happen &mdash; so the one-time plan leads. Under six months, annual
+                            is worse value and the couple would feel it, so monthly leads. Every rung stays visible and
+                            buyable; the date only decides emphasis.
+                        </p>
+                        <p>
+                            The one-time plan is implemented as a Stripe payment, not a 24-month subscription, because
+                            "one price, through your wedding day" must not quietly renew afterwards. And the checkout
+                            <strong>refuses a wedding date already in the past</strong> rather than charging for time
+                            the couple already has.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="../../Images/TheVeil/TheVeil_Banner.png" alt="The Veil store feature graphic" class="ui-clip">
+                        <p class="img-caption">
+                            Shipped to the App Store and Google Play from a single Expo codebase, with store-parity
+                            pricing reconciled against the edge functions that actually charge.
+                        </p>
+                    </div>
+                </article>
+            </div>
+
+            <h2 class="veil-section-head">ENGINEERING <span class="text-red">DISCIPLINE</span></h2>
+
+            <section class="principles">
+                <div class="principle">
+                    <div class="p-icon"><i class="fas fa-layer-group"></i></div>
+                    <h4>Migrations are append-only and numbered</h4>
+                    <p>
+                        257 of them, applied in order, never edited after the fact. Every one carries a header
+                        explaining <em>why</em> &mdash; a convention, not decoration. The reasoning has repeatedly
+                        mattered more than the SQL, because the next person to touch a policy needs to know what it
+                        was protecting against.
+                    </p>
+                </div>
+                <div class="principle">
+                    <div class="p-icon"><i class="fas fa-user-shield"></i></div>
+                    <h4>RLS is the boundary; a hidden button proves nothing</h4>
+                    <p>
+                        Permission changes are verified with impersonated, rolled-back transactions and the evidence is
+                        recorded in a role test plan. If the client is the only thing enforcing a rule, the rule is
+                        not enforced.
+                    </p>
+                </div>
+                <div class="principle">
+                    <div class="p-icon"><i class="fas fa-bug"></i></div>
+                    <h4>Judge writes on row count, never on absence of an error</h4>
+                    <p>
+                        An UPDATE denied by RLS affects zero rows and throws nothing. That single property produced two
+                        false "passes" before it was written down &mdash; a test that only checks for an exception will
+                        happily certify a policy that is wide open.
+                    </p>
+                </div>
+                <div class="principle">
+                    <div class="p-icon"><i class="fas fa-gauge-high"></i></div>
+                    <h4>Performance lives in the policies</h4>
+                    <p>
+                        Every RLS policy wraps its auth lookup in a scalar subquery, because a bare call is re-evaluated
+                        <em>per row</em>. Every foreign key in the public schema carries a covering index &mdash; those
+                        columns are exactly what the policy predicates filter on. Redundant policies subsumed by a
+                        broader predicate were dropped rather than left to accumulate.
+                    </p>
+                </div>
+                <div class="principle">
+                    <div class="p-icon"><i class="fas fa-image"></i></div>
+                    <h4>No hotlinked images, ever</h4>
+                    <p>
+                        Every asset ships bundled. A wedding guest opening an invite on venue wifi is the worst possible
+                        place to depend on a third-party CDN, and the day it matters is the one day that cannot be
+                        retried.
+                    </p>
+                </div>
+                <div class="principle">
+                    <div class="p-icon"><i class="fas fa-file-shield"></i></div>
+                    <h4>Claims get reconciled against code</h4>
+                    <p>
+                        Pricing and tiering documents are periodically re-checked line by line against the gate that
+                        enforces them. Two drifts &mdash; an "unlimited" cap that was actually five, and a paid feature
+                        that had always been free &mdash; were caught before they reached a store listing. Where the
+                        document and the code disagree, the code is right.
+                    </p>
+                </div>
+            </section>
+
+            <h2 class="veil-section-head">STACK <span class="text-red">AT A GLANCE</span></h2>
+
+            <section class="stack-grid">
+                <div class="stack-card">
+                    <h4><i class="fas fa-mobile-screen"></i> Consumer App</h4>
+                    <ul>
+                        <li>React Native 0.81 + Expo 54</li>
+                        <li>React 19, React Native Web</li>
+                        <li>Reanimated, SVG, Maps, Camera</li>
+                        <li>RevenueCat (native IAP)</li>
+                        <li>Push notifications + deep links</li>
+                        <li>iOS &middot; Android &middot; Web from one source</li>
+                    </ul>
+                </div>
+                <div class="stack-card">
+                    <h4><i class="fas fa-globe"></i> Web &amp; Portal</h4>
+                    <ul>
+                        <li>Next.js 15 (App Router)</li>
+                        <li>TypeScript, Tailwind v4</li>
+                        <li>Framer Motion</li>
+                        <li>Route groups: marketing / portal / admin</li>
+                        <li>Invite + join hand-off routes</li>
+                        <li>Deployed on Vercel</li>
+                    </ul>
+                </div>
+                <div class="stack-card">
+                    <h4><i class="fas fa-database"></i> Data &amp; Backend</h4>
+                    <ul>
+                        <li>PostgreSQL 17 with RLS throughout</li>
+                        <li><code>SECURITY DEFINER</code> access functions</li>
+                        <li>257 numbered migrations</li>
+                        <li>37 Deno edge functions</li>
+                        <li>Auth, storage, MFA / 2FA recovery</li>
+                        <li>Audit log + moderation queue</li>
+                    </ul>
+                </div>
+                <div class="stack-card">
+                    <h4><i class="fas fa-plug"></i> Integrations</h4>
+                    <ul>
+                        <li>Stripe + Stripe Connect</li>
+                        <li>OpenAI (music, checklist, moderation)</li>
+                        <li>Spotify (taste signal + export)</li>
+                        <li>Google Places &amp; Calendar</li>
+                        <li>Amazon product search / link parsing</li>
+                        <li>Transactional email + web push</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="closing-note">
+                <h3>What I actually take from this build</h3>
+                <p>
+                    Every hard problem in The Veil turned out to be the same problem in a different costume:
+                    <strong>where does the truth live?</strong> Not in the client, which can be edited. Not in a
+                    document that says what the code does, which drifts. It lives in the database that grants the row,
+                    the function that charges the card, and the migration that explains why the policy is shaped the way
+                    it is. Everything above &mdash; the two predicates, the server-resolved price, the definer
+                    functions, the append-only migration history &mdash; is that one idea applied until it held.
+                </p>
+                <div class="closing-actions">
+                    <a href="https://theveilwedding.com" target="_blank" class="btn-outline">VISIT THE VEIL</a>
+                    <a href="../projects.html" class="btn-outline">ALL PROJECTS</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const allLinks = document.querySelectorAll('a');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const href = this.getAttribute('href');
+                    if (this.target === '_blank' || href.startsWith('mailto:') || href.startsWith('#')) return;
+                    event.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => { window.location.href = href; }, 400);
+                });
+            });
+        });
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) document.body.classList.remove('fade-out');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Christopher Wilt — Resume</title>
+<!--
+  SOURCE FILE for Resume/WiltChristopher_Resume.pdf
+  Edit this file, then re-export to PDF:
+      Chrome/Edge → Print → Destination "Save as PDF" → Margins: None →
+      uncheck "Headers and footers" → check "Background graphics"
+  Page size is set below via @page, so the exported PDF matches exactly.
+-->
+<style>
+    @page { size: Letter; margin: 0.45in 0.55in; }
+
+    * { box-sizing: border-box; }
+
+    body {
+        font-family: "Calibri", "Carlito", "Helvetica Neue", Arial, sans-serif;
+        font-size: 9.9pt;
+        line-height: 1.3;
+        color: #1a1a1a;
+        margin: 0;
+    }
+
+    a { color: #0b4a6f; text-decoration: none; }
+
+    /* ---------- header ---------- */
+    .name {
+        font-size: 23pt;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        margin: 0;
+        line-height: 1.05;
+    }
+
+    .title {
+        font-size: 11.3pt;
+        font-weight: 600;
+        color: #333;
+        margin: 2px 0 5px 0;
+        letter-spacing: 0.2px;
+    }
+
+    .contact {
+        font-size: 9.4pt;
+        color: #333;
+        margin: 0 0 3px 0;
+    }
+
+    .contact .sep { color: #999; padding: 0 5px; }
+
+    .rule {
+        border: none;
+        border-top: 1.6px solid #1a1a1a;
+        margin: 7px 0 9px 0;
+    }
+
+    /* ---------- sections ---------- */
+    h2 {
+        font-size: 10.1pt;
+        font-weight: 700;
+        letter-spacing: 1.1px;
+        text-transform: uppercase;
+        margin: 9px 0 4px 0;
+        padding-bottom: 2px;
+        border-bottom: 1px solid #9a9a9a;
+        break-after: avoid;
+    }
+
+    p { margin: 0 0 4px 0; }
+
+    .summary { text-align: justify; }
+
+    /* ---------- skills ---------- */
+    .skills { margin: 0; }
+
+    .skills div {
+        margin-bottom: 2.5px;
+        padding-left: 0.82in;
+        text-indent: -0.82in;
+    }
+
+    .skills b { font-weight: 700; }
+
+    /* ---------- entries ---------- */
+    .entry { margin-bottom: 6px; }
+    /* short entries stay whole; the long lead role may split across pages */
+    .entry.keep-whole { break-inside: avoid; }
+
+    .entry-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+    }
+
+    .role { font-weight: 700; font-size: 10.4pt; }
+    .role .org { font-weight: 700; }
+    .role .stack { font-weight: 400; color: #444; }
+
+    .dates {
+        font-size: 9.3pt;
+        font-weight: 600;
+        color: #333;
+        white-space: nowrap;
+    }
+
+    .sub {
+        font-size: 9.4pt;
+        font-style: italic;
+        color: #444;
+        margin: 0 0 2px 0;
+    }
+
+    ul {
+        margin: 2px 0 0 0;
+        padding-left: 15px;
+    }
+
+    li { margin-bottom: 1.8px; }
+
+    li b { font-weight: 700; }
+
+    /* ---------- education ---------- */
+    .edu-line { display: flex; justify-content: space-between; gap: 12px; }
+</style>
+</head>
+<body>
+
+<p class="name">Christopher Wilt</p>
+<p class="title">Systems &amp; Full-Stack Software Engineer</p>
+<p class="contact">
+    Mifflinburg, PA<span class="sep">|</span>570-541-9807<span class="sep">|</span><a href="mailto:ctwilt23@gmail.com">ctwilt23@gmail.com</a>
+</p>
+<p class="contact">
+    <a href="https://linkedin.com/in/christopher-t-wilt">linkedin.com/in/christopher-t-wilt</a><span class="sep">|</span><a href="https://christopherwilt.github.io">christopherwilt.github.io</a><span class="sep">|</span><a href="https://github.com/ChristopherWilt">github.com/ChristopherWilt</a>
+</p>
+
+<hr class="rule">
+
+<h2>Professional Summary</h2>
+<p class="summary">
+    Systems and full-stack engineer who ships production software end to end. Designed, built and launched
+    <b>The Veil</b>, a live multi-surface SaaS platform (iOS, Android, web and a vendor CRM) on a single PostgreSQL
+    instance where row-level security &mdash; not the client &mdash; enforces access for five distinct user roles.
+    Equally comfortable below the abstraction line: bare-metal Vulkan 1.3 rendering pipelines, thread-safe C++
+    schedulers, and server-authoritative multiplayer networking in Unreal Engine 5. Focused on secure architecture,
+    verifiable permission models and data consistency that holds under load.
+</p>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+    <div><b>Languages:</b> C++, TypeScript/JavaScript, SQL (PostgreSQL, T-SQL, MySQL), Python, C#, Java</div>
+    <div><b>Full-Stack:</b> React, Next.js 15, React Native (Expo), Node.js, Deno, REST APIs, Tailwind, monorepo architecture</div>
+    <div><b>Data &amp; Security:</b> PostgreSQL row-level security, <span style="font-variant: small-caps; font-weight:600;">security definer</span> functions, schema normalization (3NF), query plan analysis &amp; indexing, migration discipline, Stripe / Stripe Connect payment infrastructure</div>
+    <div><b>Cloud &amp; DevOps:</b> Terraform, Docker, GitHub Actions CI/CD, AWS, Azure (Key Vault, VNet, ACR), Vercel, Supabase, Nginx, Perforce (Helix Core), Git</div>
+    <div><b>Systems &amp; Graphics:</b> Vulkan 1.3, HLSL, PBR &amp; IBL pipelines, ECS / data-oriented design, multithreading &amp; concurrency, memory management, TCP/UDP sockets, Unreal Engine 5, Unity</div>
+</div>
+
+<h2>Experience</h2>
+
+<div class="entry">
+    <div class="entry-head">
+        <span class="role"><span class="org">Founder &amp; Lead Systems Architect</span> &mdash; The Veil <span class="stack">(theveilwedding.com)</span></span>
+        <span class="dates">April 2026 &ndash; Present</span>
+    </div>
+    <p class="sub">Next.js 15 &middot; React Native (Expo) &middot; PostgreSQL 17 &middot; Deno edge functions &middot; Stripe Connect &middot; Vercel</p>
+    <ul>
+        <li><b>Shipped a three-surface product solo</b> &mdash; an iOS, Android and web client from one React Native codebase, plus a Next.js marketing site, vendor CRM and staff operations console &mdash; totaling ~143,000 lines across 257 ordered SQL migrations and 37 Deno edge functions.</li>
+        <li><b>Designed a derived permission model</b> in which two SQL predicates and seven module-scoped grants authorize five roles (host, secondary host, co-planner, day-of coordinator, guest) across ~27 shared tables, eliminating a roles table that could drift from the access it implied.</li>
+        <li><b>Closed a privilege-escalation path</b> by moving per-module delegation out of the UI and into RLS, where a collaborator granted one module could previously write every other through the API; verified with impersonated, rolled-back transactions judged on affected row count rather than absence of an error.</li>
+        <li><b>Isolated untrusted callers from shared tables entirely</b> &mdash; every guest action runs through a <span style="font-variant: small-caps; font-weight:600;">security definer</span> function scoped to the caller's claimed seat, and the partner-linking table carries no UPDATE policy at all.</li>
+        <li><b>Built payment infrastructure across five flows</b> on Stripe, Stripe Connect and RevenueCat; the client submits a plan name and never an amount, entitlement expiry is resolved server-side from authoritative data, and the webhook is the single idempotent writer keyed on checkout session ID against at-least-once delivery.</li>
+        <li><b>Engineered AI subsystems against real product constraints</b>: a curation engine separating explicit instruction from inferred taste across thirteen event-specific briefs, and a planning generator emitting dependency-aware tasks as date offsets, so changing the event date re-derives every deadline instead of invalidating the plan.</li>
+        <li><b>Built the marketplace cold-start engine</b> &mdash; an enquiry materializes an unclaimed storefront from Google Places data and triggers verified outreach; the system refuses to fabricate contact addresses and gates live sending behind an opt-in that fails closed.</li>
+        <li><b>Tuned performance at the policy layer</b>: wrapped authorization lookups in scalar subqueries to stop per-row re-evaluation and added covering indexes to every foreign key the predicates filter on.</li>
+    </ul>
+</div>
+
+<h2>Engineering Projects</h2>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Multiplayer FPS Framework</span> <span class="stack">&mdash; Unreal Engine 5, C++</span></span>
+        <span class="dates">Sept 2025 &ndash; Present</span>
+    </div>
+    <ul>
+        <li>Architected a modular, <b>server-authoritative</b> framework with strict client-prediction and server-validation logic to manage real-time replication while awaiting authoritative responses.</li>
+        <li>Engineered a <b>custom lag compensation system</b> for hit-scan weapons, rewinding server-side hitboxes to match client timestamps for fair competitive play.</li>
+        <li>Built a hybrid, data-driven recoil solver decoupled from the weapon class via <b>UDataAssets</b>, supporting hot-swappable pattern-based and procedural modes plus a spring-damper ADS system.</li>
+        <li>Integrated <b>Epic Online Services</b> for matchmaking tickets, lobby creation and peer-to-peer traversal, including a log writer that scrubs portal credentials before output.</li>
+    </ul>
+</div>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Graphics &amp; Game Engine Systems</span> <span class="stack">&mdash; C++, Vulkan 1.3, HLSL</span></span>
+        <span class="dates">June 2025 &ndash; Aug 2025</span>
+    </div>
+    <ul>
+        <li>Developed a production-grade, bare-metal <b>Vulkan PBR rendering pipeline</b> from the ground up, implementing Cook-Torrance microfacet shading, image-based lighting from HDR cube maps, and a pre-computed BRDF lookup table.</li>
+        <li>Built a data-driven <b>ECS level loader</b> on EnTT, replacing object-oriented game loops with cache-friendly component arrays and a flyweight instancing factory that shares pooled geometry across replicated entities.</li>
+        <li>Managed the lifecycle of low-level graphics structures &mdash; pipelines, descriptor pools, uniform buffers and storage views &mdash; alongside a CPU-only software rasterizer with Z-buffering and perspective-correct UV mapping.</li>
+    </ul>
+</div>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Cloud Security &amp; Infrastructure</span> <span class="stack">&mdash; Nexus Platform (Terraform, Azure, Docker)</span></span>
+        <span class="dates">Jan 2026 &ndash; March 2026</span>
+    </div>
+    <ul>
+        <li>Authored modular <b>Terraform</b> configurations provisioning an isolated Azure architecture: virtual network subnets, Linux Web Apps and an Azure Container Registry.</li>
+        <li>Implemented <b>zero-trust backend isolation</b>, wrapping Azure SQL in virtual-network firewall rules that reject all inbound traffic originating outside the application subnet.</li>
+        <li>Managed pipeline secrets natively through <b>Azure Key Vault</b>, generating, applying and rotating administrator credentials at runtime rather than hardcoding them, and shipped GitHub Actions workflows that build and push signed Nginx container images on every push to main.</li>
+    </ul>
+</div>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Concurrency &amp; Operating Systems Engineering</span> <span class="stack">&mdash; C++</span></span>
+        <span class="dates">April 2025 &ndash; July 2025</span>
+    </div>
+    <ul>
+        <li>Engineered thread-safe pipelines demonstrating shared-memory corruption hazards, applying strict synchronization primitives (<b>std::unique_lock</b>, condition variables) to override OS scheduling non-determinism.</li>
+        <li>Replaced array-based allocation by tracking concurrent hardware contexts inside a single 32-bit unsigned integer, using <b>atomic bitwise operations</b> to throttle and dispatch execution threads.</li>
+    </ul>
+</div>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Database Architecture &amp; Security Analysis</span> <span class="stack">&mdash; SQL, Python</span></span>
+        <span class="dates">Feb 2025 &ndash; March 2025</span>
+    </div>
+    <ul>
+        <li>Designed a <b>3NF relational schema</b> to parse and store raw web server logs, tracking user IPs, session durations and access patterns, with stored procedures and views auto-generating daily traffic reports.</li>
+        <li>Wrote SQL detecting security anomalies &mdash; bot traffic and unauthorized access attempts &mdash; from user-agent strings and request frequency, and a Python regex utility that flags 401 responses during parsing, before database commitment.</li>
+        <li>Optimized high-volume search queries with clustered and non-clustered indexes across a <b>30,000+ record dataset</b>, cutting complex-join execution time and reducing data redundancy by 60% while enforcing referential integrity through foreign key constraints and ACID transactions.</li>
+    </ul>
+</div>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Technical Lead &amp; Infrastructure Admin</span> <span class="stack">&mdash; Delivery Detonation (UE5 capstone team)</span></span>
+        <span class="dates">Jan 2026</span>
+    </div>
+    <ul>
+        <li>Administered a remote <b>Perforce (Helix Core)</b> depot for a multi-developer team, defining branching strategy and manually resolving deep binary merge conflicts.</li>
+        <li>Optimized network bandwidth with a customized replication graph, using raw UDP for high-frequency actor translation while reserving reliable RPC nodes for critical game state.</li>
+    </ul>
+</div>
+
+<h2>Education</h2>
+<div class="entry" style="margin-bottom:0;">
+    <div class="edu-line">
+        <span class="role">Bachelor of Science in Game Development &mdash; Full Sail University, Winter Park, FL</span>
+        <span class="dates">Graduated April 2026</span>
+    </div>
+    <p class="sub">Core focus: Systems Architecture &amp; Software Engineering</p>
+    <ul>
+        <li>Coursework: Advanced Computer Networks (TCP/UDP sockets, blocking and non-blocking execution), Operating Systems &amp; Systems Programming (race conditions, process scheduling, raw file I/O, binary serialization), Advanced Database Management, Linux Systems Administration, Computer Graphics.</li>
+    </ul>
+</div>
+
+</body>
+</html>

@@ -12,7 +12,7 @@
     <nav class="nav-dock">
         <a href="../../index.html" title="Home"><i class="fas fa-home"></i></a>
         <a href="../projects.html" title="Projects"><i class="fas fa-gamepad"></i></a>
-        <a href="../../Resume/WiltChristopher_Resume_DevOpsEngineer.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
+        <a href="../../Resume/WiltChristopher_Resume.pdf" target="_blank" title="Resume"><i class="fas fa-file-alt"></i></a>
     </nav>
     <div class="container column-layout">
 
@@ -45,13 +45,13 @@
                         </p>
                     </div>
                     <div class="image-content">
-                        <img src="../../Images/Nexus/Terraform_Architecture.png" alt="Terraform Cloud Architecture Diagram">
+                        <img src="../../Images/Systems/TerraformLab.png" alt="The deployed Nexus Platform container running on Azure" class="ui-clip">
                     </div>
                 </article>
             </div>
 
             <div class="content-grid">
-                <article class="content-block">
+                <article class="content-block text-only">
                     <div class="text-content">
                         <h2>ZERO-TRUST <span class="text-red">SECURITY</span></h2>
                         <p>
@@ -61,14 +61,11 @@
                             To prevent sensitive credentials from being exposed in the deployment pipeline, I implemented <strong>Azure Key Vault</strong>. The Terraform configuration dynamically generates complex SQL administrator passwords, stores them securely as secrets within the vault, and applies them to the database without hardcoding any values.
                         </p>
                     </div>
-                    <div class="image-content">
-                        <img src="../../Images/Nexus/Security_VNet.png" alt="Azure Security and Key Vault Implementation">
-                    </div>
                 </article>
             </div>
 
             <div class="content-grid">
-                <article class="content-block">
+                <article class="content-block text-only">
                     <div class="text-content">
                         <h2>AUTOMATED <span class="text-red">PIPELINE</span></h2>
                         <p>
@@ -77,9 +74,6 @@
                         <p>
                             Configured via a <code>deploy.yml</code> workflow, the pipeline listens for pushes to the main branch. Upon triggering, it securely authenticates with Azure, builds the latest Docker image, pushes it to the Azure Container Registry, and triggers a redeployment of the web app, ensuring zero-touch updates.
                         </p>
-                    </div>
-                    <div class="image-content">
-                        <img src="../../Images/Nexus/Github_Actions.png" alt="GitHub Actions CI/CD Pipeline">
                     </div>
                 </article>
             </div>
