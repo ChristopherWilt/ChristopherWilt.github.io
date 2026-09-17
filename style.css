@@ -671,3 +671,21 @@ body.fade-out { opacity: 0; transition: opacity 0.4s ease-out; }
     .track-links .btn { width: 100%; text-align: center; }
     .hire-contact .hire-sep { display: block; height: 0; overflow: hidden; padding: 0; }
 }
+
+.hire-avail {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.12);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .hire-avail { margin: 10px 0 0 0; }
+}
