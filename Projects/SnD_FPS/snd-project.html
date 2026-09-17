@@ -4,8 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiplayer FPS Framework - Christopher Wilt</title>
+    <!-- social preview -->
+    <meta name="description" content="A server-authoritative competitive shooter framework in Unreal Engine 5: custom lag compensation, data-driven weapons and recoil, killcam replay, and EOS matchmaking.">
+    <meta name="author" content="Christopher Wilt">
+    <meta name="theme-color" content="#050505">
+    <link rel="canonical" href="https://christopherwilt.github.io/Projects/SnD_FPS/snd-project.html">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="/favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Christopher Wilt">
+    <meta property="og:title" content="Multiplayer FPS Framework — UE5 / C++ | Christopher Wilt">
+    <meta property="og:description" content="A server-authoritative competitive shooter framework in Unreal Engine 5: custom lag compensation, data-driven weapons and recoil, killcam replay, and EOS matchmaking.">
+    <meta property="og:url" content="https://christopherwilt.github.io/Projects/SnD_FPS/snd-project.html">
+    <meta property="og:image" content="https://christopherwilt.github.io/Images/og-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Christopher Wilt — Gameplay &amp; Systems Engineer">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Multiplayer FPS Framework — UE5 / C++ | Christopher Wilt">
+    <meta name="twitter:description" content="A server-authoritative competitive shooter framework in Unreal Engine 5: custom lag compensation, data-driven weapons and recoil, killcam replay, and EOS matchmaking.">
+    <meta name="twitter:image" content="https://christopherwilt.github.io/Images/og-preview.png">
+    <!-- /social preview -->
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="../project-detail.css">
+    <link rel="stylesheet" href="fps.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -22,28 +45,63 @@
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <div class="header-title">
-                    <h1>FPS <span class="text-red">FRAMEWORK</span></h1>
-                    <p>C++ | Epic Online Services | Multiplayer Architecture</p>
-                    <p>Christopher Wilt - Game Developer</p>
+                    <h1>MULTIPLAYER <span class="text-red">FPS FRAMEWORK</span></h1>
+                    <p>Unreal Engine 5 | C++ | Server-Authoritative Networking | Epic Online Services</p>
+                    <p>Christopher Wilt &mdash; solo build, Sept 2025 &rarr; Present</p>
                 </div>
             </div>
             <nav class="header-nav">
                 <a href="https://github.com/ChristopherWilt/FPS-Framework-Source" target="_blank" class="btn-outline">VIEW SOURCE CODE</a>
+                <a href="../../Resume/WiltChristopher_Resume_Gameplay.pdf" target="_blank" class="btn-outline">GAMEPLAY RESUME</a>
                 <a href="../../index.html" class="btn-outline">HOME PAGE</a>
             </nav>
         </header>
 
+
         <main>
+            <section class="fps-hero">
+                <div class="fps-hero-media">
+                    <img src="../../Images/FPSFramework/CurrentInGameScreenshot.png" alt="Multiplayer FPS Framework in-game">
+                </div>
+                <div class="fps-hero-copy">
+                    <p class="fps-kicker">Competitive Shooter Framework &mdash; In Active Development</p>
+                    <h2>A server-authoritative FPS foundation, written in C++ from the ground up.</h2>
+                    <p>
+                        Not a template project. Every system here exists because a competitive shooter needs it to be
+                        correct under latency: the server owns the truth, the client predicts for feel, and the two
+                        are reconciled deliberately. Built solo in Unreal Engine 5 as the groundwork for a
+                        Search-and-Destroy style game mode.
+                    </p>
+                    <div class="fps-tags">
+                        <span class="tag">Server Authority</span>
+                        <span class="tag">Client Prediction</span>
+                        <span class="tag">Lag Compensation</span>
+                        <span class="tag">Replication</span>
+                        <span class="tag">EOS Matchmaking</span>
+                        <span class="tag">Weapon Systems</span>
+                        <span class="tag">Killcam Replay</span>
+                        <span class="tag">UMG / HUD</span>
+                        <span class="tag">Anim Retargeting</span>
+                    </div>
+                    <div class="fps-status">
+                        <div><span class="dot ok"></span> <strong>Working now:</strong> lobbies and matchmaking, buy menu and economy, weapon and recoil systems, movement and slide, compass and minimap, killfeed, killcam replay, match state machine.</div>
+                        <div><span class="dot wip"></span> <strong>In progress:</strong> public matchmaking flows, custom game rules, persistent loadouts and settings. The online subsystem files are held back from the public repo while that work is in flux.</div>
+                    </div>
+                </div>
+            </section>
             <div class="content-grid">
 
                 <article class="content-block">
                     <div class="text-content">
-                        <h2>PROJECT <span class="text-red">OVERVIEW</span></h2>
+                        <h2>NETWORK <span class="text-red">ARCHITECTURE</span></h2>
                         <p>
-                            This project is a modular First-Person Shooter framework engineered in C++ to serve as a scalable foundation for competitive multiplayer games.
+                            The framework is modular by construction: gameplay systems are components and data assets rather than subclasses, so a new weapon, game mode or HUD element is a configuration change instead of an inheritance chain.
                         </p>
                         <p>
-                            Unlike standard template projects, this framework integrates <strong>Epic Online Services (EOS)</strong> with EIK for peer-to-peer matchmaking, lobby management, and secure user authentication. So far, the lobby and matchmaking systems are functional, allowing players to create and join sessions seamlessly. <em>(Note: The Online Subsystems are still being developed and debugged, so the files are not on the source just yet.)</em>
+                            <strong>Epic Online Services</strong> (via EIK) handles peer-to-peer matchmaking, lobby management and authentication. Persistent data lobbies keep a party together on the main menu without an active server IP, and the C++ subsystem binds the Epic social overlay so an accepted invite pulls a player straight into the host's party.
+                        </p>
+                        <p>
+                            Everything that affects the outcome of a fight is validated server-side. The client is allowed to be optimistic &mdash; it traces locally the instant you pull the trigger &mdash; but the server re-runs that shot against rewound hitboxes and has the final say.
                         </p>
                     </div>
                     <div class="image-content">
@@ -139,69 +197,47 @@
                     </div>
                 </article>
 
-                <article class="content-block text-only">
-                    <div class="text-content">
-                        <h2>SKELETAL MESH & <span class="text-red">RETARGETING</span></h2>
-                        <p>
-                            To support modern AAA mechanics like reciprocating slides and physical magazine drops, the core weapon architecture was upgraded to utilize fully rigged <code>USkeletalMeshComponents</code>. This allows attachments to parent dynamically directly to moving bones via socket tags.
-                        </p>
-                        <p>
-                            A major technical victory was successfully retargeting the <em>Infima Games Low Poly Weapon Anim Pack</em> from its custom legacy UE4 skeleton to the UE5 Manny skeleton. After auto-alignment failed, I manually set the root retarget bone to the pelvis and meticulously adjusted the clavicle and arm translation settings. This achieved a 98% perfect alignment, bridging legacy assets into a modern UE5 environment.
-                        </p>
-                    </div>
-                </article>
+                            </div>
+
+            <h2 class="fps-section-head">SYSTEMS <span class="text-red">BREAKDOWN</span></h2>
+            <div class="sys-grid">
+                    <article class="sys-card">
+                        <h3>Skeletal Mesh & Retargeting</h3>
+                        <p>To support modern AAA mechanics like reciprocating slides and physical magazine drops, the core weapon architecture was upgraded to utilize fully rigged <code>USkeletalMeshComponents</code>. This allows attachments to parent dynamically directly to moving bones via socket tags.</p>
+                        <p>A major technical victory was successfully retargeting the <em>Infima Games Low Poly Weapon Anim Pack</em> from its custom legacy UE4 skeleton to the UE5 Manny skeleton. After auto-alignment failed, I manually set the root retarget bone to the pelvis and meticulously adjusted the clavicle and arm translation settings. This achieved a 98% perfect alignment, bridging legacy assets into a modern UE5 environment.</p>
+                    </article>
+
+                    <article class="sys-card">
+                        <h3>Modular Recoil Dynamics</h3>
+                        <p>I engineered a hybrid, data-driven recoil solver that decouples logic from the weapon class via <code>UDataAssets</code>. It supports immediate hot-swapping between two primary modes: <strong>Pattern-Based</strong> (Valorant-style deterministic VectorCurve sprays with a custom Stochastic Sway system) and <strong>Procedural</strong> (CoD-style randomized variance).</p>
+                        <p>This is layered with a procedural Spring-Mass-Damper (<code>SpringInterp</code>) system for independent visual weapon kick and camera roll. The dynamic ADS system calculates the offset between the camera and a "SightSocket" in real-time, procedurally aligning the weapon to the center screen over a time-based float for true modular optics.</p>
+                    </article>
+
+                    <article class="sys-card">
+                        <h3>Match Flow & State Machine</h3>
+                        <p>The core logic was refactored for strict server authority. The server-only <code>ATDMGameMode</code> dictates match phases. The <code>AFPSGameState</code> safely replicates global timers and calculates a <code>WinLossStatusText</code>, driving dynamic HUD elements to show real-time "WINNING/LOSING" status.</p>
+                        <p>During the 15-second <code>PreRound</code> phase, player inputs are intercepted and frozen, allowing players to navigate preset class arrays and push a custom <code>FPlayerLoadout</code> selection to the server. Upon elimination, an asynchronous respawn system un-possesses the pawn, waits for a customizable delay, and securely spawns a fresh character body using the native <code>RestartPlayer</code> routine.</p>
+                    </article>
+
+                    <article class="sys-card">
+                        <h3>Aaa Killcam Replay</h3>
+                        <p>I engineered a server-authorized replay system split into three specialized classes to ensure 1:1 visual parity without memory bloat. The <code>UKillCamRecorderComponent</code> captures compressed <code>FPlayerSnapshot</code> structs (transform, control rotation, weapon class pointer, firing state) every 0.05 seconds, actively trimming data older than 5 seconds.</p>
+                        <p>The local spectator actor (<code>AKillCamGhost</code>) dynamically spawns and destroys weapon classes based on the recorded timeline. To preserve immersion, it forces visibility on 1st-person meshes and hides live actors. Background combatants (<code>AKillCamOtherPlayer</code>) synchronize to a Master Clock, firing collision-safe VFX traces that explicitly ignore live players.</p>
+                    </article>
+
+                    <article class="sys-card">
+                        <h3>Eos Architecture & Social Overlay</h3>
+                        <p>The backend relies on Epic Online Services (EOS) via the EOS Integration Kit. To mimic AAA lobby flows, the framework uses <code>bUseLobbiesIfAvailable</code> to create persistent data lobbies on the main menu, keeping parties together with full Voice Chat support without needing an active server IP.</p>
+                        <p>The C++ subsystem binds directly to the Epic Games Social Overlay (Shift+F3) via <code>OnSessionUserInviteAcceptedDelegate</code>, intercepting accepted invites to seamlessly pull players into the host's party. Additionally, I wrote a custom <code>FSaneEOSLogWriter</code> that actively scrubs sensitive Dev Portal credentials before writing output logs, and utilized <code>ClientReturnToMainMenuWithTextReason</code> to gracefully handle party state edge cases.</p>
+                    </article>
+            </div>
+
+            <div class="content-grid">
+
 
                 <article class="content-block text-only">
                     <div class="text-content">
-                        <h2>MODULAR <span class="text-red">RECOIL DYNAMICS</span></h2>
-                        <p>
-                            I engineered a hybrid, data-driven recoil solver that decouples logic from the weapon class via <code>UDataAssets</code>. It supports immediate hot-swapping between two primary modes: <strong>Pattern-Based</strong> (Valorant-style deterministic VectorCurve sprays with a custom Stochastic Sway system) and <strong>Procedural</strong> (CoD-style randomized variance).
-                        </p>
-                        <p>
-                            This is layered with a procedural Spring-Mass-Damper (<code>SpringInterp</code>) system for independent visual weapon kick and camera roll. The dynamic ADS system calculates the offset between the camera and a "SightSocket" in real-time, procedurally aligning the weapon to the center screen over a time-based float for true modular optics.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="content-block text-only">
-                    <div class="text-content">
-                        <h2>MATCH FLOW & <span class="text-red">STATE MACHINE</span></h2>
-                        <p>
-                            The core logic was refactored for strict server authority. The server-only <code>ATDMGameMode</code> dictates match phases. The <code>AFPSGameState</code> safely replicates global timers and calculates a <code>WinLossStatusText</code>, driving dynamic HUD elements to show real-time "WINNING/LOSING" status.
-                        </p>
-                        <p>
-                            During the 15-second <code>PreRound</code> phase, player inputs are intercepted and frozen, allowing players to navigate preset class arrays and push a custom <code>FPlayerLoadout</code> selection to the server. Upon elimination, an asynchronous respawn system un-possesses the pawn, waits for a customizable delay, and securely spawns a fresh character body using the native <code>RestartPlayer</code> routine.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="content-block text-only">
-                    <div class="text-content">
-                        <h2>AAA <span class="text-red">KILLCAM REPLAY</span></h2>
-                        <p>
-                            I engineered a server-authorized replay system split into three specialized classes to ensure 1:1 visual parity without memory bloat. The <code>UKillCamRecorderComponent</code> captures compressed <code>FPlayerSnapshot</code> structs (transform, control rotation, weapon class pointer, firing state) every 0.05 seconds, actively trimming data older than 5 seconds.
-                        </p>
-                        <p>
-                            The local spectator actor (<code>AKillCamGhost</code>) dynamically spawns and destroys weapon classes based on the recorded timeline. To preserve immersion, it forces visibility on 1st-person meshes and hides live actors. Background combatants (<code>AKillCamOtherPlayer</code>) synchronize to a Master Clock, firing collision-safe VFX traces that explicitly ignore live players.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="content-block text-only">
-                    <div class="text-content">
-                        <h2>EOS ARCHITECTURE & <span class="text-red">SOCIAL OVERLAY</span></h2>
-                        <p>
-                            The backend relies on Epic Online Services (EOS) via the EOS Integration Kit. To mimic AAA lobby flows, the framework uses <code>bUseLobbiesIfAvailable</code> to create persistent data lobbies on the main menu, keeping parties together with full Voice Chat support without needing an active server IP.
-                        </p>
-                        <p>
-                            The C++ subsystem binds directly to the Epic Games Social Overlay (Shift+F3) via <code>OnSessionUserInviteAcceptedDelegate</code>, intercepting accepted invites to seamlessly pull players into the host's party. Additionally, I wrote a custom <code>FSaneEOSLogWriter</code> that actively scrubs sensitive Dev Portal credentials before writing output logs, and utilized <code>ClientReturnToMainMenuWithTextReason</code> to gracefully handle party state edge cases.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="content-block">
-                    <div class="text-content">
-                        <h2>DEVELOPMENT <span class="text-red">ROADMAP</span></h2>
+                        <h2>WHAT I AM BUILDING <span class="text-red">NEXT</span></h2>
                         <p>
                             The framework is continuously evolving. The immediate next phase of development focuses on scaling the Epic Online Services (EOS) backend for public and custom matchmaking, alongside expanding the combat sandbox and the out-of-match user experience.
                         </p>

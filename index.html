@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Christopher Wilt - Systems & Full-Stack Software Engineer</title>
+    <!-- social preview -->
+    <meta name="description" content="C++ and Unreal Engine 5 gameplay systems, a Vulkan renderer written from scratch, and The Veil — a live platform designed, built and launched solo. Open to gameplay/engine and software engineering roles.">
+    <meta name="author" content="Christopher Wilt">
+    <meta name="theme-color" content="#050505">
+    <link rel="canonical" href="https://christopherwilt.github.io/">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="/favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Christopher Wilt">
+    <meta property="og:title" content="Christopher Wilt — Gameplay &amp; Systems Engineer">
+    <meta property="og:description" content="C++ and Unreal Engine 5 gameplay systems, a Vulkan renderer written from scratch, and The Veil — a live platform designed, built and launched solo. Open to gameplay/engine and software engineering roles.">
+    <meta property="og:url" content="https://christopherwilt.github.io/">
+    <meta property="og:image" content="https://christopherwilt.github.io/Images/og-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Christopher Wilt — Gameplay &amp; Systems Engineer">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Christopher Wilt — Gameplay &amp; Systems Engineer">
+    <meta name="twitter:description" content="C++ and Unreal Engine 5 gameplay systems, a Vulkan renderer written from scratch, and The Veil — a live platform designed, built and launched solo. Open to gameplay/engine and software engineering roles.">
+    <meta name="twitter:image" content="https://christopherwilt.github.io/Images/og-preview.png">
+    <!-- /social preview -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -24,7 +46,8 @@
                 <div class="profile-ring"></div>
             </div>
             <h1>Christopher Wilt</h1>
-            <p class="subtitle">Systems & Full-Stack Engineer</p>
+            <p class="subtitle">Gameplay &amp; Systems Engineer</p>
+            <p class="subtitle-sub">C++ &middot; Unreal Engine 5 &middot; Full-Stack</p>
 
             <div class="connect-group">
                 <div class="social-links">
@@ -37,18 +60,68 @@
 
         <main class="content">
             <section class="about-me">
-                <h2>ARCHITECTING <span class="text-gradient">SCALABLE</span> SYSTEMS. SOLVING <span class="text-gradient">COMPLEX</span> PROBLEMS.</h2>
+                <h2>I BUILD <span class="text-gradient">GAMEPLAY SYSTEMS</span> AND THE <span class="text-gradient">PLATFORMS</span> BEHIND THEM.</h2>
                 <p class="lead-text">
-                    I am a Systems and Full-Stack Engineer focused on building robust, scalable architecture. I thrive in environments that require crossing domain boundaries&mdash;moving seamlessly between low-level memory management and high-level cloud infrastructure to deliver maintainable, performant software. Most recently I designed, built and launched <a href="Projects/TheVeil/the-veil.html" style="color: var(--accent-red); text-decoration: none; font-weight: 600;">The Veil</a>, a production wedding platform serving couples, their guests and the vendors they hire across mobile, web and a business portal.
+                    I write C++ gameplay and engine code, and I ship production software. On the engine side that means a server-authoritative <a href="Projects/SnD_FPS/snd-project.html" style="color: var(--accent-red); text-decoration: none; font-weight: 600;">multiplayer FPS framework</a> in Unreal Engine 5 with custom lag compensation, a Vulkan 1.3 PBR renderer written from scratch, and game AI from alpha-beta search to timesliced pathfinding. On the product side it means <a href="Projects/TheVeil/the-veil.html" style="color: var(--accent-red); text-decoration: none; font-weight: 600;">The Veil</a> &mdash; a live platform I designed, built and launched solo across iOS, Android, web and a business portal.
                 </p>
                 <p>
-                    My technical foundation spans the entire engineering stack. From engineering Vulkan PBR rendering pipelines and thread-safe OS schedulers in C++, to building responsive full-stack web applications in React and Next.js, and automating cloud infrastructure with Terraform, I enjoy tackling complex bottlenecks. I focus on writing clean, deterministic code, anticipating edge cases, and designing systems that scale securely.
+                    The through-line is the same in both: I want to know what the machine is actually doing. That is why the renderer is hand-written rather than borrowed, why the multiplayer loop validates on the server instead of trusting the client, and why authorization in my platform lives in the database rather than in a hidden button. I like finishing things, and I like them to hold up under scrutiny.
                 </p>
+
+
+                <section class="hire-block">
+                    <div class="hire-head">
+                        <span class="status-dot"></span>
+                        <h3>Open to full-time roles &mdash; two tracks</h3>
+                    </div>
+                    <div class="hire-tracks">
+                        <div class="track">
+                            <h4><i class="fas fa-gamepad"></i> Gameplay / Engine Programmer</h4>
+                            <p>
+                                C++ and Unreal Engine 5. Server-authoritative multiplayer, weapon and movement systems,
+                                replication and lag compensation, plus engine-level rendering and game AI.
+                            </p>
+                            <div class="track-links">
+                                <a href="Resume/WiltChristopher_Resume_Gameplay.pdf" target="_blank" class="btn btn-primary">Gameplay Resume <i class="fas fa-file-arrow-down"></i></a>
+                                <a href="Projects/SnD_FPS/snd-project.html" class="track-link">See the framework <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="track">
+                            <h4><i class="fas fa-server"></i> Software Engineer</h4>
+                            <p>
+                                Full-stack, backend and systems. Production platforms, PostgreSQL authorization models,
+                                payment infrastructure, and cloud automation &mdash; shipped and live.
+                            </p>
+                            <div class="track-links">
+                                <a href="Resume/WiltChristopher_Resume.pdf" target="_blank" class="btn btn-primary">Software Resume <i class="fas fa-file-arrow-down"></i></a>
+                                <a href="Projects/TheVeil/the-veil.html" class="track-link">See the platform <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="hire-contact">
+                        Fastest way to reach me: <a href="mailto:ctwilt23@gmail.com">ctwilt23@gmail.com</a>
+                        <span class="hire-sep">&middot;</span> 570-541-9807
+                        <span class="hire-sep">&middot;</span> Based in Mifflinburg, PA
+                    </p>
+                </section>
 
                 <section class="intro-block mt-4">
                     <h2>TECHNICAL <span class="text-gradient">EXPERTISE MATRIX</span></h2>
 
                     <div class="skills-grid">
+                        <div class="skill-card">
+                            <div class="card-icon"><i class="fas fa-gamepad"></i></div>
+                            <h3>Engines &amp; Gameplay</h3>
+                            <ul>
+                                <li><strong>Unreal Engine 5</strong> (C++ &amp; Blueprint)</li>
+                                <li>Server-Authoritative Replication</li>
+                                <li>Client Prediction &amp; Lag Compensation</li>
+                                <li>Weapon, Movement &amp; State Systems</li>
+                                <li>Epic Online Services (EOS)</li>
+                                <li><strong>Unity</strong> &amp; Custom C++ Engines</li>
+                            </ul>
+                        </div>
+
                         <div class="skill-card">
                             <div class="card-icon"><i class="fas fa-code"></i></div>
                             <h3>Languages</h3>
@@ -142,8 +215,9 @@
             </section>
 
             <div class="button-container">
-                <a href="Resume/WiltChristopher_Resume.pdf" target="_blank" class="btn btn-primary">View Resume <i class="fas fa-arrow-right"></i></a>
-                <a href="Projects/projects.html" class="btn btn-secondary">Technical Projects</a>
+                <a href="Projects/projects.html" class="btn btn-primary">Technical Projects <i class="fas fa-arrow-right"></i></a>
+                <a href="Resume/WiltChristopher_Resume_Gameplay.pdf" target="_blank" class="btn btn-secondary">Gameplay Resume</a>
+                <a href="Resume/WiltChristopher_Resume.pdf" target="_blank" class="btn btn-secondary">Software Resume</a>
             </div>
         </main>
     </div>

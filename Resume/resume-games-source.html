@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Christopher Wilt — Gameplay &amp; Engine Programmer</title>
+<!--
+  SOURCE FILE for Resume/WiltChristopher_Resume_Gameplay.pdf
+  The games-targeted variant. Resume/resume-source.html is the software /
+  systems variant; keep contact details and dates in sync between the two.
+  Re-export: Chrome -> Print -> Save as PDF -> Margins None -> Background graphics on.
+-->
+<style>
+    @page { size: Letter; margin: 0.45in 0.55in; }
+
+    * { box-sizing: border-box; }
+
+    body {
+        font-family: "Calibri", "Carlito", "Helvetica Neue", Arial, sans-serif;
+        font-size: 9.9pt;
+        line-height: 1.3;
+        color: #1a1a1a;
+        margin: 0;
+    }
+
+    a { color: #0b4a6f; text-decoration: none; }
+
+    /* ---------- header ---------- */
+    .name {
+        font-size: 23pt;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        margin: 0;
+        line-height: 1.05;
+    }
+
+    .title {
+        font-size: 11.3pt;
+        font-weight: 600;
+        color: #333;
+        margin: 2px 0 5px 0;
+        letter-spacing: 0.2px;
+    }
+
+    .contact {
+        font-size: 9.4pt;
+        color: #333;
+        margin: 0 0 3px 0;
+    }
+
+    .contact .sep { color: #999; padding: 0 5px; }
+
+    .rule {
+        border: none;
+        border-top: 1.6px solid #1a1a1a;
+        margin: 7px 0 9px 0;
+    }
+
+    /* ---------- sections ---------- */
+    h2 {
+        font-size: 10.1pt;
+        font-weight: 700;
+        letter-spacing: 1.1px;
+        text-transform: uppercase;
+        margin: 9px 0 4px 0;
+        padding-bottom: 2px;
+        border-bottom: 1px solid #9a9a9a;
+        break-after: avoid;
+    }
+
+    p { margin: 0 0 4px 0; }
+
+    .summary { text-align: justify; }
+
+    /* ---------- skills ---------- */
+    .skills { margin: 0; }
+
+    .skills div {
+        margin-bottom: 2.5px;
+        padding-left: 0.82in;
+        text-indent: -0.82in;
+    }
+
+    .skills b { font-weight: 700; }
+
+    /* ---------- entries ---------- */
+    .entry { margin-bottom: 6px; }
+    /* short entries stay whole; the long lead role may split across pages */
+    .entry.keep-whole { break-inside: avoid; }
+
+    .entry-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+    }
+
+    .role { font-weight: 700; font-size: 10.4pt; }
+    .role .org { font-weight: 700; }
+    .role .stack { font-weight: 400; color: #444; }
+
+    .dates {
+        font-size: 9.3pt;
+        font-weight: 600;
+        color: #333;
+        white-space: nowrap;
+    }
+
+    .sub {
+        font-size: 9.4pt;
+        font-style: italic;
+        color: #444;
+        margin: 0 0 2px 0;
+    }
+
+    ul {
+        margin: 2px 0 0 0;
+        padding-left: 15px;
+    }
+
+    li { margin-bottom: 1.8px; }
+
+    li b { font-weight: 700; }
+
+    /* ---------- education ---------- */
+    .edu-line { display: flex; justify-content: space-between; gap: 12px; }
+</style>
+</head>
+<body>
+
+<p class="name">Christopher Wilt</p>
+<p class="title">Gameplay &amp; Engine Programmer &mdash; C++ / Unreal Engine 5</p>
+<p class="contact">
+    Mifflinburg, PA<span class="sep">|</span>570-541-9807<span class="sep">|</span><a href="mailto:ctwilt23@gmail.com">ctwilt23@gmail.com</a>
+</p>
+<p class="contact">
+    <a href="https://christopherwilt.github.io">christopherwilt.github.io</a><span class="sep">|</span><a href="https://github.com/ChristopherWilt">github.com/ChristopherWilt</a><span class="sep">|</span><a href="https://libertystudios.itch.io/delivery-detonation">Playable build on itch.io</a>
+</p>
+
+<hr class="rule">
+
+<h2>Profile</h2>
+<p class="summary">
+    Gameplay and engine programmer working in C++ across Unreal Engine 5 and from-scratch renderers. Built a
+    server-authoritative multiplayer FPS framework with custom lag compensation, a data-driven weapon and recoil
+    system, and an EOS-backed lobby flow; shipped a networked UE5 title with a team while running the Perforce depot
+    and sprint board. Comfortable below the engine as well: a bare-metal Vulkan 1.3 PBR pipeline, an EnTT
+    data-oriented level loader, and a CPU software rasterizer written from first principles. Also designed and
+    launched a live production platform solo &mdash; evidence that I finish and ship, not just prototype.
+</p>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+    <div><b>Engines:</b> Unreal Engine 5 (C++ &amp; Blueprint), Unity, custom C++ engines</div>
+    <div><b>Gameplay:</b> Server-authoritative replication, client-side prediction, lag compensation, RPCs, character movement &amp; state machines, weapon systems, UMG/HUD architecture, data assets</div>
+    <div><b>Graphics:</b> Vulkan 1.3, HLSL, PBR &amp; Cook-Torrance shading, image-based lighting, software rasterization, 3D math (vectors, matrices, quaternions)</div>
+    <div><b>AI &amp; Systems:</b> Alpha-beta minimax, A* with timesliced search, behavior trees, flocking &amp; steering, ECS / data-oriented design, multithreading, memory management, profiling</div>
+    <div><b>Languages:</b> C++, C#, TypeScript/JavaScript, Python, SQL</div>
+    <div><b>Pipeline:</b> Perforce (Helix Core) administration, Git, Jira sprint planning, EOS / Epic Online Services, CI/CD, Blender asset integration, animation retargeting</div>
+</div>
+
+<h2>Game Projects</h2>
+
+<div class="entry">
+    <div class="entry-head">
+        <span class="role"><span class="org">Multiplayer FPS Framework</span> <span class="stack">&mdash; Unreal Engine 5, C++ (solo)</span></span>
+        <span class="dates">Sept 2025 &ndash; Present</span>
+    </div>
+    <ul>
+        <li>Built a modular, <b>server-authoritative</b> competitive shooter framework: the client predicts the hit trace locally for zero-latency feedback while <code>Server_FireShot</code> validates ammo and recalculates the shot authoritatively.</li>
+        <li>Engineered <b>custom lag compensation</b> for hit-scan weapons, rewinding server-side hitboxes to the shooter's client timestamp so high-ping players are neither punished nor advantaged.</li>
+        <li>Architected a hybrid, data-driven <b>recoil solver</b> decoupled from the weapon class via <code>UDataAssets</code> &mdash; hot-swappable between deterministic pattern sprays and procedural variance, layered over a spring-mass-damper system for visual kick and camera roll.</li>
+        <li>Wrote a <b>socket-driven procedural ADS system</b> that removes hard-coded camera offsets entirely, resolving the transform from the active optic's sight socket so any modular attachment centers correctly without per-weapon tuning.</li>
+        <li>Extended the Character Movement Component with a replicated <b>slide state</b> that alters ground friction and shrinks the capsule, with procedural arm interpolation blending input sway into the first-person mesh.</li>
+        <li>Built a <b>killcam replay system</b> capturing compressed player snapshots at 20&nbsp;Hz on a rolling five-second buffer, replayed against a master clock with collision-safe VFX traces.</li>
+        <li>Shipped gameplay UI in C++ and UMG: a buy menu with real-time affordability gating, a procedural crosshair scaling to fire spread, a networked minimap fed by a multicast ping RPC, and a killfeed using <code>TWeakObjectPtr</code> and timer handles to avoid leaks &mdash; with impact decals capped through a 50-instance global pool and animation state replicated as compressed integer flags to hold the rendering and bandwidth budgets.</li>
+        <li>Integrated <b>Epic Online Services</b> for peer-to-peer matchmaking, persistent lobbies and social-overlay invites, including a custom log writer that scrubs portal credentials before output.</li>
+    </ul>
+</div>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Delivery Detonation</span> <span class="stack">&mdash; UE5 networked capstone, 4-person team &middot; playable on itch.io</span></span>
+        <span class="dates">Jan 2026</span>
+    </div>
+    <p class="sub">Technical Lead &amp; Infrastructure Administrator &mdash; Full Sail University capstone</p>
+    <ul>
+        <li><b>Shipped a playable networked build</b> of a physics-driven third-person delivery game, and served as the team's technical lead through production.</li>
+        <li>Administered the remote <b>Perforce (Helix Core)</b> depot for the engineering team &mdash; defined the branching strategy, and manually resolved deep binary merge conflicts that standard tooling could not.</li>
+        <li>Ran sprint planning in <b>Jira</b>, decomposing systems like networked physics into atomic tasks; the project hit every milestone.</li>
+        <li>Developed a <b>server-authoritative session state machine</b> over EOS to prevent client-side state exploitation and synchronize state across clients.</li>
+        <li>Optimized bandwidth with a customized <b>replication graph</b>, using raw UDP for high-frequency actor translation while reserving reliable RPC nodes for critical game state.</li>
+    </ul>
+</div>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Engine &amp; Graphics Programming</span> <span class="stack">&mdash; C++, Vulkan 1.3, HLSL (solo)</span></span>
+        <span class="dates">June 2025 &ndash; Aug 2025</span>
+    </div>
+    <ul>
+        <li>Wrote a bare-metal <b>Vulkan 1.3 PBR renderer</b> from the ground up: Cook-Torrance microfacet shading, image-based lighting from HDR cube maps, and a pre-computed BRDF lookup table enforcing energy conservation &mdash; managing pipelines, descriptor pools, uniform buffers and storage views directly, with glTF assets streamed into staging buffers.</li>
+        <li>Built a data-driven <b>ECS level loader</b> on EnTT, replacing object-oriented game loops with cache-friendly component arrays, plus a flyweight instancing factory that shares pooled geometry and packs per-instance transforms into instanced buffers to avoid pipeline stalls.</li>
+        <li>Implemented a <b>CPU software rasterizer</b> from first principles beforehand: parametric line drawing, barycentric triangle fill, Z-buffering, perspective-correct UV mapping, backface culling, and a hand-written 4x4 matrix math library with a full MVP pipeline.</li>
+    </ul>
+</div>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Game AI &amp; Low-Level Systems</span> <span class="stack">&mdash; C++, C#</span></span>
+        <span class="dates">Feb 2025 &ndash; July 2025</span>
+    </div>
+    <ul>
+        <li>Built a recursive <b>alpha-beta minimax</b> agent with branch cutoffs to contain exponential growth, driven by a phase-adaptive heuristic that shifts scoring bias from early positional weighting to mid-game mobility restriction to late-game material count.</li>
+        <li>Engineered <b>A* pathfinding</b> over coordinate grids with hash-map visited-set lookups, and a <b>non-blocking timesliced update system</b> that splits long searches across frames so deep queries never starve the main loop.</li>
+        <li>Implemented <b>Reynolds steering</b> for emergent flocking &mdash; cohesion, alignment and inverse-distance separation resolved into one delta-time-scaled kinematic acceleration loop for large agent counts.</li>
+        <li>Wrote an <b>N-ary behavior tree</b> on a hand-rolled template linked-list container with custom iterators, supporting breadth-first, pre-order and post-order traversal with static leak tracking across live node trees.</li>
+        <li>Engineered thread-safe C++ pipelines using <code>std::unique_lock</code> and condition variables to override scheduling non-determinism, and tracked concurrent hardware contexts inside a single 32-bit integer with atomic bitwise operations.</li>
+    </ul>
+</div>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Archmage</span> <span class="stack">(Unity RPG, C#)</span> &nbsp;&middot;&nbsp; <span class="org">Space Race</span> <span class="stack">(custom C++ arcade)</span></span>
+        <span class="dates">2025</span>
+    </div>
+    <ul>
+        <li>Built interface-driven ability and damage systems in Unity so spells, enemies and destructibles share one contract, plus a C++ arcade title with its own game loop, audio layer and menu flow. Gameplay demos for both are linked from the portfolio.</li>
+    </ul>
+</div>
+
+<h2>Software Engineering Experience</h2>
+
+<div class="entry keep-whole">
+    <div class="entry-head">
+        <span class="role"><span class="org">Founder &amp; Lead Systems Architect</span> &mdash; The Veil <span class="stack">(theveilwedding.com)</span></span>
+        <span class="dates">April 2026 &ndash; Present</span>
+    </div>
+    <ul>
+        <li><b>Designed, built and launched a live production platform solo</b> &mdash; an iOS, Android and web client from one React Native codebase plus a Next.js business portal, totaling ~143,000 lines across 257 ordered SQL migrations and 37 edge functions.</li>
+        <li>Enforced authorization in PostgreSQL rather than the client, deriving five user roles from two SQL predicates, and built payment infrastructure across five Stripe flows in which the client submits a plan name and never an amount, with an idempotent webhook as the single writer against at-least-once delivery.</li>
+    </ul>
+</div>
+
+<h2>Education</h2>
+<div class="entry keep-whole" style="margin-bottom:0;">
+    <div class="edu-line">
+        <span class="role">Bachelor of Science in Game Development &mdash; Full Sail University, Winter Park, FL</span>
+        <span class="dates">Graduated April 2026</span>
+    </div>
+    <p class="sub">Core focus: Systems Architecture &amp; Software Engineering</p>
+    <p style="margin:0;">Coursework: Computer Graphics, Artificial Intelligence for Games, Operating Systems &amp; Systems Programming, Advanced Computer Networks, Advanced Database Management.</p>
+</div>
+
+</body>
+</html>

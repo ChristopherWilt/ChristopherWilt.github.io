@@ -272,3 +272,178 @@
     .card-actions .btn { width: 100%; text-align: center; }
     .badge-live { position: static; display: inline-block; margin-bottom: 1rem; }
 }
+
+/* --- JUMP NAVIGATION --- */
+.jump-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 55px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.jump-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0.65rem 1.2rem;
+    border-radius: 30px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.jump-nav a i { font-size: 0.78rem; }
+
+.jump-nav a:hover {
+    color: #fff;
+    border-color: rgba(255, 46, 84, 0.45);
+    background: rgba(255, 46, 84, 0.08);
+    transform: translateY(-2px);
+}
+
+/* --- SECTION SUBTITLES --- */
+.section-sub {
+    margin: -18px 0 30px 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    max-width: 800px;
+}
+
+/* --- PLAY / WATCH REEL --- */
+.reel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.reel-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem;
+    border-radius: 18px;
+    border: 1px solid var(--glass-border);
+    background: rgba(18, 18, 18, 0.55);
+    text-decoration: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reel-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 46, 84, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55);
+}
+
+.reel-card.reel-play {
+    border-color: rgba(74, 222, 128, 0.35);
+    background:
+        radial-gradient(circle at 85% 12%, rgba(74, 222, 128, 0.10) 0%, transparent 55%),
+        rgba(18, 18, 18, 0.55);
+}
+
+.reel-card.reel-play:hover {
+    border-color: rgba(74, 222, 128, 0.6);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55), inset 0 0 22px rgba(74, 222, 128, 0.06);
+}
+
+.reel-tag {
+    align-self: flex-start;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+}
+
+.reel-play .reel-tag {
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.12);
+    border-color: rgba(74, 222, 128, 0.32);
+}
+
+.reel-card h3 {
+    margin: 0 0 0.6rem 0;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.2px;
+}
+
+.reel-card p {
+    margin: 0 0 1.4rem 0;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.65;
+    flex-grow: 1;
+}
+
+.reel-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.4px;
+}
+
+.reel-cta i { font-size: 0.8rem; transition: transform 0.3s ease; }
+.reel-card:hover .reel-cta { color: var(--accent-red); }
+.reel-play:hover .reel-cta { color: #4ade80; }
+.reel-card:hover .reel-cta i { transform: translateX(4px); }
+
+/* --- PLAYABLE BADGE --- */
+.badge-play {
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+@media (max-width: 768px) {
+    .jump-nav { gap: 8px; margin-bottom: 40px; }
+    .jump-nav a { font-size: 0.75rem; padding: 0.55rem 0.95rem; }
+    .reel-grid { grid-template-columns: 1fr; }
+}
+
+.header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.header-actions .btn {
+    flex: 0 0 auto;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .header-actions { justify-content: center; }
+}
