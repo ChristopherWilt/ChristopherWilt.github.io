@@ -132,7 +132,7 @@
 <p class="name">Christopher Wilt</p>
 <p class="title">Systems &amp; Full-Stack Software Engineer</p>
 <p class="contact">
-    Mifflinburg, PA <span class="reloc">&mdash; open to relocation &amp; remote</span><span class="sep">|</span>570-541-9807<span class="sep">|</span><a href="mailto:ctwilt23@gmail.com">ctwilt23@gmail.com</a>
+    Mifflinburg, PA <span class="reloc">&mdash; remote, or hybrid in central PA</span><span class="sep">|</span>570-541-9807<span class="sep">|</span><a href="mailto:ctwilt23@gmail.com">ctwilt23@gmail.com</a>
 </p>
 <p class="contact">
     <a href="https://linkedin.com/in/christopher-t-wilt">linkedin.com/in/christopher-t-wilt</a><span class="sep">|</span><a href="https://christopherwilt.github.io">christopherwilt.github.io</a><span class="sep">|</span><a href="https://github.com/ChristopherWilt">github.com/ChristopherWilt</a>
@@ -168,13 +168,15 @@
     </div>
     <p class="sub">Next.js 15 &middot; React Native (Expo) &middot; PostgreSQL 17 &middot; Deno edge functions &middot; Stripe Connect &middot; Vercel</p>
     <ul>
-        <li><b>Shipped a three-surface product solo</b> &mdash; an iOS, Android and web client from one React Native codebase, plus a Next.js marketing site, vendor CRM and staff operations console &mdash; totaling ~143,000 lines across 257 ordered SQL migrations and 37 Deno edge functions.</li>
+        <li><b>Shipped a three-surface product solo</b> &mdash; an iOS, Android and web client from one React Native codebase, plus a Next.js marketing site, vendor CRM and staff operations console &mdash; totaling ~300,000 lines across 550 ordered SQL migrations and 75 Deno edge functions.</li>
         <li><b>Designed a derived permission model</b> in which two SQL predicates and seven module-scoped grants authorize five roles (host, secondary host, co-planner, day-of coordinator, guest) across ~27 shared tables, eliminating a roles table that could drift from the access it implied.</li>
         <li><b>Closed a privilege-escalation path</b> by moving per-module delegation out of the UI and into RLS, where a collaborator granted one module could previously write every other through the API; verified with impersonated, rolled-back transactions judged on affected row count rather than absence of an error.</li>
         <li><b>Isolated untrusted callers from shared tables entirely</b> &mdash; every guest action runs through a <span style="font-variant: small-caps; font-weight:600;">security definer</span> function scoped to the caller's claimed seat, and the partner-linking table carries no UPDATE policy at all.</li>
         <li><b>Built payment infrastructure across five flows</b> on Stripe, Stripe Connect and RevenueCat; the client submits a plan name and never an amount, entitlement expiry is resolved server-side from authoritative data, and the webhook is the single idempotent writer keyed on checkout session ID against at-least-once delivery.</li>
         <li><b>Engineered AI subsystems against real product constraints</b>: a curation engine separating explicit instruction from inferred taste across thirteen event-specific briefs, and a planning generator emitting dependency-aware tasks as date offsets, so changing the event date re-derives every deadline instead of invalidating the plan.</li>
         <li><b>Built the marketplace cold-start engine</b> &mdash; an enquiry materializes an unclaimed storefront from Google Places data and triggers verified outreach; the system refuses to fabricate contact addresses and gates live sending behind an opt-in that fails closed.</li>
+        <li><b>Opened the platform to other software</b>: a key-scoped public REST API with signed webhooks, a Zapier app, QuickBooks Online accounting sync over OAuth, and an MCP server with OAuth 2.1 sign-in so a business can work its leads from Claude or ChatGPT.</li>
+        <li><b>Sell it myself, on tooling I built</b>: demos and walk-ins with venue owners, backed by paced Gmail outreach batches, a crawler that finds each business's published address, and self-planning call lists that drop anyone who opts out.</li>
         <li><b>Tuned performance at the policy layer</b>: wrapped authorization lookups in scalar subqueries to stop per-row re-evaluation and added covering indexes to every foreign key the predicates filter on.</li>
     </ul>
 </div>
